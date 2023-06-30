@@ -1,0 +1,60 @@
+.load-save-state {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+
+    list-style: none;
+    padding: 0;
+    max-height: 80vh;
+    overflow-y: auto;
+
+    li {
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+
+        border: solid black 2px;
+        padding: 8px;
+
+        box-sizing: border-box;
+
+        p {
+            margin: 0;
+        }
+
+        .saved-game-name {
+            &:hover {
+                cursor: pointer;
+            }
+        }
+
+        .delete-game {
+            margin-left: 8px;
+            cursor: pointer;
+            height: 40px;
+            width: 40px;
+            padding: 2px;
+            font-size: 8px;
+
+            &:hover {
+                background-color: rgb(184, 0, 0);
+                border: none;
+            }
+
+            &:focus,
+            &:focus-visible {
+                outline: none;
+            }
+        }
+
+        // lift up with a shadow on hover
+        // &:hover {
+        //     cursor: pointer;
+        //     box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.5);
+        //     transform: translateY(-5px);
+        // }
+    }
+}

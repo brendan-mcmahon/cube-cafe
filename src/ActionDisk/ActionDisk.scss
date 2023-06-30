@@ -1,0 +1,40 @@
+#ActionDisk {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .disk {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+
+        svg {
+            grid-area: 1 / 1 / 2 / 2;
+
+            .rotatable {
+                transition: transform 0.5s ease-in-out;
+            }
+        }
+
+        #ColorDisk {
+            pointer-events: none;
+        }
+
+        text {
+            pointer-events: none;
+        }
+    }
+
+    .arrow {
+        &:hover {
+            cursor: pointer;
+            transform: scale(1.1);
+        }
+
+        &.disabled {
+            &:hover {
+                cursor: default;
+                transform: scale(1);
+            }
+        }
+    }
+}

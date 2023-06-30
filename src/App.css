@@ -1,0 +1,130 @@
+#root {
+  /* max-width: 1280px; */
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.start-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+  font-size: 36px;
+}
+
+svg:focus,
+svg:focus-visible {
+  outline: none;
+}
+
+.start-screen > h1 {
+    font-size: 2em;
+}
+
+.start-screen > .buttons {
+  display: flex;
+  flex-direction: column;
+}
+
+.start-screen > .buttons > button {
+  margin-bottom: 16px;
+}
+
+#Game {  
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 2fr;
+  grid-auto-columns: 1fr;
+  grid-template-areas: 
+    "tableau dishwasher console console console history"
+    "tableau drive-thru kitchen tables tables history";
+    align-items: center;
+    justify-items: center;
+    max-height: 100vh;
+    grid-gap: 12px;
+}
+
+#Button {
+  grid-area: console;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+
+}
+
+#ActionDisk { grid-area: tableau; }
+#Dice { 
+  grid-area: tableau; 
+  display: flex;
+  flex-wrap: wrap;
+  align-self: flex-start;
+}
+
+.cube {
+  width: 25px;
+  height: 25px;
+  margin: 0;
+  padding: 0;
+  border-radius: 4px;
+}
+
+.red {
+  background-color: red;
+  border: solid black 1px;
+  color: white;
+}
+
+.white {
+  background-color: white;
+  border: solid black 1px;
+  color: black;
+}
+
+.blue {
+  background-color: blue;
+  border: solid black 1px;
+  color: white;
+
+}
+
+.yellow {
+  background-color: yellow;
+  border: solid black 1px;
+}
+
+.purple {
+  background-color: purple;
+  border: solid black 1px;
+  color: white;
+}
+
+.green {
+  background-color: green;
+  border: solid black 1px;
+  color: white;
+}
+
+.black {
+  background-color: black;
+  border: solid black 1px;
+  color: white;
+}
+
+.wild {
+  background: linear-gradient(
+      45deg,
+      white 28%,
+      red 28%,
+      red 43%,
+      yellow 43%,
+      yellow 58%,
+      blue 58%,
+      blue 73%,
+      purple 73%,
+      purple
+  );
+}

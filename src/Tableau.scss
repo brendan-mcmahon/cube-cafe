@@ -1,0 +1,13 @@
+#Tableau {
+    grid-area: tableau;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    justify-content: flex-start;
+
+    /* each top level child should have a margin-top of 16px */
+    > * {
+        margin-top: 16px;
+    }
+}

@@ -1,0 +1,138 @@
+#Tables {
+    margin-left: 64px;
+    grid-area: tables;
+    // height: 90%;
+    align-self: flex-start;
+    width: 80%;
+    display: grid;
+    grid-template-columns: 0.5fr repeat(4, 1fr) 0.5fr;
+    grid-template-rows: repeat(2, 1fr) 0.5fr;
+    grid-template-areas:
+        "table1 table1 table1 table2 table2 table2"
+        ". . table3 table3 . ."
+        "track track track track track track";
+    // center all items
+    justify-items: center;
+    align-items: center;
+
+    // first child should be in the top left corner
+    & > *:first-child {
+        // grid-area: "table1";
+        grid-area: table1;
+    }
+    // second child should be in the top right corner
+    & > *:nth-child(2) {
+        grid-area: table2;
+    }
+    // third child should be in the bottom middle
+    & > *:nth-child(3) {
+        grid-area: table3;
+    }
+
+    .manager-track {
+        grid-area: track;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        margin-top: 16px;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        .arrow {
+            display: grid;
+            grid-template-rows: 1fr 1em;
+            justify-content: center;
+
+            svg {
+                margin: 7px;
+            }
+        }
+        .stop-container {
+            display: grid;
+            grid-template-rows: 1fr 1em;
+            justify-content: center;
+            p {
+                margin: 0;
+            }
+            .stop {
+                height: 40px;
+                width: 40px;
+                border: dotted white 1px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                background-color: white;
+                color: black;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+
+                .manager {
+                    height: 40px;
+                }
+            }
+        }
+    }
+
+    .customer {
+        width: 150px;
+        height: 150px;
+        background-color: white;
+        border-radius: 50%;
+        color: black;
+
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+        grid-template-areas: "meeple" "plate";
+        justify-items: center;
+        align-items: center;
+
+        box-shadow: 0 0 10px 5px #0c0;
+
+        &.disabled {
+            cursor: default;
+            box-shadow: none;
+        }
+
+        .meeple {
+            height: 40px;
+            width: 40px;
+            grid-area: meeple;
+        }
+
+        .plate {
+            grid-area: plate;
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+            border: solid black 1px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            &.red {
+                background-color: red;
+            }
+
+            &.white {
+                background-color: white;
+            }
+
+            &.blue {
+                background-color: blue;
+            }
+
+            &.yellow {
+                background-color: yellow;
+            }
+
+            &.purple {
+                background-color: purple;
+            }
+        }
+    }
+}

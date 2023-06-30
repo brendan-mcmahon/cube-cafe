@@ -1,0 +1,23 @@
+#Dice {
+    grid-area: tableau;
+    .die {
+        width: 50px;
+        height: 50px;
+        margin: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: black; // or another color that contrasts with your dice colors
+        font-size: 20px;
+        background-color: white;
+        border-radius: 8px;
+
+        .dot {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin: 2px;
+            border: solid black 1px;
+        }
+    }
+}
