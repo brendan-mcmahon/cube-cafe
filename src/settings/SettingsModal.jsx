@@ -4,6 +4,7 @@ import "./Settings.scss";
 import { SettingsInput } from "./SettingsInput";
 import { ManagerTrackStep } from "./ManagerTrackStep";
 import { Modal } from "../Modal";
+import { GameAction } from "../constants";
 
 export default function SettingsModal({ show, setShow }) {
   const { state, dispatch } = useGame();
@@ -24,7 +25,7 @@ export default function SettingsModal({ show, setShow }) {
   const onSaveClicked = (e) => {
     e.preventDefault();
     dispatch({
-      type: "SET_SETTINGS",
+      type: GameAction.SET_SETTINGS,
       settings: {
         startingMood,
         numTables,

@@ -35,11 +35,12 @@ svg:focus-visible {
 #Game {  
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 2fr;
+  grid-template-rows: 1fr 2fr auto;
   grid-auto-columns: 1fr;
   grid-template-areas: 
     "tableau dishwasher console console console history"
-    "tableau drive-thru kitchen tables tables history";
+    "tableau drive-thru kitchen tables tables history"
+    "debug debug debug debug debug debug";
     align-items: center;
     justify-items: center;
     max-height: 100vh;
@@ -54,6 +55,18 @@ svg:focus-visible {
   align-items: flex-start;
   justify-content: flex-end;
 
+}
+
+#Debug {
+  grid-area: debug;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  .resource {
+    padding: 4px;
+  }
 }
 
 #ActionDisk { grid-area: tableau; }
@@ -94,6 +107,7 @@ svg:focus-visible {
 .yellow {
   background-color: yellow;
   border: solid black 1px;
+  color: black;
 }
 
 .purple {
