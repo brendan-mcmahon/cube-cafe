@@ -37,4 +37,10 @@
             }
         }
     }
+
+    .slice {
+        &.enabled:hover {
+            cursor: pointer;
+        }
+    }
 }

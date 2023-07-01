@@ -1,6 +1,6 @@
 # TODO Items
 
-In Progress: End Game Screen
+In Progress:
 
 ## Game Functionality
 * add drive-thru to the game
@@ -21,26 +21,17 @@ In Progress: End Game Screen
 * Maybe a button to confirm your dishwasher selections? It can just be a little jarring.
 * Can we make the manager track look better? Like loop it through the tables? Probably not.
 * Pick new colors (ChatGPT recommends Blue, Red, Green, Yellow, Black but maybe swap out Red or Green for colorblind people?)
-* Fix the hit boxes on the action disk
+* Have a Statistics modal that shows the stats for the game (use Endgame or refactor)
+  * Maybe not a modal, but something hidable that shows up on the side
 
 ## Data Collection Features
-* What should the end game look like?
-  * total points
-  * total customers served
-  * leftover customers
-  * time / round
-  * total time
-  * total rotate actions taken
+* Statistic Ideas:
+    * Cooking without an order
+    * Dishwasher slots selected
 * Share button so you can send saved games to other people
   * Don't make this too complicated, Brendan. You just need to send the json, you don't need to create a lambda function that saves the state to a table and generates a link to another endpoint that pulls in those, but damn, it would be cool if we could save them all in one place and access them anywhere. Ugh.
-
+* We're not using the file we're "auto-saving" on its own. We only allow you to load manually saved files. This would allow a "continue last game?" button.
 
 ## Bugs
-* When there are only two tables, the player shouldn't be able to add a third customer
-* The +1 dishwasher stuff puts people over 5
-* Bugginess around the history and resources getting exhausted
-* Load dishwasher shouldn't appear in the history
 
 ## Tech Debt
-* We should use typescript. It would save a lot of headaches I think
-* Add the other actions to the constants file

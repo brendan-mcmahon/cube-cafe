@@ -1,5 +1,10 @@
 <svg width="210" height="210" xmlns="http://www.w3.org/2000/svg">
     <circle r="100" cx="105" cy="105" fill="white" stroke="black" />
+    <path transform="rotate(36, 105, 105)" d="M105 105 L105 0 A 105 105 0 0 1 205 73 z" fill="red" />
+    <path transform="rotate(108, 105, 105)" d="M105 105 L105 0 A 105 105 0 0 1 205 73 z" fill="green" />
+    <path transform="rotate(180, 105, 105)" d="M105 105 L105 0 A 105 105 0 0 1 205 73 z" fill="blue" />
+    <path transform="rotate(252, 105, 105)" d="M105 105 L105 0 A 105 105 0 0 1 205 73 z" fill="purple" />
+    <path transform="rotate(324, 105, 105)" d="M105 105 L105 0 A 105 105 0 0 1 205 73 z" fill="yellow" />
     <g transform="translate(105, 105)">
         <g transform="rotate(0) translate(0, -80)">
             <path
