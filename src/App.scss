@@ -20,7 +20,7 @@ svg:focus-visible {
 }
 
 .start-screen > h1 {
-    font-size: 2em;
+  font-size: 2em;
 }
 
 .start-screen > .buttons {
@@ -32,19 +32,33 @@ svg:focus-visible {
   margin-bottom: 16px;
 }
 
-#Game {  
-  display: grid;
+#Game {
+  /* display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 2fr auto;
   grid-auto-columns: 1fr;
   grid-template-areas: 
-    "tableau dishwasher console console console history"
-    "tableau drive-thru kitchen tables tables history"
-    "debug debug debug debug debug debug";
+  "tableau dishwasher console console console history"
+  "tableau kitchen tables tables tables history"
+  "debug debug debug debug debug debug";
     align-items: center;
     justify-items: center;
     max-height: 100vh;
-    grid-gap: 12px;
+    grid-gap: 12px; */
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 0.25fr 1fr 2fr auto;
+  grid-auto-columns: 1fr;
+  grid-template-areas:
+    "console console console console console console"
+    "tableau dishwasher tables tables tables history"
+    "tableau kitchen tables tables tables history"
+    "debug debug debug debug debug debug";
+  align-items: center;
+  justify-items: center;
+  max-height: 100vh;
+  grid-gap: 12px;
 }
 
 #Button {
@@ -54,7 +68,6 @@ svg:focus-visible {
   display: flex;
   align-items: flex-start;
   justify-content: flex-end;
-
 }
 
 #Debug {
@@ -69,9 +82,11 @@ svg:focus-visible {
   }
 }
 
-#ActionDisk { grid-area: tableau; }
-#Dice { 
-  grid-area: tableau; 
+#ActionDisk {
+  grid-area: tableau;
+}
+#Dice {
+  grid-area: tableau;
   display: flex;
   flex-wrap: wrap;
   align-self: flex-start;
@@ -101,7 +116,6 @@ svg:focus-visible {
   background-color: blue;
   border: solid black 1px;
   color: white;
-
 }
 
 .yellow {
@@ -130,15 +144,47 @@ svg:focus-visible {
 
 .wild {
   background: linear-gradient(
-      45deg,
-      white 28%,
-      red 28%,
-      red 43%,
-      yellow 43%,
-      yellow 58%,
-      blue 58%,
-      blue 73%,
-      purple 73%,
-      purple
+    45deg,
+    white 28%,
+    red 28%,
+    red 43%,
+    yellow 43%,
+    yellow 58%,
+    blue 58%,
+    blue 73%,
+    purple 73%,
+    purple
   );
+}
+
+@media only screen and (max-width: 845px) and (orientation: landscape) {
+  #root {
+    padding: 2px;
+  }
+  #Game {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 0.25fr 1fr 2fr auto;
+    grid-auto-columns: 1fr;
+    grid-template-areas:
+      "console console console console console history"
+      "tableau kitchen tables tables tables history"
+      "tableau . . dishwasher dishwasher history"
+      "debug debug debug debug debug debug";
+    align-items: center;
+    justify-items: center;
+    max-height: 100vh;
+    grid-gap: 12px;
+  }
+
+  #History {
+    // display: none !important;
+
+    h2 {
+      font-size: 1em;
+    }
+
+    .undo {
+      height: 16px;
+    }
+  }
 }

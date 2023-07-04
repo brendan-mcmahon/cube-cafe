@@ -14,6 +14,7 @@ import EndGame from "../EndGame";
 import SaveModal from "../Components/SaveModal";
 import SavedGamesModal from "../Components/SavedGamesModal";
 import { GameAction } from "../constants";
+import NewKitchen from "../Components/NewKitchen";
 
 export default function Game() {
   const { dispatch, state } = useGame();
@@ -51,10 +52,10 @@ export default function Game() {
       <SavedGamesModal show={loadModalOpen} setShow={setLoadModalOpen} />
       <Dishwasher />
       <Tableau />
-      <DriveThru />
+      {/* <DriveThru /> */}
       <AvailablePlatesModal show={availablePlatesOpen} setShow={setAvailablePlatesOpen} />
       <Tables />
-      <Kitchen />
+      <NewKitchen />
       <History />
       <div id="Debug">
         {/* <pre>{JSON.stringify(state.statistics)}</pre> */}

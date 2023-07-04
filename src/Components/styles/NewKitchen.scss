@@ -1,4 +1,4 @@
-#Kitchen {
+#NewKitchen {
     grid-area: kitchen;
     width: 80%;
     height: 100%;
@@ -6,31 +6,35 @@
 
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: repeat(6, 1fr);
+    grid-template-rows: 0.25fr 0.75fr 0.25fr 1fr 1fr;
     grid-template-areas:
-        ". ."
-        ". hot"
-        "grill hot"
-        "grill cold"
-        ". cold"
-        ". .";
+        "grill-label ."
+        "grill grill"
+        "hot-label cold-label"
+        "hot cold"
+        "hot cold";
 
-    border: solid white 2px;
+    .grill-label {
+        grid-area: grill-label;
+    }
 
-    .wall {
-        border: solid white 2px;
+    .hot-label {
+        grid-area: hot-label;
+    }
+
+    .cold-label {
+        grid-area: cold-label;
     }
 
     .grill {
         grid-area: grill;
-        width: 50%;
-        height: 100%;
         border: solid rgb(102, 102, 102) 2px;
+        height: 50%;
 
         display: grid;
-        grid-template-rows: 1fr 1fr;
-        justify-content: center;
-        align-items: center;
+        grid-template-columns: 1fr 1fr;
+        justify-items: center;
+        align-content: center;
 
         .burner {
             width: 25px;
@@ -65,10 +69,8 @@
     }
 
     .counter {
-        width: 50%;
         border: solid white 2px;
         // translate right by half of this width
-        transform: translateX(150%);
         background-color: rgb(73, 73, 73);
         display: flex;
         flex-direction: column;
