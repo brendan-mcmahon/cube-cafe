@@ -57,26 +57,6 @@ function EndGame() {
     setAverageCustomerPointValue(getAverageCustomerPointValue());
   }, [state.statistics.servedCustomers]);
 
-  // * customers region
-  //   * total points
-  //   * total customers served
-  //   * average rating per customer
-  //   * leftover customers
-  // * time region
-  //   * average time / round
-  //   * total time
-  //   * round list w/ times
-  // * player habits region
-  //   * total rotate actions taken
-  //   * Hot food served
-  //   * Cold food served
-  //   * rotations
-  //   * total of each action taken?
-  //     * refills
-  //     * manager movements
-  // * misc region
-  //   * any cooks without orders?
-
   return (
     <div id="EndGame">
       <div className="title">
@@ -146,12 +126,6 @@ function EndGame() {
           <div className="value">{state.statistics.rotationCount}</div>
         </div>
 
-
-        {/* hotFoodServed */}
-        {/* coldFoodServed */}
-        {/* refillCount */}
-        {/* foodCooked */}
-
         <div className="stats-row">
           <label>Hot Food Served</label>
           <div className="value">{state.statistics.hotFoodServed}</div>
@@ -175,6 +149,22 @@ function EndGame() {
         <div className="stats-row">
           <label>Manager Actions Taken / Total Steps</label>
           <div className="value">{state.statistics.managerActionsTaken} / {state.statistics.managerStepsMoved}</div>
+        </div>
+
+        <div className="stats-row">
+          <label>Cooking without an Order</label>
+          <div className="value">{state.statistics.itemsCookedWithNoOrder}</div>
+        </div>
+
+        <div className="stats-row">
+          <label>Dishwasher Selections</label>
+          <div className="stats-list">
+            {state.statistics.roundTimers.map((t, i) => (
+              <div key={i} className="value">
+                {formatSecondsToMinutes(getTimeInSeconds(t))}
+              </div>
+            ))}
+          </div>
         </div>
 
       </div>

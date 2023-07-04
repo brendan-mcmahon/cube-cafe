@@ -1,7 +1,9 @@
+import React from "react";
 import { useGame } from "../gameContext";
 import { PlayPhase, ManualAction } from "../constants";
 import "./styles/Dishwasher.scss";
 import { DishwasherAction } from "../constants";
+import { DishwasherSquare } from "../game";
 
 function Dishwasher() {
   const { state, dispatch } = useGame();
@@ -10,13 +12,13 @@ function Dishwasher() {
 
   const actionMap = {
     [DishwasherAction.INCREASE_ONE_CUSTOMER]: "+2 to one Customer",
-    [DishwasherAction.PULL_PLATES]: "Recommendations",
+    [DishwasherAction.PULL_PLATES]: "Choose from 2 plates",
     [DishwasherAction.RESET_WHEEL]: "Reset the Wheel",
     [DishwasherAction.ADD_TABLE]: "+1 Table",
     [DishwasherAction.INCREASE_ALL_CUSTOMERS]: "+1 to all Customers",
   };
 
-  const selectDishwasherSquare = (square, squareIndex) => {
+  const selectDishwasherSquare = (square: DishwasherSquare, squareIndex: number) => {
     if (enabled && !square.activated) {
       dispatch({ type: ManualAction.LOAD_DISHWASHER, squareIndex });
     }
@@ -31,7 +33,7 @@ function Dishwasher() {
           onClick={() => selectDishwasherSquare(square, i)}
           className={`square  ${!enabled ? "disabled" : ""}`}
         >
-          <span className={square.plate}>{actionMap[square.action]}</span>
+          <span className={square.plate || ""}>{actionMap[square.action]}</span>
         </button>
       ))}
     </div>

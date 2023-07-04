@@ -14,10 +14,8 @@ export default function SaveDialog(props: IModalProps) {
 
     const saveName = form.elements.namedItem("saveName") as HTMLInputElement;
 
-    storage.saveGame(saveName.value, state);
-
-    props.setShow(false);
-  };
+    storage.saveGame(saveName.value, state, () => props.setShow(false));
+  }
 
   return (
     <Modal title="Save Game" show={props.show} setShow={props.setShow}>

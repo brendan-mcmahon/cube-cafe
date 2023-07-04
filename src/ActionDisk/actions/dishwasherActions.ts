@@ -1,4 +1,4 @@
-import { ManualAction, RoundPhase, PlayPhase, DishwasherAction } from "../../constants";
+import { ManualAction, PlayPhase, DishwasherAction } from "../../constants";
 import { roundTearDown } from "./roundActions";
 import { Game } from "../../game";
 
@@ -16,14 +16,23 @@ const dishwasherMap: { [key in DishwasherAction]: (game: Game) => Game } = {
   [DishwasherAction.ADD_TABLE]: addTable,
   [DishwasherAction.PULL_PLATES]: pullPlates,
   [DishwasherAction.RESET_WHEEL]: resetWheel,
-  // [DishwasherAction.CAR]: addCar,
 };
 
 function dishwasherResolver(state: Game, action: DishwasherAction) {
-  return dishwasherMap[action](state);
+  return addActionToStats(dishwasherMap[action](state), action);
 }
 
-function increaseAllCustomers(state: Game) : Game {
+function addActionToStats(state: Game, action: DishwasherAction): Game {
+  return {
+    ...state,
+    statistics: {
+      ...state.statistics,
+      dishwasherSelections: [...state.statistics.dishwasherSelections, action],
+    },
+  };
+}
+
+function increaseAllCustomers(state: Game): Game {
   const customers = [...state.customers];
   customers.forEach((customer) => {
     if (!!customer) customer.pointValue = Math.min(5, customer.pointValue + 1);
@@ -34,7 +43,7 @@ function increaseAllCustomers(state: Game) : Game {
   });
 }
 
-function increaseOneCustomer(state: Game) : Game {
+function increaseOneCustomer(state: Game): Game {
   return {
     ...state,
     playPhase: PlayPhase.SELECT_CUSTOMER,
@@ -42,7 +51,7 @@ function increaseOneCustomer(state: Game) : Game {
   };
 }
 
-function addTable(state: Game) : Game {
+function addTable(state: Game): Game {
   const customers = [...state.customers];
   customers.push(null);
   return roundTearDown({
@@ -51,7 +60,7 @@ function addTable(state: Game) : Game {
   });
 }
 
-function pullPlates(state: Game) : Game {
+function pullPlates(state: Game): Game {
   const settings = { ...state.settings };
   settings.numPlates += 1;
   return roundTearDown({
@@ -60,7 +69,7 @@ function pullPlates(state: Game) : Game {
   });
 }
 
-function resetWheel(state: Game) : Game {
+function resetWheel(state: Game): Game {
   return {
     ...state,
     playPhase: PlayPhase.ROTATE_FREELY,

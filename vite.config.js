@@ -5,4 +5,5 @@ import reactSvgPlugin from "vite-plugin-react-svg";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), reactSvgPlugin()],
+  base: process.env.NODE_ENV === "production" ? "/cube-cafe/" : "/",
 });

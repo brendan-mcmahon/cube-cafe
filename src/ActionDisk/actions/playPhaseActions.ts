@@ -226,6 +226,9 @@ function takeOrder(state: Game): Game {
 function cook(state: Game): Game {
   const color = state.selectedResource?.color === "wild" ? state.actionDisk.colors[2] : state.selectedResource?.color;
 
+  //check to see if there are any open orders that match the color
+  const openOrders = state.customers.filter((customer) => !!customer && customer.status === CustomerStatus.WAITING && customer.order === color).length > 0;
+
   const grillItems = !!color ?
     [...state.grillItems, color] :
     [...state.grillItems];
@@ -236,6 +239,7 @@ function cook(state: Game): Game {
     statistics: {
       ...state.statistics,
       foodCooked: state.statistics.foodCooked + 1,
+      itemsCookedWithNoOrder: state.statistics.itemsCookedWithNoOrder + (openOrders ? 0 : 1),
     },
   });
 }

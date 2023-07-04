@@ -17,11 +17,6 @@ export default function Table(props: TableProps) {
     return <button disabled className={`customer empty disabled`}></button>;
   }
 
-  useEffect(() => {
-    console.log(props.customer?.status);
-  }, [props.customer, state.history]);
-
-
   let disabled = true;
 
   switch (state.currentAction) {

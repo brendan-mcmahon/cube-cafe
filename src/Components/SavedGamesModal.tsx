@@ -6,6 +6,7 @@ import Trash from "../icons/Trash";
 import { GameAction } from "../constants";
 import { IModalProps } from "./IModalProps";
 import storage from "./localStorageUtils";
+import { SaveFile } from "./SaveFile";
 
 const dateFormat: Intl.DateTimeFormatOptions = {
   month: "short",
@@ -17,26 +18,44 @@ const dateFormat: Intl.DateTimeFormatOptions = {
 
 export default function SavedGamesModal(props: IModalProps) {
   const { dispatch } = useGame();
-  const [savedGames, setSavedGames] = useState(storage.getSavedGames());
+  const [savedGames, setSavedGames] = useState<SaveFile[]>([]);
+  const [doneLoading, setDoneLoading] = useState<boolean>(false);
 
   useEffect(() => {
     if (props.show) {
-      setSavedGames(storage.getSavedGames());
+      setDoneLoading(false);
+      console.log('getting saved games')
+      storage.getSavedGames().then((games) => {
+        console.log(games);
+        setSavedGames(games);
+        setDoneLoading(true);
+      });
     }
   }, [props.show]);
 
   const loadGame = (index: number) => {
+    console.log('load clicked');
     dispatch({ type: GameAction.LOAD_GAME, game: savedGames[index].game });
     props.setShow(false);
   };
 
-  const deleteGame = (index: number) => {
-    setSavedGames(storage.deleteSave(savedGames[index].saveName));
+  const deleteGame = async (index: number) => {
+    console.log('delete clicked');
+    setDoneLoading(false);
+    storage.deleteSave(savedGames[index], () => {
+      storage.getSavedGames().then((games) => {
+        setSavedGames(games);
+        setDoneLoading(true);
+      });
+    });
   };
 
   let body = null;
 
-  if (savedGames.length === 0) {
+  if (!doneLoading) {
+    body = <p>Loading...</p>;
+  }
+  else if (savedGames.length === 0) {
     body = <p>No saved games</p>;
   } else {
     body = (
@@ -44,17 +63,21 @@ export default function SavedGamesModal(props: IModalProps) {
         {savedGames?.map((save, index: number) => {
           return (
             <li key={index}>
-              <p className="saved-game-name" onClick={() => loadGame(index)}>
-                {save.saveName}
-              </p>
-              <p>{new Date(save.date).toLocaleString("en-US", dateFormat)}</p>
+              <div className="info" onClick={() => loadGame(index)}>
+                <p className="saved-game-name">
+                  {save.name}
+                </p>
+                <p>{new Date(save.date).toLocaleString("en-US", dateFormat)}</p>
+              </div>
+
               <button onClick={() => deleteGame(index)} className="delete-game">
                 <Trash />
               </button>
             </li>
           );
-        })}
-      </ul>
+        })
+        }
+      </ul >
     );
   }
   return (

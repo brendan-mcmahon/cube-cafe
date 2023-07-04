@@ -29,7 +29,7 @@ export default function Game() {
   if (state.gamePhase === GamePhase.NOT_STARTED) {
     return (
       <div className="start-screen">
-        <h1>Cube Cafe</h1>
+        <h1>Cube Café</h1>
         <div className="buttons">
           <button onClick={() => dispatch({ type: GameAction.ROUND_SETUP })}>Start</button>
           <button onClick={() => setLoadModalOpen(true)}>Saved Games</button>
