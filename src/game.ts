@@ -12,7 +12,7 @@ import {
 export interface Settings {
   platesPerColor: number;
   startingMood: number;
-  tableCounter: number;
+  startingTableCount: number;
   numPlates: number;
   hotFoodReward: number;
   coldFoodPenalty: number;
@@ -104,7 +104,7 @@ export const defaultGame: Game = {
   settings: {
     platesPerColor: 5,
     startingMood: 3,
-    tableCounter: 3,
+    startingTableCount: 2,
     numPlates: 1,
     hotFoodReward: 1,
     coldFoodPenalty: 0,

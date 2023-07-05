@@ -25,7 +25,7 @@ function Dishwasher() {
   };
 
   return (
-    <div id="Dishwasher">
+    <div id="Dishwasher" className="game-area">
       {state.dishwasher.map((square, i) => (
         <button
           disabled={!enabled || square.activated}

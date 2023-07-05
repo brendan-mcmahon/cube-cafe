@@ -1,3 +1,7 @@
+html {
+  overflow: hidden;
+}
+
 #root {
   /* max-width: 1280px; */
   margin: 0 auto;
@@ -33,19 +37,6 @@ svg:focus-visible {
 }
 
 #Game {
-  /* display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 2fr auto;
-  grid-auto-columns: 1fr;
-  grid-template-areas: 
-  "tableau dishwasher console console console history"
-  "tableau kitchen tables tables tables history"
-  "debug debug debug debug debug debug";
-    align-items: center;
-    justify-items: center;
-    max-height: 100vh;
-    grid-gap: 12px; */
-
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows: 0.25fr 1fr 2fr auto;
@@ -59,6 +50,10 @@ svg:focus-visible {
   justify-items: center;
   max-height: 100vh;
   grid-gap: 12px;
+}
+
+.game-area {
+  // margin-top: 4px;
 }
 
 #Button {
@@ -82,9 +77,6 @@ svg:focus-visible {
   }
 }
 
-#ActionDisk {
-  grid-area: tableau;
-}
 #Dice {
   grid-area: tableau;
   display: flex;
@@ -160,10 +152,12 @@ svg:focus-visible {
 @media only screen and (max-width: 900px) and (max-height: 400px) and (orientation: landscape) {
   #root {
     padding: 2px;
+    overflow: hidden;
   }
   #Game {
     max-height: 100vh;
     grid-template-columns: 1fr 1fr 1fr 1fr 2fr;
+    grid-template-columns: 1.2fr 0.7fr 1fr 1fr 1.5fr;
     grid-template-rows: auto auto;
     grid-auto-columns: 1fr;
     grid-template-areas:

@@ -12,7 +12,7 @@ export default function DriveThru() {
   //   const emptySpaces = state.settings.driveThruLength - occupiedSpaces;
 
   return (
-    <div id="DriveThru">
+    <div id="DriveThru" className="game-area">
       {Array.from({ length: state.settings.driveThruLength }, (_, i) => (
         <Fragment key={i}>
           <div key={i} className="car empty"></div>

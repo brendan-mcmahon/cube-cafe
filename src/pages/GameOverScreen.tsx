@@ -1,10 +1,10 @@
 import React from "react";
-import { useGame } from "./gameContext";
+import { useGame } from "../gameContext";
 import { useEffect, useState } from "react";
-import { GameAction } from "./constants";
-import "./EndGame.scss";
-import { RoundTimer } from "./game";
-import Save from "./icons/Save";
+import { GameAction } from "../constants";
+import "./GameOverScreen.scss";
+import { RoundTimer } from "../game";
+import Save from "../icons/Save";
 
 function getTimeInSeconds(t: RoundTimer) {
   const end = t.end || new Date();
@@ -25,7 +25,7 @@ type EndGameProps = {
   setSaveOpen: (open: boolean) => void;
 };
 
-function EndGame({ setSaveOpen }: EndGameProps) {
+function GameOverScreen({ setSaveOpen }: EndGameProps) {
   const { dispatch, state } = useGame();
 
   const getAverageRoundTime = () => {
@@ -181,4 +181,4 @@ function EndGame({ setSaveOpen }: EndGameProps) {
   );
 }
 
-export default EndGame;
+export default GameOverScreen;

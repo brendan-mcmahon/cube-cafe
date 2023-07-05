@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect } from "react";
 import { useGame } from "../gameContext";
 import Manager from "../icons/Manager";
-import Arrow from "../icons/Plus";
+import Arrow from "../icons/Arrow";
 import Table from "./Table";
 
 export default function Tables() {
@@ -15,7 +15,7 @@ export default function Tables() {
     };
     return (
         // if customers count is 3, grid-template-rows: repeat(2, 1fr) 0.5fr; otherwise, grid-template-rows: 1fr 0.5fr;
-        <div id="Tables" style={tableGrid}>
+        <div id="Tables" className="game-area" style={tableGrid}>
             <Table customer={state.customers[0]} index={0}></Table>
             <Table customer={state.customers[1]} index={1}></Table>
             {state.customers.length === 3 && <Table customer={state.customers[2]} index={2}></Table>}

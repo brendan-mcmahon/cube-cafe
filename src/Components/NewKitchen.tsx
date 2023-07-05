@@ -21,15 +21,18 @@ function NewKitchen() {
     }, [state.selectedCustomerIndex, state.customers]);
 
     return (
-        <div id="NewKitchen">
-            <label className="grill-label">grill</label>
+        <div id="NewKitchen" className="game-area">
+            <label className="grill-label">Grill</label>
             <div className="grill">
                 <div className={`burner ${state.grillItems?.[0] || ""}`}></div>
                 <div className={`burner ${state.grillItems?.[1] || ""}`}></div>
             </div>
 
-            <label className="hot-label">+{state.settings.hotFoodReward}</label>
+            <label className="counters-label">Counter</label>
+
             <div className="counter hot-counter">
+                <label className="hot-label">+{state.settings.hotFoodReward}</label>
+
                 {state.hotCounterItems?.map((food, i) => (
                     <button
                         disabled={disabled || food !== selectedCustomerOrder}
@@ -39,8 +42,9 @@ function NewKitchen() {
                     ></button>
                 ))}
             </div>
-            <label className="cold-label">+{state.settings.coldFoodPenalty}</label>
             <div className="counter cold-counter">
+                <label className="cold-label">+{state.settings.coldFoodPenalty}</label>
+
                 {state.coldCounterItems?.map((value, i) => (
                     <button
                         disabled={disabled || value !== selectedCustomerOrder}

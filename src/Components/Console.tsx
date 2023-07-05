@@ -34,17 +34,20 @@ function Console({ setSettingsOpen, setSaveOpen }: ConsoleProps) {
 
   return (
     <div id="Console">
-      <p className="round">
-        Round {state.round} / {state.settings.totalRounds}
-      </p>
-      <p className="instructions">{playPhase}</p>
+      <div className="info">
+        <p className="round">
+          Round {state.round} / {state.settings.totalRounds}
+        </p>
+        <Star text={state.stars} />
+      </div>
 
-      <Star text={state.stars} />
+      <p className="instructions">{playPhase}</p>
+      {state.roundPhase === RoundPhase.RESOLVE && (
+        <button className="instructions" onClick={() => dispatch({ type: GameAction.ROUND_TEARDOWN })}>End Turn</button>
+      )}
 
       <div className="buttons">
-        {state.roundPhase === RoundPhase.RESOLVE && (
-          <button onClick={() => dispatch({ type: GameAction.ROUND_TEARDOWN })}>End Turn</button>
-        )}
+
         <Save onClick={() => setSaveOpen(true)} />
 
         <Gear onClick={() => setSettingsOpen(true)} />

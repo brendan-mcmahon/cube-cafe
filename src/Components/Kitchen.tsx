@@ -21,7 +21,7 @@ function Kitchen() {
   }, [state.selectedCustomerIndex, state.customers]);
 
   return (
-    <div id="Kitchen">
+    <div id="Kitchen" className="game-area">
       <div className="grill">
         <div className={`burner ${state.grillItems?.[0] || ""}`}></div>
         <div className={`burner ${state.grillItems?.[1] || ""}`}></div>

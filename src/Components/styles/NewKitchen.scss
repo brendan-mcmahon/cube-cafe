@@ -2,20 +2,31 @@
     grid-area: kitchen;
     width: 80%;
     height: 100%;
-    // height: 300px;
 
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 0.25fr 0.75fr 0.25fr 1fr 1fr;
+    grid-template-rows: auto auto auto auto 2fr;
     grid-template-areas:
-        "grill-label ."
+        "grill-label grill-label"
         "grill grill"
+        "counters-label counters-label"
         "hot-label cold-label"
-        "hot cold"
         "hot cold";
+
+    label {
+    }
+
+    .counters-label {
+        grid-area: counters-label;
+        margin-top: 4px;
+        font-weight: bold;
+        justify-self: start;
+    }
 
     .grill-label {
         grid-area: grill-label;
+        font-weight: bold;
+        justify-self: start;
     }
 
     .hot-label {
@@ -29,7 +40,7 @@
     .grill {
         grid-area: grill;
         border: solid rgb(102, 102, 102) 2px;
-        height: 50%;
+        padding: 4px 0;
 
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -75,9 +86,12 @@
         justify-content: flex-start;
         align-items: center;
 
-        // second instance of .counter should have border-left: none
         &.cold-counter {
             border-left: none;
+        }
+
+        &.hot-counter {
+            border-right-style: dashed;
         }
 
         .food {

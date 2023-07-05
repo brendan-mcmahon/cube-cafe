@@ -100,6 +100,9 @@ const defaultGameContext: GameContextType = {
 const GameContext = createContext(defaultGameContext);
 
 export const GameProvider = ({ children }: GameProviderProps) => {
+  if (defaultGame.settings.startingTableCount === 3) {
+    defaultGame.customers[3] = null;
+  }
   const [state, dispatch] = useReducer(gameReducer, defaultGame);
 
   return <GameContext.Provider value={{ state, dispatch }}> {children}</GameContext.Provider>;

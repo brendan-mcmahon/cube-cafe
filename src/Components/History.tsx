@@ -8,7 +8,7 @@ export default function History() {
   const { state, dispatch } = useGame();
 
   return (
-    <div id="History">
+    <div id="History" className="game-area">
       <div className="header">
         <h2>History</h2>
         <Undo onClick={() => dispatch({ type: ManualAction.UNDO })} disabled={state.actionHistory?.length === 0} />
