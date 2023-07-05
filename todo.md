@@ -27,6 +27,8 @@
 * Have a Statistics modal that shows the stats for the game (use Endgame or refactor)
   * Maybe not a modal, but something hidable that shows up on the side
 * In mobile, have the undo button with the others and skip the History list
+* Add a "reset game" button to the settings
+* 
 
 ## Data Collection Features
 * Save all of the rolls so you can play the exact same game again?
@@ -36,6 +38,5 @@
 
 ## Bugs
 * Selecting 2 plates for the dishwasher at the same time was buggy. It let me do 3 for some reason.
-* Settings Modal view is broken on mobile
 
 ## Tech Debt
