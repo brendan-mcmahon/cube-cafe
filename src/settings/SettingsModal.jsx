@@ -5,6 +5,7 @@ import { SettingsInput } from "./SettingsInput";
 import { ManagerTrackStep } from "./ManagerTrackStep";
 import { Modal } from "../Modal";
 import { GameAction } from "../constants";
+import Plus from "../icons/Plus";
 
 export default function SettingsModal({ show, setShow }) {
   const { state, dispatch } = useGame();
@@ -107,13 +108,7 @@ export default function SettingsModal({ show, setShow }) {
                 />
               ))}
             </ul>
-            <button
-              type="button"
-              onClick={() => setManagerTrack([...managerTrack, "empty"])}
-              className="add-manager-track-step"
-            >
-              +
-            </button>
+            <Plus class={"add-manager-track-step"} onClick={() => setManagerTrack([...managerTrack, "empty"])} />
           </div>
         </div>
 

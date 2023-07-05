@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect } from "react";
 import { useGame } from "../gameContext";
 import Manager from "../icons/Manager";
-import Arrow from "../icons/Arrow";
+import Arrow from "../icons/Plus";
 import Table from "./Table";
 
 export default function Tables() {

@@ -1,93 +1,96 @@
+// #Console {
+//     grid-area: console;
+//     height: 100%;
+//     width: 100%;
+//     display: grid;
+//     grid-gap: 8px;
+//     grid-template-columns: 1fr 4fr;
+//     grid-template-rows: 1fr 3fr;
+//     grid-template-areas:
+//         "round buttons"
+//         "stars instructions";
+//     justify-content: flex-start;
+//     align-items: start;
+
+//     .buttons {
+//         grid-area: buttons;
+//         justify-self: flex-end;
+//         align-self: flex-start;
+//         display: flex;
+
+//         // all children should have a margin-left of 8px
+//         > * {
+//             margin: 0;
+//             margin-left: 8px;
+//         }
+
+//         svg {
+//             height: 40px;
+//             width: 40px;
+//         }
+
+//         .save {
+//             cursor: pointer;
+//         }
+
+//         .gear {
+//             cursor: pointer;
+//         }
+//     }
+
+//     .round {
+//         grid-area: round;
+//         margin: 0;
+//         font-size: 22px;
+//     }
+
+//     .star {
+//         grid-area: stars;
+//         display: grid;
+//         place-items: center;
+//         align-self: center;
+
+//         svg {
+//             height: 75px;
+//             grid-column: 1/1;
+//             grid-row: 1/1;
+//         }
+
+//         span {
+//             color: black;
+//             grid-column: 1/1;
+//             grid-row: 1/1;
+//             font-size: 32px;
+//         }
+//     }
+
+//     .instructions {
+//         grid-area: instructions;
+//         margin: 0;
+//         font-size: 32px;
+//         border: solid white 2px;
+//         height: 100%;
+//         align-self: center;
+//         display: flex;
+//         align-items: center;
+//         justify-content: center;
+//     }
+// }
+
 #Console {
     grid-area: console;
     height: 100%;
     width: 100%;
     display: grid;
     grid-gap: 8px;
-    grid-template-columns: 1fr 4fr;
-    grid-template-rows: 1fr 3fr;
-    grid-template-areas:
-        "round buttons"
-        "stars instructions";
-    justify-content: flex-start;
-    align-items: start;
-
-    .buttons {
-        grid-area: buttons;
-        justify-self: flex-end;
-        align-self: flex-start;
-        display: flex;
-
-        // all children should have a margin-left of 8px
-        > * {
-            margin: 0;
-            margin-left: 8px;
-        }
-
-        svg {
-            height: 40px;
-            width: 40px;
-        }
-
-        .save {
-            cursor: pointer;
-        }
-
-        .gear {
-            cursor: pointer;
-        }
-    }
-
-    .round {
-        grid-area: round;
-        margin: 0;
-        font-size: 22px;
-    }
-
-    .star {
-        grid-area: stars;
-        display: grid;
-        place-items: center;
-        align-self: center;
-
-        svg {
-            height: 75px;
-            grid-column: 1/1;
-            grid-row: 1/1;
-        }
-
-        span {
-            color: black;
-            grid-column: 1/1;
-            grid-row: 1/1;
-            font-size: 32px;
-        }
-    }
-
-    .instructions {
-        grid-area: instructions;
-        margin: 0;
-        font-size: 32px;
-        border: solid white 2px;
-        height: 100%;
-        align-self: center;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-}
-
-#Console {
-    grid-area: console;
-    height: 100%;
-    width: 100%;
-    display: grid;
-    grid-gap: 8px;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     grid-template-rows: 1fr;
-    grid-template-areas: " round instructions stars  buttons ";
-    justify-content: flex-start;
-    align-items: start;
+    grid-template-areas: " stars round instructions buttons buttons ";
+    align-items: center;
+
+    .undo {
+        display: none;
+    }
 
     .buttons {
         grid-area: buttons;
@@ -118,7 +121,7 @@
     .round {
         grid-area: round;
         margin: 0;
-        font-size: 22px;
+        font-size: 16px;
     }
 
     .star {
@@ -145,11 +148,15 @@
         grid-area: instructions;
         margin: 0;
         font-size: 16px;
-        border: solid white 2px;
-        height: 100%;
-        align-self: center;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+    }
+}
+
+@media only screen and (max-width: 900px) and (max-height: 400px) and (orientation: landscape) {
+    #Console {
+        grid-gap: 4px;
+        .undo {
+            display: block;
+        }
+        border-bottom: 1px solid white;
     }
 }

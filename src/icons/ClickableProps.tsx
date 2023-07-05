@@ -2,4 +2,5 @@
 export type ClickableProps = {
     onClick: () => void;
     disabled?: boolean;
+    class?: string;
 };

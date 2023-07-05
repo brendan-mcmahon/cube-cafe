@@ -41,7 +41,7 @@ export default function Game() {
   }
 
   if (state.gamePhase === GamePhase.FINISHED) {
-    return <EndGame />;
+    return <EndGame setSaveOpen={setSaveModalOpen} />;
   }
 
   return (
@@ -56,11 +56,11 @@ export default function Game() {
       <AvailablePlatesModal show={availablePlatesOpen} setShow={setAvailablePlatesOpen} />
       <Tables />
       <NewKitchen />
-      <History />
-      <div id="Debug">
+      {/* <History /> */}
+      {/* <div id="Debug">
         {/* <pre>{JSON.stringify(state.statistics)}</pre> */}
-        {/* <EndGame /> */}
-      </div>
+      {/* <EndGame /> */}
+      {/* </div> */}
     </div>
   );
 }

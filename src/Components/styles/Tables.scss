@@ -1,7 +1,6 @@
 #Tables {
     margin-left: 64px;
     grid-area: tables;
-    // height: 90%;
     align-self: flex-start;
     width: 80%;
     display: grid;
@@ -11,20 +10,15 @@
         "table1 table1 table1 table2 table2 table2"
         ". . table3 table3 . ."
         "track track track track track track";
-    // center all items
     justify-items: center;
     align-items: center;
 
-    // first child should be in the top left corner
     & > *:first-child {
-        // grid-area: "table1";
         grid-area: table1;
     }
-    // second child should be in the top right corner
     & > *:nth-child(2) {
         grid-area: table2;
     }
-    // third child should be in the bottom middle
     & > *:nth-child(3) {
         grid-area: table3;
     }
@@ -113,39 +107,45 @@
             display: flex;
             justify-content: center;
             align-items: center;
-
-            &.red {
-                background-color: red;
-            }
-
-            &.white {
-                background-color: white;
-            }
-
-            &.blue {
-                background-color: blue;
-            }
-
-            &.yellow {
-                background-color: yellow;
-            }
-
-            &.purple {
-                background-color: purple;
-            }
         }
     }
 }
 
-@media only screen and (max-width: 845px) and (orientation: landscape) {
+@media only screen and (max-width: 900px) and (max-height: 400px) and (orientation: landscape) {
     #Tables {
+        margin-left: 0;
+        width: 100%;
         .customer {
-            width: 100px;
-            height: 100px;
+            width: 75px;
+            height: 75px;
+
+            .meeple {
+                height: 25px;
+                width: 25px;
+            }
+
+            .plate {
+                height: 20px;
+                width: 20px;
+
+                .cube {
+                    width: 14px;
+                    height: 14px;
+                    margin: 0;
+                    box-shadow: 0 0 10px black;
+                    padding: 0;
+                    border-radius: 4px;
+                }
+            }
         }
 
         .manager-track {
+            width: 90%;
+            justify-content: space-evenly;
             .stop-container {
+                p {
+                    font-size: 12px;
+                }
                 .stop {
                     height: 20px;
                     width: 20px;
@@ -153,6 +153,13 @@
                     .manager {
                         height: 20px;
                     }
+                }
+            }
+            .arrow {
+                svg {
+                    margin: 3px;
+                    height: 20px;
+                    width: 20px;
                 }
             }
         }

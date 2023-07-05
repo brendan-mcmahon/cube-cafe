@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { GameAction } from "./constants";
 import "./EndGame.scss";
 import { RoundTimer } from "./game";
+import Save from "./icons/Save";
 
 function getTimeInSeconds(t: RoundTimer) {
   const end = t.end || new Date();
@@ -20,7 +21,11 @@ function formatSecondsToMinutes(seconds: number) {
   return `${minutesStr}:${secondsStr}`;
 }
 
-function EndGame() {
+type EndGameProps = {
+  setSaveOpen: (open: boolean) => void;
+};
+
+function EndGame({ setSaveOpen }: EndGameProps) {
   const { dispatch, state } = useGame();
 
   const getAverageRoundTime = () => {
@@ -61,6 +66,10 @@ function EndGame() {
     <div id="EndGame">
       <div className="title">
         <h1>Game Over</h1>
+      </div>
+      <div className="buttons">
+        <Save onClick={() => setSaveOpen(true)} />
+        <button onClick={() => dispatch({ type: GameAction.ROUND_SETUP })}>Play Again</button>
       </div>
       <div className="stats-region customers">
         <h2>Customers</h2>
@@ -147,7 +156,7 @@ function EndGame() {
         </div>
 
         <div className="stats-row">
-          <label>Manager Actions Taken / Total Steps</label>
+          <label>Manager Actions / Total Steps</label>
           <div className="value">{state.statistics.managerActionsTaken} / {state.statistics.managerStepsMoved}</div>
         </div>
 
@@ -168,8 +177,6 @@ function EndGame() {
         </div>
 
       </div>
-
-      <button onClick={() => dispatch({ type: GameAction.ROUND_SETUP })}>Play Again</button>
     </div>
   );
 }

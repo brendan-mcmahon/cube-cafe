@@ -1,10 +1,11 @@
 import React from "react";
 import { useGame } from "../gameContext";
-import { GameAction, PlayPhase, RoundPhase } from "../constants";
+import { GameAction, ManualAction, PlayPhase, RoundPhase } from "../constants";
 import Star from "../icons/Star";
 import Gear from "../icons/Gear";
 import "./styles/Console.scss";
 import Save from "../icons/Save";
+import Undo from "../icons/Undo";
 
 const instructionsMap: { [key in PlayPhase]?: string } = {
   [PlayPhase.SELECT_RESOURCE]: "Select a resource",
@@ -49,6 +50,8 @@ function Console({ setSettingsOpen, setSaveOpen }: ConsoleProps) {
         <Gear onClick={() => setSettingsOpen(true)} />
 
         <button onClick={() => quitGame()}>Quit</button>
+
+        <Undo onClick={() => dispatch({ type: ManualAction.UNDO })} disabled={state.actionHistory?.length === 0} />
       </div>
     </div>
   );

@@ -47,3 +47,16 @@
         }
     }
 }
+
+@media only screen and (max-width: 900px) and (max-height: 400px) and (orientation: landscape) {
+    .modal {
+        .modal-content {
+            height: 80%;
+            justify-content: flex-start;
+
+            .modal-body {
+                height: 80%;
+            }
+        }
+    }
+}

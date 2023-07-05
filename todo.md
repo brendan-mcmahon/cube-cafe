@@ -26,14 +26,16 @@
 * Pick new colors (ChatGPT recommends Blue, Red, Green, Yellow, Black but maybe swap out Red or Green for colorblind people?)
 * Have a Statistics modal that shows the stats for the game (use Endgame or refactor)
   * Maybe not a modal, but something hidable that shows up on the side
+* In mobile, have the undo button with the others and skip the History list
 
 ## Data Collection Features
+* Save all of the rolls so you can play the exact same game again?
 * Statistic Ideas:
-* Share button so you can send saved games to other people
-  * Don't make this too complicated, Brendan. You just need to send the json, you don't need to create a lambda function that saves the state to a table and generates a link to another endpoint that pulls in those, but damn, it would be cool if we could save them all in one place and access them anywhere. Ugh.
 * We're not using the file we're "auto-saving" on its own. We only allow you to load manually saved files. This would allow a "continue last game?" button.
 
+
 ## Bugs
-* Fix deployments
+* Selecting 2 plates for the dishwasher at the same time was buggy. It let me do 3 for some reason.
+* Settings Modal view is broken on mobile
 
 ## Tech Debt

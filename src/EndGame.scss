@@ -1,8 +1,8 @@
 #EndGame {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: auto auto auto;
-    grid-template-areas: "title title title" "customers time player" ". . button";
+    grid-template-columns: 1fr 1fr 2fr;
+    grid-template-rows: auto auto;
+    grid-template-areas: "title title buttons" "customers time player";
     justify-items: start;
     align-items: start;
     text-align: left;
@@ -32,7 +32,7 @@
         grid-area: misc;
     }
 
-    button {
+    .buttons {
         grid-area: button;
         display: flex;
         justify-content: center;
