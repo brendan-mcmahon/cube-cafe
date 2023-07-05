@@ -9,31 +9,29 @@ html {
   text-align: center;
 }
 
-.start-screen {
+#StartScreen {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  height: 80vh;
+  justify-content: space-between;
+  height: 100%;
   font-size: 36px;
+
+  h1 {
+    font-size: 2em;
+  }
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    button {
+      margin-bottom: 16px;
+    }
+  }
 }
 
 svg:focus,
 svg:focus-visible {
   outline: none;
-}
-
-.start-screen > h1 {
-  font-size: 2em;
-}
-
-.start-screen > .buttons {
-  display: flex;
-  flex-direction: column;
-}
-
-.start-screen > .buttons > button {
-  margin-bottom: 16px;
 }
 
 #Game {
@@ -169,7 +167,17 @@ svg:focus-visible {
     grid-gap: 4px;
   }
 
-  #History {
-    display: none !important;
+  #StartScreen {
+    h1 {
+      font-size: 1.5em;
+      margin: 16px 0;
+    }
+
+    .buttons {
+      button {
+        font-size: 1em;
+        padding: 0.4em 1em;
+      }
+    }
   }
 }

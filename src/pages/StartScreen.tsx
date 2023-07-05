@@ -12,7 +12,7 @@ export function StartScreen(props: StartScreenProps) {
 
     const { dispatch } = useGame();
 
-    return (<div className="start-screen">
+    return (<div id="StartScreen">
         <h1>Cube Café</h1>
         <div className="buttons">
             <button onClick={() => dispatch({
