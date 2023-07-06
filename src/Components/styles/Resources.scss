@@ -41,7 +41,7 @@
     }
 }
 
-@media only screen and (max-width: 900px) and (max-height: 400px) and (orientation: landscape) {
+@media only screen and (max-width: 900px) and (max-height: 430px) and (orientation: landscape) {
     #Resources {
         .resource {
             height: 24px;
@@ -54,7 +54,7 @@
     }
 }
 
-@media only screen and (max-width: 400px) and (orientation: portrait) {
+@media only screen and (max-width: 430px) and (orientation: portrait) {
     #Resources {
         width: 100%;
         display: grid;
