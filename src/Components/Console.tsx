@@ -55,6 +55,7 @@ function Console({ setSettingsOpen, setSaveOpen }: ConsoleProps) {
         <button onClick={() => quitGame()}>Quit</button>
 
         <Undo onClick={() => dispatch({ type: ManualAction.UNDO })} disabled={state.actionHistory?.length === 0} />
+
       </div>
     </div>
   );

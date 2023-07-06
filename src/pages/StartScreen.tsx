@@ -2,6 +2,7 @@ import React from "react";
 import SavedGamesModal from "../Components/SavedGamesModal";
 import { GameAction } from "../constants";
 import { useGame } from "../gameContext";
+import "./StartScreen.scss";
 
 type StartScreenProps = {
     loadModalOpen: boolean;

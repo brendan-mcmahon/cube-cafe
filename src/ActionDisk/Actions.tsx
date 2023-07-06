@@ -7,7 +7,7 @@ function Actions() {
   const { state } = useGame();
 
   return (
-    <svg width="210" height="210">
+    <svg viewBox="0 0 210 210">
       <defs>
         <filter id="glow">
           <feGaussianBlur stdDeviation="2.5" result="coloredBlur" />

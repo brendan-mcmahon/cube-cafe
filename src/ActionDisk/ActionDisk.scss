@@ -68,3 +68,33 @@
         }
     }
 }
+
+@media only screen and (max-width: 400px) and (orientation: portrait) {
+    #ActionDisk {
+        display: grid;
+        grid-template-columns: auto calc(210px / 2) auto;
+        grid-template-rows: 1fr;
+
+        .disk {
+            svg {
+                height: calc(210px / 2);
+            }
+        }
+
+        .arrow {
+            height: calc(75px / 2);
+            width: calc(33px / 2);
+            &:hover {
+                cursor: pointer;
+                transform: scale(1);
+            }
+
+            &.disabled {
+                &:hover {
+                    cursor: default;
+                    transform: scale(1);
+                }
+            }
+        }
+    }
+}

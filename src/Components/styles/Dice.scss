@@ -1,5 +1,8 @@
 #Dice {
-    grid-area: tableau;
+    grid-area: Dice;
+    display: flex;
+    flex-wrap: wrap;
+    align-self: flex-start;
     .die {
         width: 35px;
         height: 35px;
@@ -24,18 +27,34 @@
 
 @media only screen and (max-width: 900px) and (max-height: 400px) and (orientation: landscape) {
     #Dice {
-        grid-area: tableau;
         .die {
             width: 24px;
             height: 24px;
             margin: 4px;
-            display: flex;
             justify-content: center;
             align-items: center;
-            color: black; // or another color that contrasts with your dice colors
             font-size: 20px;
             background-color: white;
             border-radius: 8px;
+
+            .dot {
+                width: 16px;
+                height: 16px;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 400px) and (orientation: portrait) {
+    #Dice {
+        width: 100%;
+        display: grid;
+        grid-template-areas: ". . ." ". . .";
+        place-items: center;
+        .die {
+            width: 24px;
+            height: 24px;
+            margin: 4px;
 
             .dot {
                 width: 16px;

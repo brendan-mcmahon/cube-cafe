@@ -9,6 +9,7 @@ import Tableau from "../Components/Tableau";
 import SaveModal from "../Components/SaveModal";
 import SavedGamesModal from "../Components/SavedGamesModal";
 import NewKitchen from "../Components/NewKitchen";
+import "./GameScreen.scss";
 
 type GameScreenProps = {
     settingsOpen: boolean;
@@ -23,7 +24,7 @@ type GameScreenProps = {
 };
 
 export function GameScreen(props: GameScreenProps) {
-    return (<div id="Game">
+    return (<div id="GameScreen">
         <Console setSettingsOpen={props.setSettingsOpen} setSaveOpen={props.setSaveModalOpen} />
         <SettingsModal show={props.settingsOpen} setShow={props.setSettingsOpen} />
         <SaveModal show={props.saveModalOpen} setShow={props.setSaveModalOpen} />

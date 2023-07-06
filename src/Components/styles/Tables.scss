@@ -171,3 +171,55 @@
         }
     }
 }
+
+@media only screen and (max-width: 400px) and (orientation: portrait) {
+    #Tables {
+        margin-left: 0;
+        width: 100%;
+        .customer {
+            width: 75px;
+            height: 75px;
+
+            .meeple {
+                height: 25px;
+                width: 25px;
+            }
+
+            .plate {
+                height: 20px;
+                width: 20px;
+
+                .cube {
+                    width: 10px;
+                    height: 10px;
+                }
+            }
+        }
+
+        .manager-track {
+            width: 90%;
+            // justify-content: space-evenly;
+            grid-template-columns: repeat(auto-fit, minmax(20px, 1fr));
+            .stop-container {
+                p {
+                    font-size: 12px;
+                }
+                .stop {
+                    height: 20px;
+                    width: 20px;
+
+                    .manager {
+                        height: 20px;
+                    }
+                }
+            }
+            .arrow {
+                svg {
+                    margin: 3px;
+                    height: 20px;
+                    width: 20px;
+                }
+            }
+        }
+    }
+}

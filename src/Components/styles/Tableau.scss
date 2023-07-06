@@ -7,7 +7,6 @@
     justify-content: flex-start;
     align-items: start;
 
-    /* each top level child should have a margin-top of 16px */
     > * {
         margin-top: 16px;
     }
@@ -22,13 +21,18 @@
         > * {
             margin-top: 0;
         }
+    }
+}
 
-        #Dice {
-            grid-area: Dice;
-        }
-
-        #Resources {
-            grid-area: Resources;
+@media only screen and (max-width: 400px) and (orientation: portrait) {
+    #Tableau {
+        display: grid;
+        width: 100%;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+        grid-template-areas: "Dice" "Resources" "ActionDisk";
+        > * {
+            margin-top: 0;
         }
     }
 }

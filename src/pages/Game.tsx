@@ -9,8 +9,8 @@ import { GameScreen } from "./GameScreen";
 
 
 export default function Game() {
-  useLockOrientation('landscape');
-  const isMobile = useIsMobile();
+  // const isMobile = useIsMobile();
+  const isMobile = true;
   const { state } = useGame();
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [availablePlatesOpen, setAvailablePlatesOpen] = useState(false);
