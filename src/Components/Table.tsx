@@ -14,7 +14,11 @@ export default function Table(props: TableProps) {
   const { state, dispatch } = useGame();
 
   if (!props.customer) {
-    return <button disabled className={`customer empty disabled`}></button>;
+    return <button 
+    disabled
+     className={`customer empty disabled`}
+     >
+     <p className="table-number">{props.index + 1}</p></button>;
   }
 
   let disabled = true;
@@ -48,6 +52,7 @@ export default function Table(props: TableProps) {
       className={`customer ${props.customer.status} ${disabled ? "disabled" : ""}`}
       onClick={() => dispatch({ type: ManualAction.SELECT_CUSTOMER, customerIndex: props.index })}
     >
+      <p className="table-number">{props.index + 1}</p>
       <Meeple number={props.customer.pointValue} />
       {!!props.customer.order && (
         <div className={`plate ${props.customer.order}`}>

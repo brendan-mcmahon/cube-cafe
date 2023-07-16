@@ -6,6 +6,7 @@ import Gear from "../icons/Gear";
 import "./styles/Console.scss";
 import Save from "../icons/Save";
 import Undo from "../icons/Undo";
+import storage from "../storage";
 
 const instructionsMap: { [key in PlayPhase]?: string } = {
   [PlayPhase.SELECT_RESOURCE]: "Select a resource",
@@ -34,11 +35,14 @@ function Console({ setSettingsOpen, setSaveOpen }: ConsoleProps) {
 
   return (
     <div id="Console">
-      <div className="info">
-        <p className="round">
-          Round {state.round} / {state.settings.totalRounds}
-        </p>
-        <Star text={state.stars} />
+    <h1>{state.settings.gameName}</h1>
+      <div className="game-info">
+        <div className="info">
+          <p className="round">
+            Round {state.round} / {state.settings.totalRounds}
+          </p>
+          <Star text={state.stars} />
+        </div>
       </div>
 
       <p className="instructions">{playPhase}</p>
@@ -48,7 +52,8 @@ function Console({ setSettingsOpen, setSaveOpen }: ConsoleProps) {
 
       <div className="buttons">
 
-        <Save onClick={() => setSaveOpen(true)} />
+        {/* <Save onClick={() => setSaveOpen(true)} /> */}
+        <Save onClick={() => storage.saveGame(state)} />
 
         <Gear onClick={() => setSettingsOpen(true)} />
 

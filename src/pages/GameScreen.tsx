@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Tables from "../Components/Tables";
 import AvailablePlatesModal from "../Components/AvailablePlatesModal";
 import SettingsModal from "../settings/SettingsModal";
@@ -8,10 +8,23 @@ import History from "../Components/History";
 import Tableau from "../Components/Tableau";
 import SaveModal from "../Components/SaveModal";
 import SavedGamesModal from "../Components/SavedGamesModal";
-import NewKitchen from "../Components/NewKitchen";
+import Kitchen from "../Components/Kitchen/Kitchen";
+import Alert from "../Components/Alert";
+import AlertModel from "../Components/AlertModel";
 import "./GameScreen.scss";
+import { useGame } from "../gameContext";
+
+const emptyAlert = { 
+    title: "", 
+    text: "",
+    confirm: () => {},
+    cancel: () => {}
+}
+
 
 type GameScreenProps = {
+    alertOpen: boolean;
+    setAlertOpen: (open: boolean) => void;
     settingsOpen: boolean;
     setSettingsOpen: (open: boolean) => void;
     saveModalOpen: boolean;
@@ -24,6 +37,13 @@ type GameScreenProps = {
 };
 
 export function GameScreen(props: GameScreenProps) {
+
+    const { state } = useGame();
+
+    // useEffect(() => {
+    //     console.log('alert changed', state.alert);
+    // }, [state.alert])
+
     return (<div id="GameScreen">
         <Console setSettingsOpen={props.setSettingsOpen} setSaveOpen={props.setSaveModalOpen} />
         <SettingsModal show={props.settingsOpen} setShow={props.setSettingsOpen} />
@@ -32,8 +52,11 @@ export function GameScreen(props: GameScreenProps) {
         <Dishwasher />
         <Tableau />
         <AvailablePlatesModal show={props.availablePlatesOpen} setShow={props.setAvailablePlatesOpen} />
+        {/* { state.alert !== null && <Alert /> } */}
+        {/* use each property separately because show and setShow are in there */}
+        <Alert show={props.alertOpen} setShow={props.setAlertOpen} />
         <Tables />
-        <NewKitchen />
+        <Kitchen />
         {!props.isMobile && <History />}
     </div>);
 }

@@ -24,7 +24,7 @@ export default function Tables() {
                     <Fragment key={index}>
                         <div className="stop-container">
                             <div className="stop">{state.managerPosition === index && <Manager />}</div>
-                            <p>{stop === "empty" ? "" : stop}</p>
+                            <p className="stop-action">{stop === "empty" ? "" : stop}</p>
                         </div>
                         {index < state.settings.managerTrack.length - 1 && <Arrow />}
                     </Fragment>

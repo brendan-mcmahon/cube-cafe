@@ -38,8 +38,26 @@ function seatCustomer(state: Game): Game {
   });
 }
 
+function freezeResource(state: Game): Game {
+  if (state.selectedResource === null) return {...state};
+
+  return resetAction({
+    ...state,
+    freezerItems: [state.selectedResource]
+  });
+}
+
+function thawResource(state: Game): Game {
+  if (state.freezerItems.length === 0) return {...state};
+
+  return {
+    ...state,
+    freezerItems: [],
+    resources: [...state.resources, ...state.freezerItems ]
+  };
+}
+
 function selectCustomer(state: Game, customerIndex: number): Game {
-  console.log('selecting customer: ', state.customers[customerIndex])
   let resolve = null;
   switch (state.currentAction) {
     case ResourceAction.TAKE_ORDER:
@@ -84,7 +102,6 @@ function refillCustomer(state: Game, customerIndex: number): Game {
   return state;
 }
 
-
 function buyCustomerADrink(state: Game, customerIndex: number): Game {
   if (customerIndex >= 0 && customerIndex < state.customers.length) {
     const customer = state.customers[customerIndex];
@@ -101,7 +118,6 @@ function buyCustomerADrink(state: Game, customerIndex: number): Game {
   }
   return state;
 }
-
 
 function chooseFoodToServe(state: Game, customerIndex: number): Game {
   return {
@@ -226,7 +242,6 @@ function takeOrder(state: Game): Game {
 function cook(state: Game): Game {
   const color = state.selectedResource?.color === "wild" ? state.actionDisk.colors[2] : state.selectedResource?.color;
 
-  //check to see if there are any open orders that match the color
   const openOrders = state.customers.filter((customer) => !!customer && customer.status === CustomerStatus.WAITING && customer.order === color).length > 0;
 
   const grillItems = !!color ?
@@ -253,14 +268,14 @@ function serve(state: Game): Game {
 }
 
 function resetAction(state: Game): Game {
-  const lastResource = state.resources.filter((resource) => resource.status === ResourceStatus.AVAILABLE).length === 1;
+  const isLastResource = state.resources.filter((resource) => resource.status === ResourceStatus.AVAILABLE).length === 1;
 
   const resources = exhaustResource(state);
 
   const newState = {
     ...state,
-    playPhase: lastResource ? PlayPhase.NONE : PlayPhase.SELECT_RESOURCE,
-    roundPhase: lastResource ? RoundPhase.RESOLVE : state.roundPhase,
+    playPhase: isLastResource ? PlayPhase.NONE : PlayPhase.SELECT_RESOURCE,
+    roundPhase: isLastResource ? RoundPhase.RESOLVE : state.roundPhase,
     availableActions: [],
     selectedCustomerIndex: null,
     resources,
@@ -270,7 +285,7 @@ function resetAction(state: Game): Game {
     currentAction: null,
   };
 
-  return lastResource ? clearHistory(newState) : newState;
+  return isLastResource ? clearHistory(newState) : newState;
 }
 
 function refill(state: Game): Game {
@@ -360,44 +375,11 @@ function giveCustomerPlate(state: Game, plate: string): Game {
   };
 }
 
-// function giveCustomerPlate(state: Game, plate: string): Game {
-//   if (state.selectedCustomerIndex === null) {
-//     throw new Error("No customer selected");
-//   }
-
-//   const customers = [...state.customers];
-//   const selectedCustomer = customers[state.selectedCustomerIndex];
-
-//   if (!selectedCustomer) {
-//     throw new Error(`No customer at index ${state.selectedCustomerIndex}`);
-//   }
-
-//   selectedCustomer.order = plate;
-
-//   const availablePlates = [...state.availablePlates];
-//   const plateIndex = availablePlates.indexOf(plate);
-  
-//   if (plateIndex === -1) {
-//     throw new Error(`Plate "${plate}" not found in available plates`);
-//   }
-  
-//   availablePlates.splice(plateIndex, 1);
-
-//   const plateBag = [...state.plateBag, ...availablePlates];
-
-//   return {
-//     ...state,
-//     customers: customers,
-//     availablePlates: availablePlates,
-//     plateBag: plateBag,
-//   };
-// }
-
-
-
 export default {
   selectResource,
   selectCustomer,
+  freezeResource,
+  thawResource,
   selectPlate,
   selectFood,
   seatCustomer,
@@ -407,4 +389,5 @@ export default {
   serve,
   refill,
   rotate,
+  drawPlates
 };

@@ -7,7 +7,7 @@ import "./styles/Tableau.scss";
 export default function Tableau() {
   return (
     <div id="Tableau" className="game-area">
-      <Dice />
+      {/* <Dice /> */}
       <Resources />
       <ActionDisk />
     </div>

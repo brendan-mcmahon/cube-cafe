@@ -19,6 +19,11 @@ export interface RoundSetupAction {
     type: GameAction.ROUND_SETUP;
 }
 
+export interface GameSetupAction {
+    type: GameAction.GAME_SETUP;
+}
+
+
 export interface RoundTearDownAction {
     type: GameAction.ROUND_TEARDOWN;
 }
@@ -56,6 +61,14 @@ export interface LoadDishwasherAction {
 
 export interface FinishedRotatingAction {
     type: ManualAction.FINISHED_ROTATING;
+}
+
+export interface FreezeResourceAction {
+    type: ManualAction.FREEZE_RESOURCE;
+}
+
+export interface ThawResourceAction {
+    type: ManualAction.THAW_RESOURCE;
 }
 
 export interface UndoAction {

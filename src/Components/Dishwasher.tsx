@@ -10,12 +10,15 @@ function Dishwasher() {
 
   const enabled = state.playPhase === PlayPhase.SELECT_DISHWASHER_SQUARE;
 
-  const actionMap = {
+  const actionMap : { [key in DishwasherAction]: string } = {
     [DishwasherAction.INCREASE_ONE_CUSTOMER]: "+2 to one Customer",
     [DishwasherAction.PULL_PLATES]: "Choose from 2 plates",
     [DishwasherAction.RESET_WHEEL]: "Reset the Wheel",
     [DishwasherAction.ADD_TABLE]: "+1 Table",
     [DishwasherAction.INCREASE_ALL_CUSTOMERS]: "+1 to all Customers",
+    [DishwasherAction.FREEZER_UPGRADE]: "Buy a Freezer",
+    [DishwasherAction.CUSTOMER_START_UPGRADE]: "+1 Customer Start",
+    [DishwasherAction.HEATLAMP_UPGRADE]: "Buy a Heatlamp"
   };
 
   const selectDishwasherSquare = (square: DishwasherSquare, squareIndex: number) => {

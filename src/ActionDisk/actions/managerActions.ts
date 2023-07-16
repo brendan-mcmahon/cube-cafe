@@ -1,11 +1,28 @@
-import { ManagerAction, ResourceStatus } from "../../constants";
+import { ManagerAction, PlayPhase, ResourceAction, ResourceStatus } from "../../constants";
 import { Game } from "../../game";
+import playPhaseActions from "./playPhaseActions";
 
-type PureTransformer = (state: Game) => Game;
+type ManagerResolver = (state: Game) => Game;
 
-const managerActionMap :{ [key in ManagerAction]: PureTransformer } = {
+const managerActionMap :{ [key in ManagerAction]: ManagerResolver } = {
   [ManagerAction.EMPTY]: empty,
   [ManagerAction.WILD]: wild,
+  [ManagerAction.BOOST_ONE]: (s) => boost(s, 0),
+  [ManagerAction.BOOST_TWO]: (s) => boost(s, 1),
+  [ManagerAction.BOOST_THREE]: (s) => boost(s, 2)
+}
+
+function boost(state: Game, table: number): Game {
+  const customers = [...state.customers];
+
+  if (customers !== null && customers[table] !== null) {
+     customers[table]!.pointValue++;
+  }
+
+  return {
+    ...state,
+    customers
+  };;
 }
 
 function empty(state: Game): Game {

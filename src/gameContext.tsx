@@ -1,15 +1,17 @@
 import React, { ReactNode, createContext, useContext, useReducer } from "react";
-import { roundSetup, beginRoundTearDown, loadDishwasher, finishRotating } from "./ActionDisk/actions/roundActions";
-import { GamePhase, ManualAction, PlayPhase, ResourceStatus, GameAction, ResourceAction } from "./constants";
+import { roundSetup, gameSetup, beginRoundTearDown, loadDishwasher, finishRotating } from "./ActionDisk/actions/roundActions";
+import { GamePhase, ManualAction, PlayPhase, GameAction, ResourceAction } from "./constants";
 import playActions from "./ActionDisk/actions/playPhaseActions";
 import { updateSettings } from "./settings/updateSettings";
 import { Game, defaultGame } from "./game";
-import { IResourceAction, FinishedRotatingAction, LoadDishwasherAction, SelectFoodAction, LoadGameAction, QuitGameAction, SetSettingsAction, RoundSetupAction, RoundTearDownAction, SelectResourceAction, SelectCustomerAction, SelectPlateAction, UndoAction } from "./actions";
+import { v4 as uuidv4 } from 'uuid';
+import { IResourceAction, GameSetupAction, FinishedRotatingAction, LoadDishwasherAction, SelectFoodAction, LoadGameAction, QuitGameAction, SetSettingsAction, RoundSetupAction, RoundTearDownAction, SelectResourceAction, SelectCustomerAction, SelectPlateAction, UndoAction, FreezeResourceAction, ThawResourceAction } from "./actions";
+import { generatePersonName } from "./nameGenerator";
 
-type Action = IResourceAction | FinishedRotatingAction | LoadDishwasherAction | SelectFoodAction | LoadGameAction | QuitGameAction | SetSettingsAction | RoundSetupAction | RoundTearDownAction | SelectResourceAction | SelectCustomerAction | SelectPlateAction | UndoAction;
+type Action = IResourceAction | ThawResourceAction | FreezeResourceAction | GameSetupAction | FinishedRotatingAction | LoadDishwasherAction | SelectFoodAction | LoadGameAction | QuitGameAction | SetSettingsAction | RoundSetupAction | RoundTearDownAction | SelectResourceAction | SelectCustomerAction | SelectPlateAction | UndoAction;
 
 const gameReducer = (state: Game, action: Action) => {
-  // localStorage.setItem("state", JSON.stringify(state));
+  // TODO: localStorage.setItem("state", JSON.stringify(state));
 
   switch (action.type) {
     case GameAction.LOAD_GAME:
@@ -18,6 +20,8 @@ const gameReducer = (state: Game, action: Action) => {
       return { ...defaultGame };
     case GameAction.SET_SETTINGS:
       return updateSettings(state, action.settings);
+    case GameAction.GAME_SETUP:
+      return gameSetup(state);
     case GameAction.ROUND_SETUP:
       return roundSetup(state);
     case GameAction.ROUND_TEARDOWN:
@@ -50,6 +54,10 @@ const gameReducer = (state: Game, action: Action) => {
       return playActions.serve(state);
     case ResourceAction.REFILL:
       return playActions.refill(addHistory(state, action.type));
+    case ManualAction.FREEZE_RESOURCE:
+      return playActions.freezeResource(addHistory(state, action.type));
+    case ManualAction.THAW_RESOURCE:
+      return playActions.thawResource(addHistory(state, action.type))
     case ManualAction.UNDO:
       return state.history || state;
     default:
@@ -68,7 +76,6 @@ const loadGame = (state: Game, newGame: Game) => {
 };
 
 const addHistory = (state: Game, action: string): Game => {
-  console.log(state.customers[0]);
   const clonedState: Game = {
     ...state,
     resources: state.resources.map((resource) => ({ ...resource })),
@@ -100,9 +107,18 @@ const defaultGameContext: GameContextType = {
 const GameContext = createContext(defaultGameContext);
 
 export const GameProvider = ({ children }: GameProviderProps) => {
+  defaultGame.id = uuidv4();
+
   if (defaultGame.settings.startingTableCount === 3) {
     defaultGame.customers[3] = null;
   }
+
+  if (!localStorage.getItem("user")) {
+    const user = generatePersonName();
+    localStorage.setItem("user", user);
+    defaultGame.settings.user = user;
+  }
+
   const [state, dispatch] = useReducer(gameReducer, defaultGame);
 
   return <GameContext.Provider value={{ state, dispatch }}> {children}</GameContext.Provider>;

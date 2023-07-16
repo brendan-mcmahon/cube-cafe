@@ -1,3 +1,4 @@
+import AlertModel from "./Components/AlertModel";
 import {
   ManualAction,
   GamePhase,
@@ -10,6 +11,9 @@ import {
 } from "./constants";
 
 export interface Settings {
+  user: string;
+  dice: string[][];
+  gameName: string;
   platesPerColor: number;
   startingMood: number;
   startingTableCount: number;
@@ -70,14 +74,28 @@ export interface Statistics {
   dishwasherSelections: DishwasherAction[];
 }
 
+export enum UpgradeKeys {
+  Freezer = 'freezer',
+  HeatLamp = 'heatlamp'
+}
+
+interface Upgrades {
+  [UpgradeKeys.Freezer]: boolean;
+  [UpgradeKeys.HeatLamp]: boolean;
+}
+
 export interface Game {
+  freezerItems: Resource[];
+  upgrades: Upgrades;
+  alert: AlertModel | null;
+  id: string;
   settings: Settings;
   stars: number;
   round: number;
   gamePhase: GamePhase;
   roundPhase: RoundPhase;
   actionDisk: ActionDisk;
-  currentAction: ResourceAction | ManualAction | DishwasherAction | null;
+  currentAction: ResourceAction | ManualAction | DishwasherAction | ManagerAction | null;
   playPhase: PlayPhase;
   resources: Resource[];
   dice: string[];
@@ -100,8 +118,26 @@ export interface Game {
   statistics: Statistics;
 }
 
+
 export const defaultGame: Game = {
+  alert: null,
+  id: "",
+  freezerItems: [],
+  upgrades: {
+    freezer: false,
+    heatlamp: false
+  },
   settings: {
+    user: "",
+    dice: [
+      ["red", "red", "blue", "yellow", "white", "purple"],
+      ["red", "blue", "yellow", "yellow", "white", "purple"],
+      ["red", "blue", "blue", "yellow", "white", "purple"],
+      ["red", "blue", "yellow", "purple", "white", "white"],
+      ["red", "blue", "yellow", "white", "purple", "purple"],
+      ["red", "blue", "yellow", "white", "purple", "wild"],
+    ],
+    gameName: "",
     platesPerColor: 5,
     startingMood: 3,
     startingTableCount: 2,
@@ -159,12 +195,12 @@ export const defaultGame: Game = {
   dishwasher: [
     { plate: null, action: DishwasherAction.INCREASE_ONE_CUSTOMER, activated: false },
     { plate: null, action: DishwasherAction.INCREASE_ONE_CUSTOMER, activated: false },
-    { plate: null, action: DishwasherAction.INCREASE_ONE_CUSTOMER, activated: false },
+    { plate: null, action: DishwasherAction.CUSTOMER_START_UPGRADE, activated: false },
     { plate: null, action: DishwasherAction.PULL_PLATES, activated: false },
     { plate: null, action: DishwasherAction.RESET_WHEEL, activated: false },
     { plate: null, action: DishwasherAction.ADD_TABLE, activated: false },
-    { plate: null, action: DishwasherAction.INCREASE_ALL_CUSTOMERS, activated: false },
-    { plate: null, action: DishwasherAction.INCREASE_ALL_CUSTOMERS, activated: false },
+    { plate: null, action: DishwasherAction.FREEZER_UPGRADE, activated: false },
+    { plate: null, action: DishwasherAction.HEATLAMP_UPGRADE, activated: false },
     { plate: null, action: DishwasherAction.INCREASE_ALL_CUSTOMERS, activated: false },
   ],
   selectedPlate: null,

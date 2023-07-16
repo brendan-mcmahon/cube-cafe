@@ -2,6 +2,9 @@ import { ManualAction, PlayPhase, RoundPhase, GamePhase, ResourceStatus } from "
 import dishwasherResolver from "./dishwasherActions";
 import { CustomerStatus } from "../../constants";
 import { Customer, Game, Resource, RoundTimer } from "../../game";
+import { dateFormat } from "../../Components/dateFormat";
+import storage from "../../storage";
+import { generateRestaurantName } from "../../nameGenerator";
 
 const diceTemplates: string[][] = [
   ["red", "red", "blue", "yellow", "white", "purple"],
@@ -12,8 +15,20 @@ const diceTemplates: string[][] = [
   ["red", "blue", "yellow", "white", "purple", "wild"],
 ];
 
+function gameSetup(state: Game) {
+  const gameName = generateRestaurantName();
+  console.log(gameName);
+  return roundSetup({
+    ...state,
+    settings: {
+      ...state.settings,
+      gameName,
+    }
+  });
+}
+
 function roundSetup(state: Game): Game {
-  const dice = rollDice();
+  const dice = rollDice(state);
 
   return {
     ...state,
@@ -29,6 +44,11 @@ function roundSetup(state: Game): Game {
   };
 }
 
+function save(state: Game): Game {
+  storage.saveGame(state);
+  return state;
+}
+
 function addRoundTimer(state: Game): RoundTimer[] {
   return [...state.statistics.roundTimers, { start: new Date(), end: null }];
 }
@@ -39,10 +59,11 @@ function pullResources(dice: string[]): Resource[] {
   });
 }
 
-function rollDice(): string[] {
+function rollDice(state: Game): string[] {
+  const diceCount = state.settings.dice.length;
   return Array
-    .from({ length: 6 }, () => Math.floor(Math.random() * 6) + 1)
-    .map((die, index) => diceTemplates[index][die - 1]);
+    .from({ length: diceCount }, () => Math.floor(Math.random() * 6) + 1)
+    .map((die, index) => state.settings.dice[index][die - 1]);
 }
 
 function finishRotating(state: Game): Game {
@@ -100,8 +121,11 @@ function roundTearDown(state: Game): Game {
 
   let customers = removeFinishedCustomers(state);
   customers = tickDownCustomers(customers);
+  let hotCounterItems = state.upgrades.heatlamp
+  ? [...state.grillItems, ...state.hotCounterItems]
+  : [...state.grillItems];
 
-  return roundSetup({
+  return roundSetup(save({
     ...state,
     stars: getStars(state),
     statistics: {
@@ -111,7 +135,7 @@ function roundTearDown(state: Game): Game {
     },
     customers,
     coldCounterItems: moveHotFoodToCold(state),
-    hotCounterItems: [...state.grillItems],
+    hotCounterItems: hotCounterItems,
     grillItems: [],
     roundPhase: RoundPhase.SETUP,
     playPhase: PlayPhase.SELECT_RESOURCE,
@@ -120,7 +144,7 @@ function roundTearDown(state: Game): Game {
     selectedResource: null,
     currentAction: null,
     round: state.round + 1,
-  });
+  }));
 }
 
 function loadDishwasherState(state: Game): Game {
@@ -138,6 +162,9 @@ function stopTimer(state: Game) {
 }
 
 function endGameState(state: Game): Game {
+  // // save the game here
+  const now = new Date().toLocaleString("en-US", dateFormat);
+  storage.saveGame(state);
   return {
     ...state,
     stars: getStars(state),
@@ -161,6 +188,9 @@ function customerExists(customer: Customer | null | undefined): customer is Cust
 
 function moveHotFoodToCold(state: Game): string[] {
   //Need to test this... there may be a reason this wasn't working before. Seems to obvious
+
+  if (state.upgrades.heatlamp) return [...state.coldCounterItems];
+
   return [...state.coldCounterItems, ...state.hotCounterItems];
 
   const coldCounterItems = [...state.coldCounterItems];
@@ -197,4 +227,4 @@ function getStars(state: Game): number {
   }, state.stars);
 }
 
-export { roundSetup, beginRoundTearDown, loadDishwasher, finishRotating, roundTearDown };
+export { gameSetup, roundSetup, beginRoundTearDown, loadDishwasher, finishRotating, roundTearDown };

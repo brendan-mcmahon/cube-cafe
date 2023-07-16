@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ChangeEvent, MouseEvent } from "react";
 import Trash from "../icons/Trash";
 import { ManagerAction } from "../constants";
 
@@ -6,8 +6,8 @@ import { ManagerAction } from "../constants";
 type ManagerTrackStepProps = {
   index: number;
   step: ManagerAction;
-  updateStep: (index: number, event: React.ChangeEvent<HTMLSelectElement>) => void;
-  deleteStep: (index: number, event: React.MouseEvent) => void;
+  updateStep: (index: number, event: ChangeEvent<HTMLSelectElement>) => void;
+  deleteStep: (index: number, event: MouseEvent) => void;
 };
 
 export function ManagerTrackStep(props: ManagerTrackStepProps) {
@@ -16,6 +16,9 @@ export function ManagerTrackStep(props: ManagerTrackStepProps) {
       <label>{props.index + 1}:</label>
       <select name="manager-track-step" value={props.step} onChange={(e) => props.updateStep(props.index, e)}>
         <option value={ManagerAction.EMPTY}></option>
+        <option value={ManagerAction.BOOST_ONE}>+1 table 1</option>
+        <option value={ManagerAction.BOOST_TWO}>+1 table 2</option>
+        <option value={ManagerAction.BOOST_THREE}>+1 table 3</option>
         <option value={ManagerAction.WILD}>+1 Wild</option>
       </select>
 

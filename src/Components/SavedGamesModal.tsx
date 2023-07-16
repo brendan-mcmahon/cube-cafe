@@ -5,16 +5,9 @@ import "./styles/SavedGamesModal.scss";
 import Trash from "../icons/Trash";
 import { GameAction } from "../constants";
 import { IModalProps } from "./IModalProps";
-import storage from "./localStorageUtils";
+import storage from "../storage";
 import { SaveFile } from "./SaveFile";
-
-const dateFormat: Intl.DateTimeFormatOptions = {
-  month: "short",
-  day: "numeric",
-  hour: "numeric",
-  minute: "numeric",
-  hour12: true,
-};
+import { dateFormat } from "./dateFormat";
 
 export default function SavedGamesModal(props: IModalProps) {
   const { dispatch } = useGame();

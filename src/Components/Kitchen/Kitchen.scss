@@ -1,19 +1,25 @@
-#NewKitchen {
+#Kitchen {
     grid-area: kitchen;
     width: 80%;
     height: 100%;
 
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto auto auto auto 2fr;
+    grid-template-rows: repeat(4, fr) 2fr;
     grid-template-areas:
-        "grill-label grill-label"
-        "grill grill"
-        "counters-label counters-label"
-        "hot-label cold-label"
-        "hot cold";
+            "grill-label freezer-label"
+            "grill freezer"
+            "counters-label counters-label"
+            "hot-label cold-label"
+            "hot cold";
 
-    label {
+    &.heated {
+        grid-template-areas:
+            "grill-label freezer-label"
+            "grill freezer"
+            "counters-label counters-label"
+            "hot-label hot-label"
+            "hot hot";
     }
 
     .counters-label {
@@ -28,13 +34,37 @@
         font-weight: bold;
         justify-self: start;
     }
+    
+    .freezer-label {
+        grid-area: freezer-label;
+        font-weight: bold;
+        margin-top: 4px;
+        justify-self: end;
+    }
 
     .hot-label {
         grid-area: hot-label;
+        align-self: end;
+        padding: 0 4px;
     }
 
     .cold-label {
         grid-area: cold-label;
+        align-self: end;
+        padding: 0 4px;
+    }
+
+    .freezer {
+        grid-area: freezer;
+        border: solid rgb(102, 102, 102) 2px;
+        padding: 4px;
+        justify-self: flex-end;
+
+        .freezer-item {
+            width: 25px;
+            height: 25px;
+            border: solid rgb(73, 73, 73) 2px;
+        }
     }
 
     .grill {
@@ -51,31 +81,6 @@
             width: 25px;
             height: 25px;
             border: solid rgb(73, 73, 73) 2px;
-
-            &.red {
-                background-color: red;
-                border: solid black 1px;
-            }
-
-            &.white {
-                background-color: white;
-                border: solid black 1px;
-            }
-
-            &.blue {
-                background-color: blue;
-                border: solid black 1px;
-            }
-
-            &.yellow {
-                background-color: yellow;
-                border: solid black 1px;
-            }
-
-            &.purple {
-                background-color: purple;
-                border: solid black 1px;
-            }
         }
     }
 
@@ -85,6 +90,7 @@
         flex-direction: column;
         justify-content: flex-start;
         align-items: center;
+        min-height: 90px;
 
         &.cold-counter {
             border-left: none;
@@ -92,6 +98,12 @@
 
         &.hot-counter {
             border-right-style: dashed;
+        }
+
+        &.heated {
+            border-right-style: solid;
+            border-color: rgb(149, 0, 0);
+            background-color: rgb(149, 0, 0, .15);
         }
 
         .food {
@@ -120,7 +132,7 @@
 }
 
 @media only screen and (max-width: 900px) and (max-height: 430px) and (orientation: landscape) {
-    #NewKitchen {
+    #Kitchen {
         height: 300px;
         align-self: flex-start;
     }

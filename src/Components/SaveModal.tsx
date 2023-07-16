@@ -3,7 +3,7 @@ import { Modal } from "../Modal";
 import { useGame } from "../gameContext";
 import "./styles/SaveModal.scss";
 import { IModalProps } from "./IModalProps";
-import storage from "./localStorageUtils";
+import storage from "../storage";
 
 export default function SaveDialog(props: IModalProps) {
   const { state } = useGame();
@@ -14,7 +14,8 @@ export default function SaveDialog(props: IModalProps) {
 
     const saveName = form.elements.namedItem("saveName") as HTMLInputElement;
 
-    storage.saveGame(saveName.value, state, () => props.setShow(false));
+    //TODO: Need to make a new storage.updateName function
+    // storage.saveGame(saveName.value, state, () => props.setShow(false));
   }
 
   return (

@@ -3,7 +3,7 @@ import { ClickableProps } from "./ClickableProps";
 
 function Gear(props: ClickableProps) {
   return (
-    <svg className="gear" onClick={props.onClick} x="0px" y="0px" height="40px" width="40px" viewBox="0 0 64 64">
+    <svg id="Gear" className="gear" onClick={props.onClick} x="0px" y="0px" height="40px" width="40px" viewBox="0 0 64 64">
       <g>
         <path
           fill="white"

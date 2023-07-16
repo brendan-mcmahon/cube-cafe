@@ -3,20 +3,23 @@ import { useGame } from "../gameContext";
 import { useState } from "react";
 import "./Settings.scss";
 import { NumericSettingsInput } from "./NumericSettingsInput";
-import { ManagerTrackStep } from "./ManagerTrackStep";
 import { Modal } from "../Modal";
 import { GameAction, ManagerAction } from "../constants";
-import Plus from "../icons/Plus";
 import { IModalProps } from "../Components/IModalProps";
+import { DiceSettings } from "./DiceSettings";
+import { ManagerTrackSettings } from "./ManagerTrackSettings";
+
 
 export default function SettingsModal({ show, setShow }: IModalProps) {
   const { state, dispatch } = useGame();
+  const [user, setUser] = useState(state?.settings?.user || localStorage.getItem("user") || "");
   const [startingMood, setStartingMood] = useState<number>(state?.settings?.startingMood || 3);
   const [tableCount, setTableCount] = useState(state?.settings?.startingTableCount || 3);
   const [numPlates, setNumPlates] = useState(state?.settings?.numPlates || 1);
   const [hotFoodReward, setHotFoodReward] = useState(state?.settings?.hotFoodReward || 1);
   const [coldFoodPenalty, setColdFoodPenalty] = useState(state?.settings?.coldFoodPenalty || 0);
   const [totalRounds, setTotalRounds] = useState(state?.settings?.totalRounds || 8);
+  const [dice, setDice] = useState(state?.settings?.dice || []);
   const [managerTrack, setManagerTrack] = useState(
     state?.settings?.managerTrack || [ManagerAction.EMPTY, ManagerAction.EMPTY, ManagerAction.EMPTY, ManagerAction.EMPTY, ManagerAction.WILD]
   );
@@ -27,9 +30,16 @@ export default function SettingsModal({ show, setShow }: IModalProps) {
 
   const onSaveClicked: FormEventHandler = (e: ChangeEvent) => {
     e.preventDefault();
+
+    // if user is different than the one in local storage, update local storage
+    if (user !== localStorage.getItem("user")) {
+      localStorage.setItem("user", user);
+    }
+
     dispatch({
       type: GameAction.SET_SETTINGS,
       settings: {
+        user,
         startingMood,
         startingTableCount: tableCount,
         hotFoodReward,
@@ -40,6 +50,8 @@ export default function SettingsModal({ show, setShow }: IModalProps) {
         platesPerColor: state.settings.platesPerColor,
         diceCount: state.settings.diceCount,
         driveThruLength: state.settings.driveThruLength,
+        gameName: state.settings.gameName,
+        dice
       },
     });
     setShow(false);
@@ -62,6 +74,12 @@ export default function SettingsModal({ show, setShow }: IModalProps) {
   return (
     <Modal title="Settings" show={show} setShow={setShow}>
       <form id="Settings" onSubmit={onSaveClicked}>
+
+        <div className="form-input">
+          <label htmlFor="user">Username:</label>
+          <input type="text" id="user" name="user" value={user} onChange={(e) => setUser(e.target.value)} />
+        </div>
+
         <NumericSettingsInput label="Starting Mood:" name="startingMood" value={startingMood} setValue={setStartingMood} />
 
         <NumericSettingsInput label="Number of Tables:" name="numTables" min={2} max={3} value={tableCount} setValue={setTableCount} />
@@ -73,6 +91,7 @@ export default function SettingsModal({ show, setShow }: IModalProps) {
           setValue={setNumPlates}
           max={10}
         />
+
         <NumericSettingsInput
           label="Hot Food Reward:"
           name="hotFoodReward"
@@ -99,23 +118,13 @@ export default function SettingsModal({ show, setShow }: IModalProps) {
           max={12}
         />
 
-        <div className="manager-track-settings">
-          <label>Manager Track:</label>
-          <div className="manager-track-input">
-            <ul>
-              {managerTrack.map((step, index) => (
-                <ManagerTrackStep
-                  key={index}
-                  updateStep={updateManagerStep}
-                  deleteStep={deleteManagerStep}
-                  step={step}
-                  index={index}
-                />
-              ))}
-            </ul>
-            <Plus class={"add-manager-track-step"} onClick={() => setManagerTrack([...managerTrack, ManagerAction.EMPTY])} />
-          </div>
-        </div>
+        <DiceSettings dice={dice} setDice={setDice} />
+
+        <ManagerTrackSettings
+          managerTrack={managerTrack}
+          setManagerTrack={setManagerTrack}
+          updateManagerStep={updateManagerStep}
+          deleteManagerStep={deleteManagerStep} />
 
         <input type="submit" value="Save" />
       </form>

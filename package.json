@@ -16,6 +16,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "sass": "^1.63.2",
+    "uuid": "^9.0.0",
     "vite-plugin-react-svg": "^0.2.0"
   },
   "devDependencies": {
@@ -23,6 +24,7 @@
     "@types/node": "^20.3.2",
     "@types/react": "^18.2.14",
     "@types/react-dom": "^18.2.6",
+    "@types/uuid": "^9.0.2",
     "@typescript-eslint/eslint-plugin": "^5.60.1",
     "@typescript-eslint/parser": "^5.60.1",
     "@vitejs/plugin-react": "^4.0.0",

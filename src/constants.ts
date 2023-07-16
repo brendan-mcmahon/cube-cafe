@@ -11,6 +11,9 @@ export enum RoundPhase {
   RESOLVE = "Resolve",
 };
 
+
+
+
 export enum PlayPhase {
   NONE = "None",
   SELECT_RESOURCE = "Select Resource",
@@ -36,6 +39,7 @@ export enum ResourceStatus {
   EXHAUSTED = "exhausted",
 }
 
+
 export enum ResourceAction {
   SEAT_CUSTOMER = "Seat Customer",
   MOVE_MANAGER = "Move Manager",
@@ -47,15 +51,23 @@ export enum ResourceAction {
   REFILL = "Refill",
 }
 
+
+
+
 export enum ManualAction {
-  INCREASE_ONE_CUSTOMER = "Increase One Customer",
-  LOAD_DISHWASHER = "Load Dishwasher",
-  SELECT_RESOURCE = "Select Resource",
-  SELECT_CUSTOMER = "Select Customer",
-  SELECT_FOOD = "Select Food",
-  UNDO = "Undo",
-  FINISHED_ROTATING = "Finished Rotating",
+    INCREASE_ONE_CUSTOMER = "Increase One Customer",
+    LOAD_DISHWASHER = "Load Dishwasher",
+    SELECT_RESOURCE = "Select Resource",
+    SELECT_CUSTOMER = "Select Customer",
+    SELECT_FOOD = "Select Food",
+    UNDO = "Undo",
+    FINISHED_ROTATING = "Finished Rotating",
+    FREEZE_RESOURCE = "Freeze Resource",
+    THAW_RESOURCE = "Thaw Resource"
 };
+
+
+
 
 export enum DishwasherAction {
   INCREASE_ALL_CUSTOMERS = "Increase All Customers",
@@ -63,12 +75,19 @@ export enum DishwasherAction {
   ADD_TABLE = "Add Table",
   PULL_PLATES = "Pull Plates",
   RESET_WHEEL = "Reset Wheel",
+  FREEZER_UPGRADE = "Freezer Upgrade",
+  CUSTOMER_START_UPGRADE = "Customer Start Upgrade",
+  HEATLAMP_UPGRADE = "Heatlamp Upgrade"
 };
 
 export enum ManagerAction {
   EMPTY = "empty",
   WILD = "wild",
+  BOOST_ONE = "+1 (1)",
+  BOOST_TWO = "+1 (2)",
+  BOOST_THREE = "+1 (3)"
 };
+
 
 export enum GameAction {
   LOAD_GAME = "Load Game",
@@ -76,4 +95,5 @@ export enum GameAction {
   SET_SETTINGS = "Set Settings",
   ROUND_SETUP = "Round Setup",
   ROUND_TEARDOWN = "Round Teardown",
+  GAME_SETUP = "Game Setup"
 }
