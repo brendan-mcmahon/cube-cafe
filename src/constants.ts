@@ -77,7 +77,8 @@ export enum DishwasherAction {
   RESET_WHEEL = "Reset Wheel",
   FREEZER_UPGRADE = "Freezer Upgrade",
   CUSTOMER_START_UPGRADE = "Customer Start Upgrade",
-  HEATLAMP_UPGRADE = "Heatlamp Upgrade"
+  HEATLAMP_UPGRADE = "Heatlamp Upgrade",
+  POINTS = "3 Points"
 };
 
 export enum ManagerAction {

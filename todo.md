@@ -25,7 +25,6 @@
     * add grill top
   * one-time rewards
     * seat a VIP
-    * bonus points
 * Add counter sections in settings
 * Manager Action Ideas: 
   * +1 to each table

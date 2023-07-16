@@ -18,7 +18,8 @@ function Dishwasher() {
     [DishwasherAction.INCREASE_ALL_CUSTOMERS]: "+1 to all Customers",
     [DishwasherAction.FREEZER_UPGRADE]: "Buy a Freezer",
     [DishwasherAction.CUSTOMER_START_UPGRADE]: "+1 Customer Start",
-    [DishwasherAction.HEATLAMP_UPGRADE]: "Buy a Heatlamp"
+    [DishwasherAction.HEATLAMP_UPGRADE]: "Buy a Heatlamp",
+    [DishwasherAction.POINTS]: "+3 Points"
   };
 
   const selectDishwasherSquare = (square: DishwasherSquare, squareIndex: number) => {

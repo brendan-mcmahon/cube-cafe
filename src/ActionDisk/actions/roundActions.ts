@@ -6,15 +6,6 @@ import { dateFormat } from "../../Components/dateFormat";
 import storage from "../../storage";
 import { generateRestaurantName } from "../../nameGenerator";
 
-const diceTemplates: string[][] = [
-  ["red", "red", "blue", "yellow", "white", "purple"],
-  ["red", "blue", "yellow", "yellow", "white", "purple"],
-  ["red", "blue", "blue", "yellow", "white", "purple"],
-  ["red", "blue", "yellow", "purple", "white", "white"],
-  ["red", "blue", "yellow", "white", "purple", "purple"],
-  ["red", "blue", "yellow", "white", "purple", "wild"],
-];
-
 function gameSetup(state: Game) {
   const gameName = generateRestaurantName();
   console.log(gameName);

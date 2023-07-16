@@ -130,12 +130,12 @@ export const defaultGame: Game = {
   settings: {
     user: "",
     dice: [
-      ["red", "red", "blue", "yellow", "white", "purple"],
-      ["red", "blue", "yellow", "yellow", "white", "purple"],
-      ["red", "blue", "blue", "yellow", "white", "purple"],
-      ["red", "blue", "yellow", "purple", "white", "white"],
-      ["red", "blue", "yellow", "white", "purple", "purple"],
-      ["red", "blue", "yellow", "white", "purple", "wild"],
+      ["red", "red", "blue", "yellow", "white", "green"],
+      ["red", "blue", "yellow", "yellow", "white", "green"],
+      ["red", "blue", "blue", "yellow", "white", "green"],
+      ["red", "blue", "yellow", "green", "white", "white"],
+      ["red", "blue", "yellow", "white", "green", "green"],
+      ["red", "blue", "yellow", "white", "green", "wild"],
     ],
     gameName: "",
     platesPerColor: 5,
@@ -166,7 +166,7 @@ export const defaultGame: Game = {
   roundPhase: RoundPhase.SETUP,
   actionDisk: {
     rotation: 0,
-    colors: ["red", "blue", "yellow", "white", "purple"],
+    colors: ["red", "blue", "yellow", "white", "green"],
     actions: [
       ResourceAction.SEAT_CUSTOMER,
       ResourceAction.TAKE_ORDER,
@@ -190,10 +190,10 @@ export const defaultGame: Game = {
     ...Array.from({ length: 5 }, () => "blue"),
     ...Array.from({ length: 5 }, () => "yellow"),
     ...Array.from({ length: 5 }, () => "white"),
-    ...Array.from({ length: 5 }, () => "purple"),
+    ...Array.from({ length: 5 }, () => "green"),
   ],
   dishwasher: [
-    { plate: null, action: DishwasherAction.INCREASE_ONE_CUSTOMER, activated: false },
+    { plate: null, action: DishwasherAction.POINTS, activated: false },
     { plate: null, action: DishwasherAction.INCREASE_ONE_CUSTOMER, activated: false },
     { plate: null, action: DishwasherAction.CUSTOMER_START_UPGRADE, activated: false },
     { plate: null, action: DishwasherAction.PULL_PLATES, activated: false },

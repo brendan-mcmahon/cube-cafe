@@ -12,7 +12,7 @@ const Colors: React.FC = () => {
         <path fill="#00f" d="M-10 -40H10V-20H-10z" transform="rotate(72)"></path>
         <path fill="#ff0" d="M-10 -40H10V-20H-10z" transform="rotate(144)"></path>
         <path fill="#fff" d="M-10 -40H10V-20H-10z" transform="rotate(216)"></path>
-        <path fill="purple" d="M-10 -40H10V-20H-10z" transform="rotate(288)"></path>
+        <path fill="green" d="M-10 -40H10V-20H-10z" transform="rotate(288)"></path>
       </g>
     </svg>
   );

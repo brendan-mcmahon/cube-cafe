@@ -5,6 +5,6 @@
         <rect stroke="black" fill="blue" x="-10" y="-40" width="20" height="20" transform="rotate(72)" />
         <rect stroke="black" fill="yellow" x="-10" y="-40" width="20" height="20" transform="rotate(144)" />
         <rect stroke="black" fill="white" x="-10" y="-40" width="20" height="20" transform="rotate(216)" />
-        <rect stroke="black" fill="purple" x="-10" y="-40" width="20" height="20" transform="rotate(288)" />
+        <rect stroke="black" fill="green" x="-10" y="-40" width="20" height="20" transform="rotate(288)" />
     </g>
 </svg>

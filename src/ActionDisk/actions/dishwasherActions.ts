@@ -10,11 +10,19 @@ const dishwasherMap: { [key in DishwasherAction]: (game: Game) => Game } = {
   [DishwasherAction.RESET_WHEEL]: resetWheel,
   [DishwasherAction.FREEZER_UPGRADE]: freezerUpgrade,
   [DishwasherAction.CUSTOMER_START_UPGRADE]: customerStartUpgrade,
-  [DishwasherAction.HEATLAMP_UPGRADE]: heatlampUpgrade
+  [DishwasherAction.HEATLAMP_UPGRADE]: heatlampUpgrade,
+  [DishwasherAction.POINTS]: addPoints,
 };
 
 function dishwasherResolver(state: Game, action: DishwasherAction) {
   return roundTearDown(addActionToStats(dishwasherMap[action](state), action));
+}
+
+function addPoints(state: Game): Game {
+  return {
+    ...state,
+    stars: state.stars + 1,
+  };
 }
 
 function heatlampUpgrade(state: Game): Game {
