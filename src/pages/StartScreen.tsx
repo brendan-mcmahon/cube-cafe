@@ -6,6 +6,8 @@ import "./StartScreen.scss";
 import Gear from "../icons/Gear";
 import SettingsModal from "../settings/SettingsModal";
 
+const version = "7.19.13.37"
+
 type StartScreenProps = {
     loadModalOpen: boolean;
     setLoadModalOpen: (open: boolean) => void;
@@ -19,7 +21,9 @@ export function StartScreen(props: StartScreenProps) {
 
     return (<div id="StartScreen">
         <Gear onClick={() => props.setSettingsModalOpen(true)} />
-        <h1 id="title">Cube Café</h1>
+        <div id="title">
+            <h1>Cube Café</h1><p>v{version}</p>
+        </div>
         <div className="buttons">
             <button onClick={() => dispatch({
                 type: GameAction.GAME_SETUP,

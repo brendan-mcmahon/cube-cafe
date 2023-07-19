@@ -26,12 +26,39 @@
         .info {
             border: solid black 2px;
             padding: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
             width: 100%;
             margin-right: 16px;
             font-size: 16px;
+
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            justify-items: start;
+            align-items: center;
+            grid-template-areas: " name name " " date phase ";
+
+            .saved-game-name {
+                grid-area: name;
+                font-weight: bold;
+            }
+
+            .saved-game-date {
+                grid-area: date;
+                font-size: 12px;
+            }
+
+            .saved-game-phase {
+                grid-area: phase;
+                justify-self: end;
+
+                &.Finished {
+                    background-color: green;
+                    color: white;
+                    padding: 4px 8px;
+                    font-size: 12px;
+                    border-radius: 100px;
+                }
+            }
 
             &:hover {
                 cursor: pointer;
@@ -48,6 +75,8 @@
             padding: 8px;
             font-size: 8px;
             z-index: 2;
+            background-color: rgb(184, 0, 0);
+            border-color: rgb(184, 0, 0);
 
             &:hover {
                 background-color: rgb(184, 0, 0);

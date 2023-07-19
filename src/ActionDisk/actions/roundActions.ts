@@ -153,10 +153,7 @@ function stopTimer(state: Game) {
 }
 
 function endGameState(state: Game): Game {
-  // // save the game here
-  const now = new Date().toLocaleString("en-US", dateFormat);
-  storage.saveGame(state);
-  return {
+  const endState = {
     ...state,
     stars: getStars(state),
     roundPhase: RoundPhase.NONE,
@@ -171,6 +168,9 @@ function endGameState(state: Game): Game {
       leftOverCustomers: [...state.customers.filter((customer) => !isEatingCustomer(customer)).filter(customerExists)],
     }
   };
+  
+  storage.saveGame(endState);
+  return endState;
 }
 
 function customerExists(customer: Customer | null | undefined): customer is Customer {

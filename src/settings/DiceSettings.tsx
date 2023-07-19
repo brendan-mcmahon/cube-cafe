@@ -34,9 +34,11 @@ export function DiceSettings(props: DiceSettingsProps) {
   }
 
   const deleteDie = (index: number) => {
-    const newDice = [...props.dice].splice(index, 1);
+    const newDice = [...props.dice];
+    newDice.splice(index, 1);
     props.setDice(newDice);
   }
+  
 
   return (<div className="dice-settings">
     <label>Dice:</label>

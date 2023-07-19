@@ -15,7 +15,7 @@ const dishwasherMap: { [key in DishwasherAction]: (game: Game) => Game } = {
 };
 
 function dishwasherResolver(state: Game, action: DishwasherAction) {
-  return roundTearDown(addActionToStats(dishwasherMap[action](state), action));
+  return addActionToStats(dishwasherMap[action](state), action);
 }
 
 function addPoints(state: Game): Game {
@@ -36,23 +36,23 @@ function heatlampUpgrade(state: Game): Game {
 }
 
 function freezerUpgrade(state: Game): Game {
-  return {
+  return roundTearDown({
     ...state,
     upgrades: {
       ...state.upgrades,
       freezer: true
     }
-  }
+  })
 }
 
 function customerStartUpgrade(state: Game) {
-  return {
+  return roundTearDown({
     ...state,
     settings: {
       ...state.settings,
       startingMood: state.settings.startingMood + 1
     }
-  }
+  })
 }
 
 function addActionToStats(state: Game, action: DishwasherAction): Game {
@@ -70,10 +70,10 @@ function increaseAllCustomers(state: Game): Game {
   customers.forEach((customer) => {
     if (!!customer) customer.pointValue = Math.min(5, customer.pointValue + 1);
   });
-  return {
+  return roundTearDown({
     ...state,
     customers,
-  };
+  });
 }
 
 function increaseOneCustomer(state: Game): Game {
@@ -96,10 +96,10 @@ function addTable(state: Game): Game {
 function pullPlates(state: Game): Game {
   const settings = { ...state.settings };
   settings.numPlates += 1;
-  return {
+  return roundTearDown({
     ...state,
     settings,
-  };
+  });
 }
 
 function resetWheel(state: Game): Game {

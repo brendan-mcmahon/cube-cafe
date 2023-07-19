@@ -70,8 +70,7 @@ const loadGame = (state: Game, newGame: Game) => {
 
   return {
     ...state,
-    ...newGame,
-    gamePhase: GamePhase.IN_PROGRESS,
+    ...newGame
   };
 };
 

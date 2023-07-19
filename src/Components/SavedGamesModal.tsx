@@ -3,7 +3,7 @@ import { Modal } from "../Modal";
 import { useGame } from "../gameContext";
 import "./styles/SavedGamesModal.scss";
 import Trash from "../icons/Trash";
-import { GameAction } from "../constants";
+import { GameAction, GamePhase } from "../constants";
 import { IModalProps } from "./IModalProps";
 import storage from "../storage";
 import { SaveFile } from "./SaveFile";
@@ -60,7 +60,8 @@ export default function SavedGamesModal(props: IModalProps) {
                 <p className="saved-game-name">
                   {save.name}
                 </p>
-                <p>{new Date(save.date).toLocaleString("en-US", dateFormat)}</p>
+                <p className="saved-game-date">{new Date(save.date).toLocaleString("en-US", dateFormat)}</p>
+                <p className={`saved-game-phase ${save.game.gamePhase}`}>{save.game.gamePhase }</p>
               </div>
 
               <button onClick={() => deleteGame(index)} className="delete-game">

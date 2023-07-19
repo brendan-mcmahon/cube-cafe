@@ -3,6 +3,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    display: grid;
+    grid-template-columns: auto 210px auto;
+    grid-template-rows: 1fr;
     .disk {
         display: grid;
         grid-template-columns: 1fr;
@@ -46,44 +49,21 @@
     }
 }
 
-@media only screen and (max-width: 900px) and (max-height: 430px) and (orientation: landscape) {
-    #ActionDisk {
-        transform: scale(0.65);
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        grid-template-rows: 1fr;
-
-        .arrow {
-            &:hover {
-                cursor: pointer;
-                transform: scale(1);
-            }
-
-            &.disabled {
-                &:hover {
-                    cursor: default;
-                    transform: scale(1);
-                }
-            }
-        }
-    }
-}
-
 @media only screen and (max-width: 430px) and (orientation: portrait) {
     #ActionDisk {
         display: grid;
-        grid-template-columns: auto calc(210px / 2) auto;
+        grid-template-columns: auto calc(210px) auto;
         grid-template-rows: 1fr;
 
         .disk {
             svg {
-                height: calc(210px / 2);
+                height: calc(210px);
             }
         }
 
         .arrow {
-            height: calc(75px / 2);
-            width: calc(33px / 2);
+            height: calc(75px);
+            width: calc(33px);
             &:hover {
                 cursor: pointer;
                 transform: scale(1);

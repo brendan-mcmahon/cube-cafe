@@ -4,6 +4,7 @@ import { GameAction } from "../constants";
 import { Game, RoundTimer, UpgradeKeys } from "../game";
 import Save from "../icons/Save";
 import "./GameOverScreen.scss";
+import { getRandomValues } from "crypto";
 
 function getTimeInSeconds(t: RoundTimer) {
   const end = t.end || new Date();
@@ -59,6 +60,11 @@ function GameOverScreen({ setSaveOpen }: EndGameProps) {
       .map(([key, _]) => upgradesMap[key as UpgradeKeys]);
   }
 
+  const mapScoring = (scoringMap: number[]) => {
+    var arr = state.statistics.servedCustomers.map((c) => scoringMap[c.pointValue - 1]);
+    return arr.reduce((prev, cur) => prev + cur, 0);
+  }
+
   const [averageRound, setAverageRound] = useState<number>(getAverageRoundTime());
   const [totalTime, setTotalTime] = useState<number>(getTotalTime());
   const [averageCustomerPointValue, setAverageCustomerPointValue] = useState<string>(getAverageCustomerPointValue());
@@ -77,19 +83,44 @@ function GameOverScreen({ setSaveOpen }: EndGameProps) {
       <div className="title">
         <h1>Game Over</h1>
         <div className="buttons">
-          <Save onClick={() => setSaveOpen(true)} />
           <button onClick={() => dispatch({ type: GameAction.ROUND_SETUP })}>Play Again</button>
+          <button onClick={() => dispatch({ type: GameAction.QUIT_GAME })}>Quit</button>
         </div>
       </div>
 
 
       <div className="all-stats">
-        <div className="stats-region customers">
-          <h2>Customers</h2>
+
+        <div className="stats-region settings">
+          <h2>Settings</h2>
           <div className="stats-row">
-            <label>Stars</label>
+            <label>Rounds</label>
+            <div className="value">{state.settings.totalRounds}</div>
+          </div>
+        </div>
+
+        <div className="stats-region scoring">
+          <h2>Scoring</h2>
+          <div className="stats-row">
+            <label>Total Stars (1, 2, 3, 4, 5)</label>
             <div className="value">{state.stars}</div>
           </div>
+          <div className="stats-row">
+            <label>(1, 2, 3, 5, 8)</label>
+            <div className="value">{mapScoring([1, 2, 3, 5, 8])}</div>
+          </div>
+          <div className="stats-row">
+            <label>(1, 2, 4, 6, 9)</label>
+            <div className="value">{mapScoring([1, 2, 4, 6, 9])}</div>
+          </div>
+          <div className="stats-row">
+            <label>(-2, -1, 0, 1, 2)</label>
+            <div className="value">{mapScoring([-2, -1, 0, 1, 2])}</div>
+          </div>
+        </div>
+
+        <div className="stats-region customers">
+          <h2>Customers</h2>
           <div className="stats-row">
             <label>Customers Served</label>
             <div className="value">{state.statistics.servedCustomers.length}</div>

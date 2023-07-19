@@ -66,9 +66,6 @@ export enum ManualAction {
     THAW_RESOURCE = "Thaw Resource"
 };
 
-
-
-
 export enum DishwasherAction {
   INCREASE_ALL_CUSTOMERS = "Increase All Customers",
   INCREASE_ONE_CUSTOMER = "Increase One Customer",
