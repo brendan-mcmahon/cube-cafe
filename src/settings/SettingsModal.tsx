@@ -23,10 +23,8 @@ export default function SettingsModal({ show, setShow }: IModalProps) {
   const [managerTrack, setManagerTrack] = useState(
     state?.settings?.managerTrack || [ManagerAction.EMPTY, ManagerAction.EMPTY, ManagerAction.EMPTY, ManagerAction.EMPTY, ManagerAction.WILD]
   );
-  // TODO: Move dishwasher to settings?
-  const [dishwasher, setDishwasher] = useState(
-    state?.dishwasher || [...Array.from({ length: 9 }, () => ({ plate: null, action: "do nothing", activated: false }))]
-  );
+  const [driveThruRound, setDriveThruRound] = useState(state?.settings?.driveThruRound || 5);
+  const [driveThruRewards, setDriveThruRewards] = useState(state?.settings?.driveThruRewards || [3, 2])
 
   const onSaveClicked: FormEventHandler = (e: ChangeEvent) => {
     e.preventDefault();
@@ -49,9 +47,10 @@ export default function SettingsModal({ show, setShow }: IModalProps) {
         totalRounds,
         platesPerColor: state.settings.platesPerColor,
         diceCount: state.settings.diceCount,
-        driveThruLength: state.settings.driveThruLength,
         gameName: state.settings.gameName,
-        dice
+        dice,
+        driveThruRound,
+        driveThruRewards,
       },
     });
     setShow(false);
@@ -83,15 +82,15 @@ export default function SettingsModal({ show, setShow }: IModalProps) {
         <NumericSettingsInput label="Starting Mood:" name="startingMood" value={startingMood} setValue={setStartingMood} />
 
         <NumericSettingsInput label="Number of Tables:" name="numTables" min={2} max={3} value={tableCount} setValue={setTableCount} />
-
+{/* 
         <NumericSettingsInput
           label="Number of Default Plates:"
           name="numPlates"
           value={numPlates}
           setValue={setNumPlates}
           max={10}
-        />
-
+        /> */}
+{/* 
         <NumericSettingsInput
           label="Hot Food Reward:"
           name="hotFoodReward"
@@ -107,7 +106,7 @@ export default function SettingsModal({ show, setShow }: IModalProps) {
           setValue={setColdFoodPenalty}
           min={-5}
           max={5}
-        />
+        /> */}
 
         <NumericSettingsInput
           label="Total Rounds:"
@@ -115,16 +114,42 @@ export default function SettingsModal({ show, setShow }: IModalProps) {
           value={totalRounds}
           setValue={setTotalRounds}
           min={1}
-          max={12}
         />
 
-        <DiceSettings dice={dice} setDice={setDice} />
+        <NumericSettingsInput
+          label="Drive Thru Opening Round:"
+          name="driveThruRound"
+          value={driveThruRound}
+          setValue={setDriveThruRound}
+          min={1}
+          max={totalRounds}
+        />
 
-        <ManagerTrackSettings
+        <NumericSettingsInput
+          label="Drive Thru Reward 1:"
+          name="driveThruReward1"
+          value={driveThruRewards[0]}
+          setValue={(value) => setDriveThruRewards([value, driveThruRewards[1]])}
+          min={1}
+          max={10}
+        />
+
+        <NumericSettingsInput
+          label="Drive Thru Reward 2:"
+          name="driveThruReward2"
+          value={driveThruRewards[1]}
+          setValue={(value) => setDriveThruRewards([driveThruRewards[0], value])}
+          min={1}
+          max={10}
+        />
+
+        {/* <DiceSettings dice={dice} setDice={setDice} /> */}
+
+        {/* <ManagerTrackSettings
           managerTrack={managerTrack}
           setManagerTrack={setManagerTrack}
           updateManagerStep={updateManagerStep}
-          deleteManagerStep={deleteManagerStep} />
+          deleteManagerStep={deleteManagerStep} /> */}
 
         <input type="submit" value="Save" />
       </form>

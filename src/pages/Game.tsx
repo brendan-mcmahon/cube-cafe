@@ -4,6 +4,7 @@ import { GamePhase, PlayPhase } from "../constants";
 import GameOverScreen from "./GameOverScreen";
 import { StartScreen } from "./StartScreen";
 import { GameScreen } from "./GameScreen";
+import Track from "../ManagerTrack/Track";
 
 
 export default function Game() {
@@ -19,6 +20,8 @@ export default function Game() {
   useEffect(() => {
     setAvailablePlatesOpen(state.playPhase === PlayPhase.SELECT_PLATE);
   }, [state.roundPhase, state.playPhase]);
+
+  // return <Track/>;
 
   switch (state.gamePhase) {
     case GamePhase.NOT_STARTED:

@@ -1,14 +1,14 @@
 import React, { ReactNode, createContext, useContext, useReducer } from "react";
 import { roundSetup, gameSetup, beginRoundTearDown, loadDishwasher, finishRotating } from "./ActionDisk/actions/roundActions";
-import { GamePhase, ManualAction, PlayPhase, GameAction, ResourceAction } from "./constants";
+import { ManualAction, PlayPhase, GameAction, ResourceAction } from "./constants";
 import playActions from "./ActionDisk/actions/playPhaseActions";
 import { updateSettings } from "./settings/updateSettings";
 import { Game, defaultGame } from "./game";
 import { v4 as uuidv4 } from 'uuid';
-import { IResourceAction, GameSetupAction, FinishedRotatingAction, LoadDishwasherAction, SelectFoodAction, LoadGameAction, QuitGameAction, SetSettingsAction, RoundSetupAction, RoundTearDownAction, SelectResourceAction, SelectCustomerAction, SelectPlateAction, UndoAction, FreezeResourceAction, ThawResourceAction } from "./actions";
+import { IResourceAction, GameSetupAction, FinishedRotatingAction, LoadDishwasherAction, SelectFoodAction, LoadGameAction, QuitGameAction, SetSettingsAction, RoundSetupAction, RoundTearDownAction, SelectResourceAction, SelectCustomerAction, SelectPlateAction, UndoAction, FreezeResourceAction, ThawResourceAction, SelectCarAction } from "./actions";
 import { generatePersonName } from "./nameGenerator";
 
-type Action = IResourceAction | ThawResourceAction | FreezeResourceAction | GameSetupAction | FinishedRotatingAction | LoadDishwasherAction | SelectFoodAction | LoadGameAction | QuitGameAction | SetSettingsAction | RoundSetupAction | RoundTearDownAction | SelectResourceAction | SelectCustomerAction | SelectPlateAction | UndoAction;
+type Action = IResourceAction | ThawResourceAction | FreezeResourceAction | GameSetupAction | FinishedRotatingAction | LoadDishwasherAction | SelectFoodAction | SelectCarAction | LoadGameAction | QuitGameAction | SetSettingsAction | RoundSetupAction | RoundTearDownAction | SelectResourceAction | SelectCustomerAction | SelectPlateAction | UndoAction;
 
 const gameReducer = (state: Game, action: Action) => {
   // TODO: localStorage.setItem("state", JSON.stringify(state));
@@ -54,6 +54,10 @@ const gameReducer = (state: Game, action: Action) => {
       return playActions.serve(state);
     case ResourceAction.REFILL:
       return playActions.refill(addHistory(state, action.type));
+    case ManualAction.SELECT_CAR:
+      return playActions.selectCar(addHistory(state, action.type), action.carIndex);
+    case ResourceAction.FEED_CAR:
+      return playActions.feedCar(addHistory(state, action.type));
     case ManualAction.FREEZE_RESOURCE:
       return playActions.freezeResource(addHistory(state, action.type));
     case ManualAction.THAW_RESOURCE:

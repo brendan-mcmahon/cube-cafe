@@ -12,6 +12,8 @@ const dishwasherMap: { [key in DishwasherAction]: (game: Game) => Game } = {
   [DishwasherAction.CUSTOMER_START_UPGRADE]: customerStartUpgrade,
   [DishwasherAction.HEATLAMP_UPGRADE]: heatlampUpgrade,
   [DishwasherAction.POINTS]: addPoints,
+  // Hire a chef to increase the value of one color of food by 1
+  // Drive thru
 };
 
 function dishwasherResolver(state: Game, action: DishwasherAction) {

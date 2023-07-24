@@ -2,18 +2,33 @@ import { ManualAction, PlayPhase, RoundPhase, GamePhase, ResourceStatus } from "
 import dishwasherResolver from "./dishwasherActions";
 import { CustomerStatus } from "../../constants";
 import { Customer, Game, Resource, RoundTimer } from "../../game";
-import { dateFormat } from "../../Components/dateFormat";
 import storage from "../../storage";
 import { generateRestaurantName } from "../../nameGenerator";
+import playPhaseActions from "./playPhaseActions";
+import { colors } from "../../colors";
 
 function gameSetup(state: Game) {
   const gameName = generateRestaurantName();
-  console.log(gameName);
+
+  const rotateCount = Math.floor(Math.random() * 6);
+  let newState = state;
+  for (let i = 0; i < rotateCount; i++) {
+    newState = playPhaseActions.rotate(newState, "clockwise");
+  }
+
   return roundSetup({
-    ...state,
+    ...newState,
+    actionDisk: {
+      ...newState.actionDisk,
+
+    },
     settings: {
-      ...state.settings,
+      ...newState.settings,
       gameName,
+    },
+    upgrades: {
+      ...newState.upgrades,
+      driveThru: newState.upgrades.driveThru || state.round >= (state.settings.driveThruRound - 1),
     }
   });
 }
@@ -21,8 +36,15 @@ function gameSetup(state: Game) {
 function roundSetup(state: Game): Game {
   const dice = rollDice(state);
 
+  const color = colors[Math.floor(Math.random() * (colors.length - 1))];
+
+  const cars = [...state.cars];
+  if (state.upgrades.driveThru || state.settings.driveThruRound <= state.round)
+    cars[0] = { color, status: 'waiting'};
+
   return {
     ...state,
+    cars,
     dice,
     resources: pullResources(dice),
     roundPhase: RoundPhase.PLAY,
@@ -116,9 +138,14 @@ function roundTearDown(state: Game): Game {
   ? [...state.grillItems, ...state.hotCounterItems]
   : [...state.grillItems];
 
+  const cars = [...state.cars];
+  cars[1] = cars[0];
+  cars[0] = null;
+
   return roundSetup(save({
     ...state,
     stars: getStars(state),
+    cars,
     statistics: {
       ...state.statistics,
       servedCustomers,
@@ -135,6 +162,10 @@ function roundTearDown(state: Game): Game {
     selectedResource: null,
     currentAction: null,
     round: state.round + 1,
+    upgrades: {
+      ...state.upgrades,
+      driveThru: state.upgrades.driveThru || state.round >= (state.settings.driveThruRound - 1),
+    }
   }));
 }
 

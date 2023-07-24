@@ -32,12 +32,13 @@
         max-height: 100vh;
         max-width: 100vw;
         grid-template-columns: 1fr 1fr;
-        grid-template-rows: auto auto auto 30vh auto auto;
+        grid-template-rows: auto auto auto auto 30vh auto auto;
         grid-auto-columns: 1fr;
         grid-template-areas:
             "title title"
             "console console"
             "tableau tableau"
+            "drive-thru drive-thru"
             "dishwasher kitchen"
             ". kitchen"
             "tables tables";

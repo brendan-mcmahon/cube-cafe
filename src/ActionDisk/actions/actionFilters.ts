@@ -1,7 +1,8 @@
+import { colors } from "../../colors";
 import { ResourceAction} from "../../constants";
-import { Game } from "../../game";
+import { Game, Resource } from "../../game";
 
-type Filter = (state: Game) => boolean;
+type Filter = (state: Game, resource: Resource) => boolean;
 
 const filterMap : { [key in ResourceAction]: Filter } = {
   [ResourceAction.SEAT_CUSTOMER]: seatFilter,
@@ -12,6 +13,7 @@ const filterMap : { [key in ResourceAction]: Filter } = {
   [ResourceAction.MOVE_MANAGER]: moveManagerFilter,
   [ResourceAction.ROTATE_CLOCKWISE]: rotateFilter,
   [ResourceAction.ROTATE_COUNTERCLOCKWISE]: rotateFilter,
+  [ResourceAction.FEED_CAR]: feedCarFilter,
 };
 
 function  moveManagerFilter() : boolean {
@@ -24,6 +26,18 @@ function rotateFilter() : boolean {
 
 function seatFilter(state: Game) : boolean {
   return state.customers.filter((customer) => !customer)?.length > 0;
+}
+
+function feedCarFilter(state: Game, resource: Resource) : boolean {
+
+  
+  return state.cars.filter((car) => {
+    const carExists = !!car;
+    const colorMatches = resource.color === colors[5] || car?.color === resource?.color;
+    const carIsWaiting = car?.status !== 'full';
+    return carExists && colorMatches && carIsWaiting;
+  }).length > 0;
+  
 }
 
 function takeOrderFilter(state: Game) : boolean {
@@ -54,8 +68,8 @@ function refillFilter(state: Game) : boolean {
   return state.customers.filter((customer) =>  !!customer && customer.pointValue <= 4)?.length > 0;
 }
 
-function filter(state: Game, actions: (ResourceAction)[]) {
-  return actions.filter((action) => filterMap[action](state));
+function filter(state: Game, actions: (ResourceAction)[], resource: Resource) {
+  return actions.filter((action) => filterMap[action](state, resource));
 }
 
 export default { filter };

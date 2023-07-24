@@ -11,6 +11,8 @@ import {
 } from "./constants";
 
 export interface Settings {
+  driveThruRewards: any;
+  driveThruRound: number;
   user: string;
   dice: string[][];
   gameName: string;
@@ -22,7 +24,6 @@ export interface Settings {
   coldFoodPenalty: number;
   diceCount: number;
   totalRounds: number;
-  driveThruLength: number;
   managerTrack: ManagerAction[];
 }
 
@@ -72,19 +73,25 @@ export interface Statistics {
   managerStepsMoved: number;
   itemsCookedWithNoOrder: number;
   dishwasherSelections: DishwasherAction[];
+  carsFed: number;
 }
+
 
 export enum UpgradeKeys {
   Freezer = 'freezer',
-  HeatLamp = 'heatlamp'
+  HeatLamp = 'heatlamp',
+  DriveThru = "driveThru"
 }
 
 interface Upgrades {
   [UpgradeKeys.Freezer]: boolean;
   [UpgradeKeys.HeatLamp]: boolean;
+  [UpgradeKeys.DriveThru]: boolean;
 }
 
 export interface Game {
+  cars: (Car | null)[];
+  bonusPoints: number;
   freezerItems: Resource[];
   upgrades: Upgrades;
   alert: AlertModel | null;
@@ -120,12 +127,15 @@ export interface Game {
 
 
 export const defaultGame: Game = {
+  cars: [null, null],
+  bonusPoints: 0,
   alert: null,
   id: "",
   freezerItems: [],
   upgrades: {
     freezer: false,
-    heatlamp: false
+    heatlamp: false,
+    driveThru: false
   },
   settings: {
     user: "",
@@ -137,6 +147,8 @@ export const defaultGame: Game = {
       ["red", "blue", "yellow", "white", "green", "green"],
       ["red", "blue", "yellow", "white", "green", "wild"],
     ],
+    driveThruRound: 1,
+    driveThruRewards: [3, 2],
     gameName: "",
     platesPerColor: 5,
     startingMood: 3,
@@ -146,7 +158,6 @@ export const defaultGame: Game = {
     coldFoodPenalty: 0,
     diceCount: 6,
     totalRounds: 8,
-    driveThruLength: 3,
     managerTrack: [
       ManagerAction.EMPTY,
       ManagerAction.EMPTY,
@@ -173,6 +184,7 @@ export const defaultGame: Game = {
       ResourceAction.COOK,
       ResourceAction.SERVE,
       ResourceAction.REFILL,
+      ResourceAction.FEED_CAR, // should this be here?
     ],
   },
   playPhase: PlayPhase.NONE,
@@ -219,5 +231,6 @@ export const defaultGame: Game = {
     managerStepsMoved: 0,
     itemsCookedWithNoOrder: 0,
     dishwasherSelections: [],
+    carsFed: 0,
   },
 };

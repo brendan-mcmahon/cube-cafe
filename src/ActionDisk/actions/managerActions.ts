@@ -1,4 +1,4 @@
-import { ManagerAction, PlayPhase, ResourceAction, ResourceStatus } from "../../constants";
+import { ManagerAction, ResourceStatus } from "../../constants";
 import { Game } from "../../game";
 import playPhaseActions from "./playPhaseActions";
 

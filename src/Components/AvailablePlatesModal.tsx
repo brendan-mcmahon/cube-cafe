@@ -1,9 +1,9 @@
 import React from "react";
 import { PlayPhase } from "../constants";
 import { useGame } from "../gameContext";
-import "./styles/AvailablePlates.scss";
 import { Modal } from "../Modal";
 import { IModalProps } from "./IModalProps";
+import "./styles/AvailablePlates.scss";
 
 function AvailablePlatesModal(props: IModalProps) {
   const { state, dispatch } = useGame();

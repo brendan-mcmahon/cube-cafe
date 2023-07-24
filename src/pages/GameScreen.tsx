@@ -13,6 +13,7 @@ import Alert from "../Components/Alert";
 import AlertModel from "../Components/AlertModel";
 import "./GameScreen.scss";
 import { useGame } from "../gameContext";
+import DriveThru from "../Components/DriveThru";
 
 const emptyAlert = { 
     title: "", 
@@ -51,6 +52,7 @@ export function GameScreen(props: GameScreenProps) {
         <SavedGamesModal show={props.loadModalOpen} setShow={props.setLoadModalOpen} />
         <Dishwasher />
         <Tableau />
+        <DriveThru />
         <AvailablePlatesModal show={props.availablePlatesOpen} setShow={props.setAvailablePlatesOpen} />
         {/* { state.alert !== null && <Alert /> } */}
         {/* use each property separately because show and setShow are in there */}

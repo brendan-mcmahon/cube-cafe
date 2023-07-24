@@ -41,7 +41,7 @@ function Console({ setSettingsOpen, setSaveOpen }: ConsoleProps) {
           <p className="round">
             Round {state.round} / {state.settings.totalRounds}
           </p>
-          <Star text={state.stars} />
+          <Star text={state.stars + state.bonusPoints} />
         </div>
       </div>
 

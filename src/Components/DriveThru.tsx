@@ -1,41 +1,43 @@
-import React, { useEffect, Fragment } from "react";
+import React, { Fragment } from "react";
 import { useGame } from "../gameContext";
+import Car from "../icons/Car";
+import { ManualAction, PlayPhase, ResourceAction } from "../constants";
 import "./styles/DriveThru.scss";
 
-// TODO: I don't know enough about how this drivethru should work to make this, I don't think
 export default function DriveThru() {
   const { state, dispatch } = useGame();
 
-  // useEffect(() => { }, [state.cars]);
-
-  //   const occupiedSpaces = state.cars.filter((car) => !!car).length;
-  //   const emptySpaces = state.settings.driveThruLength - occupiedSpaces;
+  const selectCar = (i: number) => {
+    if (state.playPhase === PlayPhase.SELECT_CAR)
+      dispatch({ type: ManualAction.SELECT_CAR, carIndex: i });
+  };
 
   return (
     <div id="DriveThru" className="game-area">
-      {Array.from({ length: state.settings.driveThruLength }, (_, i) => (
-        <Fragment key={i}>
-          <div key={i} className="car empty"></div>
-          <div className="yellow-stripe"></div>
-        </Fragment>
-      ))}
+      <div className="yellow-stripe"></div>
+
+
+      {state.cars.map((car, i) => {
+
+        const disabled = 
+          state.playPhase !== PlayPhase.SELECT_CAR
+          || (state.selectedResource?.color !== "wild" && state.selectedResource?.color !== car?.color);
+
+        const carElement = !!car
+          ? <button disabled={disabled} onClick={() => selectCar(i)} key={i} className={`car ${car.status}`}>
+            <Car color={car.color} />
+            { car.status === "full" && <div className={`cube ${car.color}`}></div> }
+          </button>
+          : <div key={i} className="car empty"></div>
+
+        return (
+          <Fragment key={i}>
+            {carElement}
+            <div className="yellow-stripe"></div>
+          </Fragment>
+        )
+      }
+      )}
     </div>
   );
-
-  //   return (
-  //     <div id="DriveThru">
-  //       {state.cars?.map((car, i) => (
-  //         <Fragment key={i}>
-  //           <div className={`car ${car.color}`}></div>
-  //           <div className="yellow-stripe"></div>
-  //         </Fragment>
-  //       ))}
-  //       {Array.from({ length: emptySpaces }, (_, i) => (
-  //         <Fragment key={i}>
-  //           <div key={i} className="car empty"></div>
-  //           <div className="yellow-stripe"></div>
-  //         </Fragment>
-  //       ))}
-  //     </div>
-  //   );
 }

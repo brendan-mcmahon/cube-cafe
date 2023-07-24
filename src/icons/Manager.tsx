@@ -2,6 +2,7 @@ import React from "react";
 import { useGame } from "../gameContext";
 import { ResourceAction } from "../constants";
 import { PlayPhase } from "../constants";
+import { GlowFilter } from "./GlowFilter";
 
 function Manager() {
   const { state, dispatch } = useGame();
@@ -16,17 +17,7 @@ function Manager() {
 
   return (
     <svg className="manager" onClick={onClick} viewBox="0 0 64 64" x="0px" y="0px" height="40px" width="40px">
-      <defs>
-        <filter id="glow">
-          <feGaussianBlur stdDeviation="2.5" result="coloredBlur" />
-          <feFlood floodColor="yellow" result="yellowColor" />
-          <feComposite in="yellowColor" in2="coloredBlur" operator="in" result="yellowBlur" />
-          <feMerge>
-            <feMergeNode in="yellowBlur" />
-            <feMergeNode in="SourceGraphic" />
-          </feMerge>
-        </filter>
-      </defs>
+      <defs> <GlowFilter /> </defs>
 
       <path
         filter={enabled ? "url(#glow)" : ""}

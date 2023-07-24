@@ -48,7 +48,7 @@ svg:focus-visible {
 }
 
 .green {
-  background-color: green;
+  background-color: rgb(0, 199, 0);
   border: solid black 1px;
   color: white;
 }
@@ -71,22 +71,15 @@ svg:focus-visible {
     blue 73%,
     // purple 73%,
     // purple
-    green 73%,
-    green
+    rgb(0, 199, 0) 73%,
+    rgb(0, 199, 0)
   );
-}
-
-@media only screen and (max-width: 932px) and (max-height: 430px) and (orientation: landscape) {
-  #root {
-    padding: 2px;
-    overflow: hidden;
-  }
 }
 
 @media only screen and (max-width: 430px) and (orientation: portrait) {
   #root {
     padding: 2px;
-    overflow: hidden;
+    overflow-x: hidden;
     overflow-y: auto;
   }
 }

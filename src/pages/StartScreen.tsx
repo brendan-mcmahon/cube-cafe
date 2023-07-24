@@ -6,7 +6,7 @@ import "./StartScreen.scss";
 import Gear from "../icons/Gear";
 import SettingsModal from "../settings/SettingsModal";
 
-const version = "7.19.13.37"
+const version = "7.19.23.37"
 
 type StartScreenProps = {
     loadModalOpen: boolean;

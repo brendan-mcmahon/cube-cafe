@@ -25,7 +25,7 @@ function ActionDisk() {
           direction="clockwise"
         />
         <div className="disk">
-          <Actions />
+          <Actions hasDriveThru={state.upgrades.driveThru} />
           <Colors />
         </div>
         <RotateArrow

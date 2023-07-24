@@ -54,6 +54,11 @@ export interface SelectFoodAction {
     counter: string;
 }
 
+export interface SelectCarAction {
+    type: ManualAction.SELECT_CAR;
+    carIndex: number;
+}
+
 export interface LoadDishwasherAction {
     type: ManualAction.LOAD_DISHWASHER;
     squareIndex: number;

@@ -7,9 +7,15 @@ import { stat } from "fs";
 
 function selectResource(state: Game, resource: Resource, resourceIndex: number): Game {
   const index = state.actionDisk.colors.indexOf(resource.color);
-  let availableActions: ResourceAction[] = resource.color === "wild" ? [...state.actionDisk.actions] : [state.actionDisk.actions[index]];
+  let availableActions: ResourceAction[] = 
+  resource.color === "wild" 
+    ? [...state.actionDisk.actions] 
+    : [state.actionDisk.actions[index]];
 
-  availableActions = actionFilters.filter(state, availableActions);
+  //TODO: Not my favorite way to implement this
+  if (state.upgrades.driveThru && index === 0) availableActions.push(ResourceAction.FEED_CAR);
+
+  availableActions = actionFilters.filter(state, availableActions, resource);
 
   return {
     ...state,
@@ -300,6 +306,30 @@ function refill(state: Game): Game {
   };
 }
 
+function feedCar(state: Game): Game {
+  // go into a select car state
+  return {
+    ...state,
+    currentAction: ResourceAction.FEED_CAR,
+    playPhase: PlayPhase.SELECT_CAR,
+  };
+}
+
+function selectCar(state: Game, carIndex: number): Game {
+  const cars = [...state.cars];
+  cars[carIndex]!.status = "full";
+
+  return resetAction({
+    ...state,
+    cars: cars,
+    bonusPoints: state.bonusPoints + state.settings.driveThruRewards[carIndex],
+    statistics: {
+      ...state.statistics,
+      carsFed: state.statistics.carsFed + 1,
+    },
+  });
+}
+
 function moveManager(state: Game): Game {
   return resetAction(resolveManagerActions(state));
 }
@@ -389,5 +419,7 @@ export default {
   serve,
   refill,
   rotate,
-  drawPlates
+  drawPlates,
+  selectCar,
+  feedCar
 };

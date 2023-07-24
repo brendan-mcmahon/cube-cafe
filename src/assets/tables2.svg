@@ -1,0 +1,53 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 600 600">
+  <defs>
+    <path id="reuse-0" stroke="#000" stroke-width=".5" d="m 263.5502,178.11082 8.35088,14.46415 -16.70176,0 z"/>
+  </defs>
+  <g fill="#d8d8d8" stroke="#000" pointer-events="auto">
+    <circle cx="243" cy="108" r="53"/>
+    <circle cx="169" cy="238" r="53"/>
+    <circle cx="317" cy="238" r="53"/>
+  </g>
+  <g stroke="#000">
+    <circle cx="243" cy="108" r="74.5" fill="none"/>
+    <circle cx="168" cy="237" r="74.5" fill="none"/>
+    <circle cx="318" cy="237" r="74.5" fill="none"/>
+    <path fill="#d8d8d8" d="M177.3 72.9 102.8 200.9" style="transform-box:fill-box" transform-origin="50% 50%"/>
+    <path fill="#d8d8d8" d="M306.5 67.6 381.9 198.3" style="transform-box:fill-box" transform-origin="50% 50%"/>
+    <path fill="#d8d8d8" d="M318.8 311.5 166.6 311.5" transform-origin="240.197px 312.289px"/>
+    <circle cx="243.6" cy="197.7" r="11.5" fill="none" style="transform-box:fill-box" transform="translate(0 -3)" transform-origin="50% 50%"/>
+  </g>
+  <path fill="#fff" stroke="#000" d="m 203.21792,161.35476 14.31669,7.14371 -7.14371,14.31669 -14.31669,-7.14371 z"/>
+  <path fill="#fff" stroke="#000" d="m 351.99648,129.88407 8,13.8564 -13.8564,8 -8,-13.8564 z" transform-origin="177.275px 72.11px"/>
+  <path fill="#fff" stroke="#000" d="m 189.43541,67.419492 -7.99999,13.85641 -13.85641,-8 8,-13.85641 z" transform-origin="177.275px 72.11px"/>
+  <path fill="#fff" stroke="#000" d="m 147.7349,139.46337 -8,13.85641 -13.85641,-8 8,-13.85641 z" transform-origin="177.275px 72.11px"/>
+  <path fill="#fff" stroke="#000" d="m 125.14043,286.77103 -11.31371,11.3137 -11.31371,-11.3137 11.31371,-11.31371 z" transform-origin="177.275px 72.11px"/>
+  <path fill="#fff" stroke="#000" d="m 379.29052,291.91622 -11.31371,11.31371 -11.31371,-11.31371 11.31371,-11.31371 z" transform-origin="177.275px 72.11px"/>
+  <path fill="#fff" stroke="#000" d="m 311.38639,58.746741 8,13.85641 -13.8564,8 -8,-13.85641 z" transform-origin="177.275px 72.11px"/>
+  <path fill="#fff" stroke="#000" d="m 382.6398,185.50213 8,13.85641 -13.85641,8 -8,-13.85641 z" transform-origin="177.275px 72.11px"/>
+  <path fill="#fff" stroke="#000" d="m 170.85,303.1434 h 16 v 16 h -16 z" transform-origin="242.967px 311.501px"/>
+  <path fill="#fff" stroke="#000" d="m 119.17607,190.08646 -8,13.8564 -13.856406,-8 7.999996,-13.8564 z" transform-origin="177.275px 72.11px"/>
+  <path fill="#fff" stroke="#000" d="m 284.52566,160.96374 8,13.85641 -13.8564,8 -8,-13.85641 z" transform-origin="177.275px 72.11px"/>
+  <path fill="#fff" stroke="#000" d="m 233.11954,25.469736 h 16 v 16 h -16 z" transform-origin="242.992px 236.063px"/>
+  <path fill="#fff" stroke="#000" d="m 235.99111,303.1434 h 16 v 16 h -16 z" transform-origin="175.378px 311.5px"/>
+  <path fill="#fff" stroke="#000" d="m 235.99111,230.60234 h 16 v 16 h -16 z" transform-origin="175.378px 311.5px"/>
+  <path fill="#fff" stroke="#000" d="m 306.05923,303.1434 h 16 v 16 h -16 z" transform-origin="310.611px 311.462px"/>
+  <use xlink:href="#reuse-0" stroke-width=".5" transform="matrix(-0.38227208,-0.66211468,0.66211468,-0.38227208,184.75272,288.52923)"/>
+  <use xlink:href="#reuse-0" stroke-width=".5" transform="matrix(-0.76454417,0,0,-0.76454417,480.02874,186.53633)"/>
+  <use xlink:href="#reuse-0" stroke-width=".5" transform="matrix(-0.66211467,-0.38227209,0.38227209,-0.66211467,258.78537,334.47224)"/>
+  <use xlink:href="#reuse-0" stroke-width=".5" transform="matrix(-0.66211467,-0.38227209,0.38227209,-0.66211467,225.31647,392.14016)"/>
+  <use xlink:href="#reuse-0" stroke-width=".5" transform="matrix(0.66211468,-0.38227208,0.38227208,0.66211468,116.44282,141.9597)"/>
+  <use xlink:href="#reuse-0" stroke-width=".5" transform="matrix(0.66211468,-0.38227208,0.38227208,0.66211468,83.235391,84.140825)"/>
+  <use xlink:href="#reuse-0" stroke-width=".5" transform="matrix(0,0.76454417,-0.76454417,0,355.97878,109.99395)"/>
+  <use xlink:href="#reuse-0" stroke-width=".5" transform="matrix(0,0.76454417,-0.76454417,0,422.65511,110.14491)"/>
+  <use xlink:href="#reuse-0" stroke-width=".5" transform="matrix(-0.76454417,0,0,-0.76454417,295.3596,379.57336)"/>
+  <use xlink:href="#reuse-0" stroke-width=".5" transform="matrix(-0.29257838,0.7063467,-0.7063467,-0.29257838,350.96466,174.81084)"/>
+  <use xlink:href="#reuse-0" stroke-width=".5" transform="matrix(0.60655366,0.46542499,-0.46542499,0.60655366,153.07589,47.288976)"/>
+  <use xlink:href="#reuse-0" stroke-width=".5" transform="matrix(-0.24575466,-0.72396991,0.72396991,-0.24575466,76.085865,402.38633)"/>
+  <use xlink:href="#reuse-0" stroke-width=".5" transform="matrix(0.38227208,0.66211467,-0.66211467,0.38227208,371.31776,58.962928)"/>
+  <use xlink:href="#reuse-0" stroke-width=".5" transform="matrix(0.75800338,-0.09979304,0.09979304,0.75800338,174.3446,119.41169)"/>
+  <use xlink:href="#reuse-0" stroke-width=".5" transform="matrix(0.09979304,-0.75800337,0.75800337,0.09979304,159.9044,344.66098)"/>
+  <use xlink:href="#reuse-0" stroke-width=".5" transform="matrix(-0.504099,0.57481473,-0.57481473,-0.504099,502.0941,229.29414)"/>
+  <use xlink:href="#reuse-0" stroke-width=".5" transform="matrix(0.36361986,0.31888607,-0.31888607,0.36361986,197.07804,37.085139)"/>
+  <use xlink:href="#reuse-0" stroke-width=".5" transform="matrix(0.09435351,-0.47434707,0.47434707,0.09435351,127.65735,312.70052)"/>
+  <use xlink:href="#reuse-0" stroke-width=".5" transform="matrix(-0.45797337,0.155461,-0.155461,-0.45797337,403.58182,234.34608)"/>
+</svg>

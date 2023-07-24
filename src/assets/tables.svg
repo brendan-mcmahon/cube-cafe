@@ -1,0 +1,54 @@
+<svg viewBox="0 0 600 600">
+  <g>
+    <circle cx="243" cy="108" r="53" fill="#d8d8d8" stroke="#000" pointer-events="auto"/>
+    <circle cx="169" cy="238" r="53" fill="#d8d8d8" stroke="#000" pointer-events="auto"/>
+    <circle cx="317" cy="238" r="53" fill="#d8d8d8" stroke="#000" pointer-events="auto"/>
+  </g>
+  <g>
+    <circle cx="243" cy="108" r="74.5" fill="none" stroke="#000"/>
+    <circle cx="168" cy="237" r="74.5" fill="none" stroke="#000"/>
+    <circle cx="318" cy="237" r="74.5" fill="none" stroke="#000"/>
+    <path fill="#d8d8d8" stroke="#000" d="M177.3 72.9 102.8 200.9" style="transform-box:fill-box" transform-origin="50% 50%"/>
+    <path fill="#d8d8d8" stroke="#000" d="M306.5 67.6 381.9 198.3" style="transform-box:fill-box" transform-origin="50% 50%"/>
+    <path fill="#d8d8d8" stroke="#000" d="M318.8 311.5 166.6 311.5" transform-origin="240.197px 312.289px"/>
+    <circle cx="243.6" cy="197.7" r="11.5" fill="none" stroke="#000" style="transform-box:fill-box" transform="translate(0 -3)" transform-origin="50% 50%"/>
+  </g>
+  <g transform="translate(1.8 -.6)">
+    <path fill="none" stroke="#000" d="M 194.986 375.284 L 188.26 361.831 L 181.533 375.284 L 188.26 361.831" transform="rotate(15 0 0)" transform-origin="1156.22px 720.982px"/>
+    <path fill="none" stroke="#000" d="M 177.169 137.594 L 170.443 124.141 L 163.716 137.594 L 170.443 124.141" transform="rotate(165 0 0)" transform-origin="170.442px 130.867px"/>
+    <path fill="none" stroke="#000" d="M 147.645 173.933 L 140.919 160.48 L 134.192 173.933 L 140.919 160.48" transform="rotate(-116 0 0)" transform-origin="140.918px 167.206px"/>
+    <path fill="none" stroke="#000" d="M 223.196 299.457 L 216.47 286.004 L 209.743 299.457 L 216.47 286.004" transform="rotate(45 0 0)" transform-origin="216.469px 292.73px"/>
+    <path fill="none" stroke="#000" d="M 397.356 251.04 L 390.63 237.587 L 383.903 251.04 L 390.63 237.587" transform-origin="390.629px 244.313px"/>
+    <path fill="none" stroke="#000" d="M 274.255 300.122 L 267.529 286.669 L 260.802 300.122 L 267.529 286.669" transform="rotate(135 0 0)" transform-origin="267.528px 293.395px"/>
+    <path fill="none" stroke="#000" d="M 244.934 209.026 L 242.709 204.575 L 240.483 209.026 L 242.709 204.575" transform="rotate(-90 0 0)" transform-origin="242.709px 206.8px"/>
+    <path fill="none" stroke="#000" d="M 234.148 191.826 L 231.923 187.375 L 229.697 191.826 L 231.923 187.375" transform="rotate(33 0 0)" transform-origin="231.923px 189.6px"/>
+    <path fill="none" stroke="#000" d="M 253.335 190.802 L 251.11 186.351 L 248.884 190.802 L 251.11 186.351" transform="rotate(147 0 0)" transform-origin="251.11px 188.576px"/>
+    <path fill="none" stroke="#000" d="M 345.064 173.44 L 338.338 159.987 L 331.611 173.44 L 338.338 159.987" transform="rotate(-72 0 0)" transform-origin="338.337px 166.713px"/>
+    <path fill="none" stroke="#000" d="M 98.72 246.415 L 91.994 232.962 L 85.267 246.415 L 91.994 232.962" transform="rotate(180 0 0)" transform-origin="91.993px 239.688px"/>
+    <path fill="none" stroke="#000" d="M 211.968 50.07 L 205.242 36.617 L 198.515 50.07 L 205.242 36.617" transform="rotate(-120 0 0)" transform-origin="205.241px 43.343px"/>
+    <path fill="none" stroke="#000" d="M 223.017 318.893 L 216.291 305.44 L 209.564 318.893 L 216.291 305.44" transform="rotate(90 0 0)" transform-origin="216.29px 312.166px"/>
+    <path fill="none" stroke="#000" d="M 160.47 117.161 L 153.744 103.708 L 147.017 117.161 L 153.744 103.708" transform="rotate(-150 0 0)" transform-origin="153.743px 110.434px"/>
+    <path fill="none" stroke="#000" d="M 337.005 120.282 L 330.279 106.829 L 323.552 120.282 L 330.279 106.829" transform="rotate(-33.3 0 0)" transform-origin="330.278px 113.555px"/>
+    <path fill="none" stroke="#000" d="M 289.089 53.047 L 282.363 39.594 L 275.636 53.047 L 282.363 39.594" transform="rotate(-60 0 0)" transform-origin="282.362px 46.32px"/>
+    <path fill="none" stroke="#000" d="M 131.628 167.277 L 124.902 153.824 L 118.175 167.277 L 124.902 153.824" transform="rotate(-150 0 0)" transform-origin="124.901px 160.55px"/>
+    <path fill="none" stroke="#000" d="M 366.06 170.08 L 359.334 156.627 L 352.607 170.08 L 359.334 156.627" transform="rotate(-33.3 0 0)" transform-origin="359.333px 163.353px"/>
+    <path fill="none" stroke="#000" d="M 272.318 318.866 L 265.592 305.413 L 258.865 318.866 L 265.592 305.413" transform="rotate(90 0 0)" transform-origin="265.591px 312.139px"/>
+  </g>
+  <g>
+    <path fill="#fff" stroke="#000" d="M235 25H251V41H235z"/>
+    <path fill="#fff" stroke="#000" d="M169.3 64.1H185.3V80.1H169.3z" transform="rotate(60 66.8 110.3)" transform-origin="177.275px 72.11px"/>
+    <path fill="#fff" stroke="#000" d="M169.3 64.1H185.3V80.1H169.3z" transform="rotate(120 -36.1 20.8)" transform-origin="177.275px 72.11px"/>
+    <path fill="#fff" stroke="#000" d="M169.3 64.1H185.3V80.1H169.3z" transform="rotate(120 -71.8 41.6)" transform-origin="177.275px 72.11px"/>
+    <path fill="#fff" stroke="#000" d="M169.3 64.1H185.3V80.1H169.3z" transform="rotate(135 -75.5 95.8)" transform-origin="177.275px 72.11px"/>
+    <path fill="#fff" stroke="#000" d="M169.3 64.1H185.3V80.1H169.3z" transform="rotate(135 49.9 148.5)" transform-origin="177.275px 72.11px"/>
+    <path fill="#fff" stroke="#000" d="M169.3 64.1H185.3V80.1H169.3z" transform="rotate(60 -6.2 236.6)" transform-origin="177.275px 72.11px"/>
+    <path fill="#fff" stroke="#000" d="M169.3 64.1H185.3V80.1H169.3z" transform="rotate(60 26 181.8)" transform-origin="177.275px 72.11px"/>
+    <path fill="#fff" stroke="#000" d="M235 303.5H251V319.5H235z" transform-origin="242.967px 311.501px"/>
+    <path fill="#fff" stroke="#000" d="M169.3 64.1H185.3V80.1H169.3z" transform="rotate(120 -14.9 58.5)" transform-origin="177.275px 72.11px"/>
+    <path fill="#fff" stroke="#000" d="M169.3 64.1H185.3V80.1H169.3z" transform="rotate(60 -35.3 139.4)" transform-origin="177.275px 72.11px"/>
+    <path fill="#fff" stroke="#000" d="M235 228.1H251V244.1H235z" transform-origin="242.992px 236.063px"/>
+    <path fill="#fff" stroke="#000" d="M167.4 303.5H183.4V319.5H167.4z" transform-origin="175.378px 311.5px"/>
+    <path fill="#fff" stroke="#000" d="M302.6 303.5H318.6V319.5H302.6z" transform-origin="310.611px 311.462px"/>
+    <path fill="#fff" stroke="#000" d="M167.4 67H183.4V83H167.4z" transform="rotate(-60 -1098.2 -430.6)" transform-origin="1271.12px 498.699px"/>
+  </g>
+</svg>

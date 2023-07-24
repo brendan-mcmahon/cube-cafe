@@ -11,9 +11,6 @@ export enum RoundPhase {
   RESOLVE = "Resolve",
 };
 
-
-
-
 export enum PlayPhase {
   NONE = "None",
   SELECT_RESOURCE = "Select Resource",
@@ -26,6 +23,7 @@ export enum PlayPhase {
   SELECT_DISHWASHER_SQUARE = "Select Dishwasher Square",
   END = "End",
   ROTATE_FREELY = "Rotate Freely",
+  SELECT_CAR = "Select Car",
 };
 
 export enum CustomerStatus {
@@ -39,7 +37,6 @@ export enum ResourceStatus {
   EXHAUSTED = "exhausted",
 }
 
-
 export enum ResourceAction {
   SEAT_CUSTOMER = "Seat Customer",
   MOVE_MANAGER = "Move Manager",
@@ -49,16 +46,15 @@ export enum ResourceAction {
   SERVE = "Serve",
   TAKE_ORDER = "Take Order",
   REFILL = "Refill",
+  FEED_CAR = "FEED_CAR",
 }
-
-
-
 
 export enum ManualAction {
     INCREASE_ONE_CUSTOMER = "Increase One Customer",
     LOAD_DISHWASHER = "Load Dishwasher",
     SELECT_RESOURCE = "Select Resource",
     SELECT_CUSTOMER = "Select Customer",
+    SELECT_CAR = "Select Car",
     SELECT_FOOD = "Select Food",
     UNDO = "Undo",
     FINISHED_ROTATING = "Finished Rotating",

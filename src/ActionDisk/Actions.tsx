@@ -2,23 +2,18 @@ import React from "react";
 import { ResourceAction } from "../constants";
 import { useGame } from "../gameContext";
 import { Slice } from "./Slice";
+import { GlowFilter } from "../icons/GlowFilter";
 
-function Actions() {
+type ActionsProps = {
+  hasDriveThru?: boolean;
+}
+
+function Actions(props: ActionsProps) {
   const { state } = useGame();
 
   return (
     <svg viewBox="0 0 210 210">
-      <defs>
-        <filter id="glow">
-          <feGaussianBlur stdDeviation="2.5" result="coloredBlur" />
-          <feFlood floodColor="yellow" result="yellowColor" />
-          <feComposite in="yellowColor" in2="coloredBlur" operator="in" result="yellowBlur" />
-          <feMerge>
-            <feMergeNode in="yellowBlur" />
-            <feMergeNode in="SourceGraphic" />
-          </feMerge>
-        </filter>
-      </defs>
+      <defs> <GlowFilter /> </defs>
 
       <circle cx="105" cy="105" r="100" fill="#fff" stroke="#000"></circle>
 
@@ -29,12 +24,26 @@ function Actions() {
           fillRule="evenodd"
           fill={actionAvailable(ResourceAction.SEAT_CUSTOMER) ? "#0C0" : "#999"}
           d="M12.023-1.678c.139-3.309-7.78-4.92-8.124-5.296-.171-.188.397-5.053-3.898-5.05-4.296-.003-3.728 4.862-3.899 5.05-.343.377-8.262 1.987-8.123 5.296.138 3.308 4.34 1.61 5.237 2.583.784.852-3.674 6.308-4.173 9.772-.163 1.129.155 1.348 1.252 1.348l5.64-.002c.79 0 1.072-.454 1.48-1.08C-1.683 9.557-.592 7.33 0 7.33c.593 0 1.684 2.227 2.586 3.613.408.626.69 1.08 1.48 1.08l5.64.001c1.097 0 1.415-.219 1.252-1.348-.499-3.464-4.957-8.92-4.173-9.771.896-.974 5.1.725 5.237-2.583z"
-          transform="translate(105 105) translate(0 -80)"
+          transform={props.hasDriveThru ? "translate(125 25)" : "translate(105 25)"}
         ></path>
-        <text fill="#fff" textAnchor="middle" transform="translate(105 105) translate(0 -80) translate(0 5)">
+        <text fill="#fff" textAnchor="middle" transform={props.hasDriveThru ? "translate(125 30)" :"translate(105 30)"}>
           0
         </text>
       </g>
+
+      {/* car */}
+      { props.hasDriveThru && <g>
+        <svg viewBox="0 0 322 222.5" x="0px" y="0px">
+          <path
+          filter={actionAvailable(ResourceAction.FEED_CAR) ? "url(#glow)" : ""}
+          fill={actionAvailable(ResourceAction.FEED_CAR) ? "#0C0" : "#999"}
+          transform="translate(105 60) translate(-12 -80)"
+            d="M 2.6 12.8 L 5.6 12.8 L 10.2 2.6 C 10.8 1.4 11.4 -0 13 -0 L 40 -0 C 41.6 -0 42 1.4 42.8 2.6 L 47.4 12.8 L 56.2 12.8 C 60.6 12.8 64.4 16.4 64.4 21 L 64.4 26.6 C 64.4 28 63.2 29.2 61.8 29.2 L 55.2 29.2 C 54.2 20.2 41.2 20.2 40.2 29.2 L 22.2 29.2 C 21.2 20.2 8.2 20.2 7.2 29.2 L 2.6 29.2 C 1.2 29.2 0 28 0 26.6 L 0 15.2 C 0 13.8 1.2 12.8 2.6 12.8 Z M 14.8 24.4 C 17.8 24.4 20.2 26.8 20.2 30 C 20.2 33 17.8 35.6 14.8 35.6 C 11.6 35.6 9.2 33 9.2 30 C 9.2 26.8 11.6 24.4 14.8 24.4 Z M 47.6 24.4 C 50.8 24.4 53.2 26.8 53.2 30 C 53.2 33 50.8 35.6 47.6 35.6 C 44.6 35.6 42 33 42 30 C 42 26.8 44.6 24.4 47.6 24.4 Z" />
+          <text fill="#fff" textAnchor="middle" transform="scale(1.7) translate(72 2.5)">
+            0
+          </text>
+        </svg>
+      </g> }
 
       {/* take order */}
       <g>
@@ -117,11 +126,13 @@ function Actions() {
       </g>
 
 
-      <Slice action={ResourceAction.TAKE_ORDER} rotation={36}></Slice>
-      <Slice action={ResourceAction.COOK} rotation={108}></Slice>
-      <Slice action={ResourceAction.SERVE} rotation={180}></Slice>
-      <Slice action={ResourceAction.REFILL} rotation={252}></Slice>
-      <Slice action={ResourceAction.SEAT_CUSTOMER} rotation={324}></Slice>
+      <Slice action={ResourceAction.TAKE_ORDER} rotation={36} />
+      <Slice action={ResourceAction.COOK} rotation={108} />
+      <Slice action={ResourceAction.SERVE} rotation={180} />
+      <Slice action={ResourceAction.REFILL} rotation={252} />
+      { !props.hasDriveThru && <Slice action={ResourceAction.SEAT_CUSTOMER} rotation={324} /> }
+      { props.hasDriveThru && <Slice  action={ResourceAction.FEED_CAR} rotation={324} size="half" /> }
+      { props.hasDriveThru && <Slice action={ResourceAction.SEAT_CUSTOMER} rotation={0} size="half" /> }
     </svg>
   );
 
