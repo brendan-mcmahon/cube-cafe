@@ -7,7 +7,7 @@ import seat from '../assets/chalkboard/icons/seat.png';
 import clipboard from '../assets/chalkboard/icons/clipboard.png';
 import pan from '../assets/chalkboard/icons/pan.png';
 import cloche from '../assets/chalkboard/icons/cloche.png';
-import refill from '../assets/chalkboard/icons/refill.png';
+import drink from '../assets/chalkboard/icons/drink.png';
 import serveCar from '../assets/chalkboard/icons/serve_car.png';
 
 type ActionsProps = {
@@ -53,7 +53,7 @@ function Actions(props: ActionsProps) {
       <image id="Refill"
         className={`action-icon ${actionAvailable(ResourceAction.REFILL) ? "glow" : ""}`}
         transform={`rotate(-72 105 105) translate(91 9) rotate(72 12.5 20)`}
-        href={refill} x="0" y="0" width="28" />
+        href={drink} x="0" y="0" width="28" />
 
 
       <Slice action={ResourceAction.TAKE_ORDER} rotation={36} />
