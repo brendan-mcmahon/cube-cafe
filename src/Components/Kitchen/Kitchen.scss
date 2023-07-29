@@ -9,11 +9,11 @@
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto 1fr auto auto 2fr;
     grid-template-areas:
-            "grill-label freezer-label"
-            "grill grill"
-            "counters-label counters-label"
-            "hot-label cold-label"
-            "hot cold";
+        "grill-label freezer-label"
+        "grill grill"
+        "counters-label counters-label"
+        "hot-label cold-label"
+        "hot cold";
 
     &.heated {
         grid-template-areas:
@@ -29,19 +29,25 @@
         margin-top: 4px;
         font-weight: bold;
         justify-self: start;
+        
+        font-size: 24px;
     }
 
     .grill-label {
         grid-area: grill-label;
         font-weight: bold;
         justify-self: start;
+        
+        font-size: 24px;
     }
-    
+
     .freezer-label {
         grid-area: freezer-label;
         font-weight: bold;
         margin-top: 4px;
         justify-self: end;
+        
+        font-size: 24px;
     }
 
     .hot-label {
@@ -80,15 +86,53 @@
         grid-template-columns: 1fr 1fr;
         justify-items: center;
         align-content: center;
+        place-content: center;
+        place-items: center;
 
         .burner {
-            width: 32px;
-            height: 32px;
-            border: solid rgb(255, 125, 125) 2px;
-            padding: 4px;
-            border-radius: 32px;
-            box-shadow: 0 0 5px 1px red,
-                inset 0 0 5px 1px red;
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: 1fr;
+            width: 48px;
+            height: 48px;
+            justify-items: center;
+            align-items: center;
+
+            .ring {
+                position: absolute;
+                border: solid rgb(255, 125, 125) 2px;
+                box-shadow:
+                    0 0 5px 1px red,
+                    inset 0 0 5px 1px red;
+            }
+
+            .ring-1 {
+                width: 36px;
+                height: 36px;
+                border-radius: 36px;
+                padding: 4px;
+            }
+
+            .ring-2 {
+                width: 24px;
+                height: 24px;
+                border-radius: 24px;
+                padding: 4px;
+            }
+
+            .ring-3 {
+                width: 12px;
+                height: 12px;
+                border-radius: 12px;
+                padding: 4px;
+            }
+
+            #Cube {
+                width: 36px;
+                height: 36px;
+                z-index: 2;
+                filter: drop-shadow(0 0 5px #000)
+            }
         }
     }
 
@@ -113,12 +157,12 @@
         &.heated {
             border-right-style: solid;
             border-color: rgb(149, 0, 0);
-            background-color: rgb(149, 0, 0, .15);
+            background-color: rgb(149, 0, 0, 0.15);
         }
 
         .food {
             margin: 4px;
-            height:36px;
+            height: 36px;
             width: 36px;
             border: none;
             // box-shadow: 0 0 10px 5px #0c0;

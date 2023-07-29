@@ -1,5 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;600;800&family=Sacramento&display=swap');
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Sacramento', cursive;
   line-height: 1.5;
   font-weight: 400;
 
@@ -38,13 +39,13 @@ body {
 }
 
 h1 {
-  font-size: 3.2em;
+  font-size: 4em;
   line-height: 1.1;
 }
 
 button {
   border-radius: 8px;
-  border: 1px solid transparent;
+  border: 1px solid white;
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
@@ -53,7 +54,10 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
   color: rgba(255, 255, 255, 0.87);
+  border-color: white;
+  font-family: "Montserrat", sans-serif;
 }
+
 button:hover {
   border-color: #646cff;
 }

@@ -14,6 +14,9 @@ export function Grill() {
         <div className="grill">
             {foods.map((food, i) => (
                 <div key={i} className="burner">
+                    <div className="ring ring-1"></div>
+                    <div className="ring ring-2"></div>
+                    <div className="ring ring-3"></div>
                     {!!food && <Cube color={food} />}
                 </div>
             ))}

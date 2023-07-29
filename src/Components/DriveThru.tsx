@@ -3,6 +3,7 @@ import { useGame } from "../gameContext";
 import Car from "../icons/Car";
 import { ManualAction, PlayPhase } from "../constants";
 import "./styles/DriveThru.scss";
+import Cube from "../icons/Cube";
 
 export default function DriveThru() {
   const { state, dispatch } = useGame();
@@ -26,7 +27,7 @@ export default function DriveThru() {
         const carElement = !!car
           ? <button disabled={disabled} onClick={() => selectCar(i)} key={i} className={`car ${car.status}`}>
             <Car color={car.color} />
-            { car.status === "full" && <div className={`cube ${car.color}`}></div> }
+            { car.status === "full" && <Cube color={car.color} /> }
           </button>
           : <div key={i} className="car empty"></div>
 

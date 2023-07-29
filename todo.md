@@ -42,19 +42,26 @@
 * Make 3 tables by default
   - [x] Remove the setting
   - [x] Get rid of the triangular shape, I think. Just put them in a row. It's causing more layout issues than it's worth
-* Make the app look a lot nicer.
+* Make the app look a lot nicer. CHALK.
   - [ ] Add a "how to play" modal
   - [x] Table highlighting is broken
-  - [ ] Tile flooring? Is that weird or even doable? Might not be worth the browser cycles
-  - [ ] Background needs to change or the resources need to have a different background. The purples get lost in the brown.
-  - [ ] End Round button is weird.
-  - [ ] Concentric circles on the grill (I know, this makes it look more like a stove, but whatever)
+  - [x] Chalkify Action Disk
+  - [x] Chalkify the background
+  - [x] Chalkify the buttons
+  - [x] Use a better font
+  - [x] End Round button is weird.
+  - [x] Concentric circles on the grill (I know, this makes it look more like a stove, but whatever)
+  - [x] Chalkify the Cars
+  - [x] Make the action icon glow better and try to scale them
+  - [ ] Chalkify/improve the manager track
+  - [ ] Chalkify the tables
 
 ## UI Improvements
 * Have a Statistics modal that shows the stats for the game (use Endgame or refactor)
   * Maybe not a modal, but something hidable that shows up on the side
 * Add a "reset game" button to the settings
 * Confirm button for "quitting" maybe? Or does it auto save anyway? Idk.
+* Have a button to turn off auto-saving (mainly for me when I'm testing the app not the game)
 
 ## Settings to add:
 * Placement of the actions
@@ -100,7 +107,7 @@
 * Is there a penalty for losing customers? We never figured that out.
 
 ## Tech Debt
-
+- [ ] Don't nest buttons
 
 ## Icebox (Deprecated Ideas)
 * Create a new manager track just for upgrades

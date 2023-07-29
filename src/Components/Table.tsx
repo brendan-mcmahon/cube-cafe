@@ -6,6 +6,7 @@ import "./styles/Tables.scss";
 import { Game } from "../models/game";
 import { TableModel } from "../models/game";
 import Drink from "../icons/Drink";
+import Cube from "../icons/Cube";
 
 type TableProps = {
   table: TableModel;
@@ -62,7 +63,7 @@ export default function Table(props: TableProps) {
   let plate = null;
   if (!!props.table.plate) {
     plate = <button disabled={!!props.table.customer} onClick={onPlateSelect} className={`plate ${props.table.plate}`}>
-      {props.table.customer?.status === "eating" && <div className={`cube ${props.table.plate}`}></div>}
+      {props.table.customer?.status === "eating" && <Cube color={props.table.plate} />}
     </button>
   }
 

@@ -14,7 +14,7 @@ function Cube({ color = "black" }: { color?: string }) {
     const _lightColors = _colors.map(c => lighten(c, 0.2));
 
     return (
-        <svg viewBox="0 0 120 120">
+        <svg id="Cube" viewBox="0 0 120 120">
             <defs>
                 <filter id="blur-me">
                     <feGaussianBlur in="SourceGraphic" stdDeviation="10" />
