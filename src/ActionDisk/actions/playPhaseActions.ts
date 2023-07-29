@@ -1,19 +1,44 @@
 import actionFilters from "./actionFilters";
-import { CustomerStatus, DishwasherAction, ResourceAction, PlayPhase, ManualAction, ResourceStatus, RoundPhase } from "../../constants";
+import {
+  CustomerStatus,
+  ResourceAction,
+  PlayPhase,
+  ManualAction,
+  ResourceStatus,
+  RefillStatus,
+} from "../../constants";
 import resolveManagerActions from "./managerActions";
-import { roundTearDown } from "./roundActions";
-import { Customer, Game, Resource } from "../../game";
-import { stat } from "fs";
+import { Game, Resource } from "../../models/game";
+import Customer from "../../models/Customer";
+import { resetAction } from "./resetAction";
+import { cloneTables, cloneCars } from "../../cloners";
 
-function selectResource(state: Game, resource: Resource, resourceIndex: number): Game {
+function selectResource(
+  state: Game,
+  resource: Resource | null,
+  resourceIndex: number | null
+): Game {
+
+  if (resource === null || resourceIndex === null) {
+    return {
+      ...state,
+      selectedResource: null,
+      selectedResourceIndex: null,
+      availableActions: [],
+      currentValue: null,
+      playPhase: PlayPhase.SELECT_RESOURCE,
+    };
+  }
+
   const index = state.actionDisk.colors.indexOf(resource.color);
-  let availableActions: ResourceAction[] = 
-  resource.color === "wild" 
-    ? [...state.actionDisk.actions] 
-    : [state.actionDisk.actions[index]];
+  let availableActions: ResourceAction[] =
+    resource.color === "wild"
+      ? [...state.actionDisk.actions]
+      : [state.actionDisk.actions[index]];
 
   //TODO: Not my favorite way to implement this
-  if (state.upgrades.driveThru && index === 0) availableActions.push(ResourceAction.FEED_CAR);
+  if (state.upgrades.driveThru && index === 0)
+    availableActions.push(ResourceAction.SERVE_CAR);
 
   availableActions = actionFilters.filter(state, availableActions, resource);
 
@@ -28,42 +53,46 @@ function selectResource(state: Game, resource: Resource, resourceIndex: number):
 }
 
 function seatCustomer(state: Game): Game {
-  const newCustomer = {
+  const newCustomer: Customer = {
     order: null,
     pointValue: state.settings.startingMood,
     status: CustomerStatus.WAITING,
+    refillStatus: RefillStatus.EMPTY,
   };
 
-  const firstEmptyIndex = state.customers.findIndex((customer) => !customer);
-  const newCustomers = [...state.customers];
-  newCustomers[firstEmptyIndex] = newCustomer;
+  const firstEmptyIndex = state.tables.findIndex(
+    (table) => !table.customer && !table.plate
+  );
+  
+  const tables = cloneTables(state);
+  tables[firstEmptyIndex].customer = newCustomer;
 
   return resetAction({
     ...state,
-    customers: newCustomers,
+    tables,
   });
 }
 
 function freezeResource(state: Game): Game {
-  if (state.selectedResource === null) return {...state};
+  if (state.selectedResource === null) return { ...state };
 
   return resetAction({
     ...state,
-    freezerItems: [state.selectedResource]
+    freezerItems: [state.selectedResource],
   });
 }
 
 function thawResource(state: Game): Game {
-  if (state.freezerItems.length === 0) return {...state};
+  if (state.freezerItems.length === 0) return { ...state };
 
   return {
     ...state,
     freezerItems: [],
-    resources: [...state.resources, ...state.freezerItems ]
+    resources: [...state.resources, ...state.freezerItems],
   };
 }
 
-function selectCustomer(state: Game, customerIndex: number): Game {
+function selectTable(state: Game, tableIndex: number): Game {
   let resolve = null;
   switch (state.currentAction) {
     case ResourceAction.TAKE_ORDER:
@@ -75,15 +104,15 @@ function selectCustomer(state: Game, customerIndex: number): Game {
     case ResourceAction.REFILL:
       resolve = (s: Game, i: number) => refillCustomer(s, i);
       break;
-    case DishwasherAction.INCREASE_ONE_CUSTOMER:
-      resolve = (s: Game, i: number) => buyCustomerADrink(s, i);
+    default:
+      resolve = (s: Game, i: number) => s;
       break;
   }
 
-  return resolve ? resolve(state, customerIndex) : resetAction(state);
+  return resolve ? resolve(state, tableIndex) : resetAction(state);
 }
 
-function clearHistory(state: Game): Game {
+export function clearHistory(state: Game): Game {
   return {
     ...state,
     actionHistory: [],
@@ -91,38 +120,36 @@ function clearHistory(state: Game): Game {
   };
 }
 
-function refillCustomer(state: Game, customerIndex: number): Game {
-  if (customerIndex >= 0 && customerIndex < state.customers.length) {
-    const customer = state.customers[customerIndex];
+function clearTable(state: Game, tableIndex: number): Game {
+  const tables = cloneTables(state);
+  const selectedPlate = tables[tableIndex].plate;
 
-    if (customer) {
-      const newCustomers = [...state.customers];
-      newCustomers[customerIndex] = {...customer, pointValue: Math.min(5, customer.pointValue + 1)};
-
-      return resetAction({
-        ...state,
-        customers: newCustomers,
-      });
-    }
-  }
-  return state;
+  return {
+    ...state,
+    tables,
+    selectedPlate,
+    selectedTableIndex: tableIndex,
+    playPhase: PlayPhase.LOAD_DISHWASHER,
+  };
 }
 
-function buyCustomerADrink(state: Game, customerIndex: number): Game {
-  if (customerIndex >= 0 && customerIndex < state.customers.length) {
-    const customer = state.customers[customerIndex];
+function refillCustomer(state: Game, tableNumber: number): Game {
+  const tables = cloneTables(state);
+  const customer = tables[tableNumber].customer;
 
-    if (customer) {
-      const newCustomers = [...state.customers];
-      newCustomers[customerIndex] = {...customer, pointValue: Math.min(5, customer.pointValue + 2)};
+  if (!!customer) {
+    tables[tableNumber].customer = {
+      ...customer,
+      refillStatus: RefillStatus.FULL,
+      pointValue: Math.min(5, customer.pointValue + 1),
+    };
 
-      return roundTearDown({
-        ...state,
-        customers: newCustomers,
-      });
-    }
+    return resetAction({
+      ...state,
+      tables,
+    });
   }
-  return state;
+  return { ...state };
 }
 
 function chooseFoodToServe(state: Game, customerIndex: number): Game {
@@ -130,50 +157,13 @@ function chooseFoodToServe(state: Game, customerIndex: number): Game {
     ...state,
     playPhase: PlayPhase.SELECT_FOOD,
     currentAction: ResourceAction.SERVE,
-    selectedCustomerIndex: customerIndex,
+    selectedTableIndex: customerIndex,
   };
 }
 
-function selectFood(state: Game, foodIndex: number, counter: string): Game {
-  if (state.selectedCustomerIndex === null) {
-    return state;
-  }
-  
-  if (!state.customers[state.selectedCustomerIndex]) {
-    return state;
-  }
-
-  let newHotCounter = [...state.hotCounterItems];
-  let newColdCounter = [...state.coldCounterItems];
-  const selectedCustomer: Customer = { ...state.customers[state.selectedCustomerIndex]! };
-  const statistics = { ...state.statistics };
-
-  if (counter === "hot") {
-    newHotCounter.splice(foodIndex, 1);
-    selectedCustomer.pointValue = Math.min(selectedCustomer.pointValue + state.settings.hotFoodReward, 5);
-    statistics.hotFoodServed++;
-  } else {
-    newColdCounter.splice(foodIndex, 1);
-    selectedCustomer.pointValue += state.settings.coldFoodPenalty;
-    statistics.coldFoodServed++;
-  }
-
-  selectedCustomer.status = CustomerStatus.EATING;
-
-  const newCustomers = [...state.customers];
-  newCustomers[state.selectedCustomerIndex] = selectedCustomer;
-
-  return resetAction({
-    ...state,
-    hotCounterItems: newHotCounter,
-    coldCounterItems: newColdCounter,
-    customers: newCustomers,
-    playPhase: PlayPhase.SELECT_CUSTOMER,
-    statistics,
-  });
-}
-
-function customerExists(customer: Customer | null | undefined): customer is Customer {
+function customerExists(
+  customer: Customer | null | undefined
+): customer is Customer {
   return !!customer;
 }
 
@@ -197,23 +187,23 @@ function drawPlates(state: Game, customerIndex: number): Game {
     ...state,
     availablePlates: newAvailablePlates,
     plateBag: newPlateBag,
-    playPhase: PlayPhase.SELECT_PLATE,
-    selectedCustomerIndex: customerIndex,
+    playPhase: PlayPhase.PLATE_SELECTION_PHASE,
+    selectedTableIndex: customerIndex,
   });
 }
 
-
 function forcePlate(state: Game, newPlateBag: string[], customerIndex: number) {
-  const customers = [...state.customers];
+  const tables = cloneTables(state);
   const newPlate = newPlateBag.pop();
-  const customer = customers[customerIndex];
-  if (customerExists(customer) && !!newPlate) {
-    customer.order = newPlate;
+  const table = tables[customerIndex];
+  if (customerExists(table.customer) && !!newPlate) {
+    table.customer.order = newPlate;
+    table.plate = newPlate;
   }
   return clearHistory(
     resetAction({
       ...state,
-      customers: customers,
+      tables,
     })
   );
 }
@@ -246,13 +236,22 @@ function takeOrder(state: Game): Game {
 }
 
 function cook(state: Game): Game {
-  const color = state.selectedResource?.color === "wild" ? state.actionDisk.colors[2] : state.selectedResource?.color;
+  let color =
+    !state.settings.cookWildsAsWild && state.selectedResource?.color === "wild"
+      ? state.actionDisk.colors[2]
+      : state.selectedResource?.color;
 
-  const openOrders = state.customers.filter((customer) => !!customer && customer.status === CustomerStatus.WAITING && customer.order === color).length > 0;
+  const openOrders =
+    state.tables.filter(
+      (table) =>
+        !!table.customer &&
+        table.customer.status === CustomerStatus.WAITING &&
+        table.customer.order === color
+    ).length > 0;
 
-  const grillItems = !!color ?
-    [...state.grillItems, color] :
-    [...state.grillItems];
+  const grillItems = !!color
+    ? [...state.grillItems, color]
+    : [...state.grillItems];
 
   return resetAction({
     ...state,
@@ -260,7 +259,8 @@ function cook(state: Game): Game {
     statistics: {
       ...state.statistics,
       foodCooked: state.statistics.foodCooked + 1,
-      itemsCookedWithNoOrder: state.statistics.itemsCookedWithNoOrder + (openOrders ? 0 : 1),
+      itemsCookedWithNoOrder:
+        state.statistics.itemsCookedWithNoOrder + (openOrders ? 0 : 1),
     },
   });
 }
@@ -271,27 +271,6 @@ function serve(state: Game): Game {
     currentAction: ResourceAction.SERVE,
     playPhase: PlayPhase.SELECT_CUSTOMER,
   };
-}
-
-function resetAction(state: Game): Game {
-  const isLastResource = state.resources.filter((resource) => resource.status === ResourceStatus.AVAILABLE).length === 1;
-
-  const resources = exhaustResource(state);
-
-  const newState = {
-    ...state,
-    playPhase: isLastResource ? PlayPhase.NONE : PlayPhase.SELECT_RESOURCE,
-    roundPhase: isLastResource ? RoundPhase.RESOLVE : state.roundPhase,
-    availableActions: [],
-    selectedCustomerIndex: null,
-    resources,
-    selectedResourceIndex: null,
-    selectedResource: null,
-    currentValue: null,
-    currentAction: null,
-  };
-
-  return isLastResource ? clearHistory(newState) : newState;
 }
 
 function refill(state: Game): Game {
@@ -306,17 +285,16 @@ function refill(state: Game): Game {
   };
 }
 
-function feedCar(state: Game): Game {
-  // go into a select car state
+function serveCar(state: Game): Game {
   return {
     ...state,
-    currentAction: ResourceAction.FEED_CAR,
+    currentAction: ResourceAction.SERVE_CAR,
     playPhase: PlayPhase.SELECT_CAR,
   };
 }
 
 function selectCar(state: Game, carIndex: number): Game {
-  const cars = [...state.cars];
+  const cars = cloneCars(state);
   cars[carIndex]!.status = "full";
 
   return resetAction({
@@ -330,20 +308,8 @@ function selectCar(state: Game, carIndex: number): Game {
   });
 }
 
-function moveManager(state: Game): Game {
-  return resetAction(resolveManagerActions(state));
-}
-
-function exhaustResource(state: Game): Resource[] {
-  if (state.selectedResourceIndex === null) {
-    return [...state.resources];
-  }
-  const resources = [...state.resources];
-  resources[state.selectedResourceIndex] = {
-    ...resources[state.selectedResourceIndex],
-    status: ResourceStatus.EXHAUSTED,
-  };
-  return resources;
+function moveManager(state: Game, spaces?: number): Game {
+  return resolveManagerActions(state, spaces);
 }
 
 function rotate(state: Game, direction: string): Game {
@@ -362,7 +328,9 @@ function rotate(state: Game, direction: string): Game {
       ...state,
       actionDisk: {
         ...state.actionDisk,
-        rotation: state.actionDisk.rotation + (direction === "counter-clockwise" ? -72 : 72),
+        rotation:
+          state.actionDisk.rotation +
+          (direction === "counter-clockwise" ? -72 : 72),
         colors: colors,
       },
     };
@@ -376,20 +344,22 @@ function rotate(state: Game, direction: string): Game {
     },
     actionDisk: {
       ...state.actionDisk,
-      rotation: state.actionDisk.rotation + (direction === "counter-clockwise" ? -72 : 72),
+      rotation:
+        state.actionDisk.rotation +
+        (direction === "counter-clockwise" ? -72 : 72),
       colors: colors,
     },
   });
 }
 
 function giveCustomerPlate(state: Game, plate: string): Game {
-  if (state.selectedCustomerIndex === null) {
+  if (state.selectedTableIndex === null) {
     throw new Error("No customer selected");
   }
-  const customers = [...state.customers];
-  const customer = customers[state.selectedCustomerIndex];
+  const tables = cloneTables(state);
+  const customer = tables[state.selectedTableIndex].customer;
   if (!customer) {
-    throw new Error(`No customer at index ${state.selectedCustomerIndex}`);
+    throw new Error(`No customer at index ${state.selectedTableIndex}`);
   }
   customer.order = plate;
 
@@ -399,19 +369,41 @@ function giveCustomerPlate(state: Game, plate: string): Game {
   const plateBag = [...state.plateBag, ...availablePlates];
   return {
     ...state,
-    customers: customers,
+    tables,
     availablePlates: availablePlates,
     plateBag: plateBag,
   };
 }
 
+function selectManagerBonus(state: Game, bonus: string): Game {
+  let resources = [...state.resources];
+  if (bonus !== "point")
+    resources.push({ color: bonus, status: ResourceStatus.AVAILABLE });
+  const bonusPoints = state.bonusPoints + (bonus === "point" ? 1 : 0);
+  return resetAction({
+    ...state,
+    resources,
+    bonusPoints,
+  });
+}
+
+function selectResourceToCopy(state: Game, color: string): Game {
+  return {
+    ...state,
+    resources: [
+      ...state.resources,
+      { color, status: ResourceStatus.AVAILABLE },
+    ],
+    playPhase: PlayPhase.SELECT_RESOURCE,
+  };
+}
+
 export default {
   selectResource,
-  selectCustomer,
+  selectTable,
   freezeResource,
   thawResource,
   selectPlate,
-  selectFood,
   seatCustomer,
   moveManager,
   takeOrder,
@@ -421,5 +413,8 @@ export default {
   rotate,
   drawPlates,
   selectCar,
-  feedCar
+  serveCar: serveCar,
+  selectManagerBonus,
+  clearTable,
+  selectResourceToCopy,
 };

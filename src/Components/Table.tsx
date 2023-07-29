@@ -1,64 +1,91 @@
-import React, { useEffect } from "react";
-import { PlayPhase, ManualAction, CustomerStatus, ResourceAction } from "../constants";
+import React from "react";
+import { PlayPhase, ManualAction, CustomerStatus, ResourceAction, RefillStatus } from "../constants";
 import { useGame } from "../gameContext";
 import Meeple from "../icons/Meeple";
 import "./styles/Tables.scss";
-import { Customer } from "../game";
+import { Game } from "../models/game";
+import { TableModel } from "../models/game";
+import Drink from "../icons/Drink";
 
 type TableProps = {
-  customer: Customer | null;
+  table: TableModel;
   index: number;
 };
 
 export default function Table(props: TableProps) {
   const { state, dispatch } = useGame();
 
-  if (!props.customer) {
-    return <button 
-    disabled
-     className={`customer empty disabled`}
-     >
-     <p className="table-number">{props.index + 1}</p></button>;
+  if (!props.table) {
+    return <button
+      disabled
+      className={`customer empty disabled`}
+    >
+      <p className="table-number">{props.index + 1}</p></button>;
   }
 
-  let disabled = true;
+  const onSelect = () => dispatch({ type: ManualAction.SELECT_TABLE, tableIndex: props.index });
+  const onPlateSelect = () => dispatch({ type: ManualAction.CLEAR_TABLE, tableIndex: props.index  });
+
+  let enabled = false;
+
+  const hasOrder = !!props.table.customer?.order;
+  const couldBeHappier = (props.table.customer?.pointValue || 0) < 5;
+  const hasCustomer = !!props.table.customer;
+  const isEating = props.table.customer?.status === CustomerStatus.EATING;
+  const orderIsOnTheCounter = counterContains(state, props.table.customer?.order!);
+  const cookWildsAsWild = state.settings.cookWildsAsWild && counterContains(state, "wild");
+  const hasPlate = !!props.table.plate;
 
   switch (state.currentAction) {
     case ResourceAction.SERVE:
-      disabled =
-        !props.customer.order ||
-        props.customer.status === CustomerStatus.EATING ||
-        (!state.hotCounterItems.includes(props.customer.order) && !state.coldCounterItems.includes(props.customer.order));
+      enabled = hasCustomer && hasOrder && !isEating && (cookWildsAsWild || orderIsOnTheCounter);
       break;
     case ResourceAction.TAKE_ORDER:
-      disabled = !!props.customer.order;
+      enabled = hasCustomer && !hasOrder;
       break;
     case ResourceAction.REFILL:
+      enabled = hasCustomer && couldBeHappier && (state.settings.refillMode === "unlimited" || props.table.customer?.refillStatus === RefillStatus.EMPTY);
+      break;
     case ManualAction.INCREASE_ONE_CUSTOMER:
-      disabled = props.customer.pointValue === 5;
+      enabled = hasCustomer && couldBeHappier;
       break;
     default:
-      disabled = true;
+      enabled = false;
       break;
   }
 
-  if (state.playPhase !== PlayPhase.SELECT_CUSTOMER) {
-    disabled = true;
+  let drink = null;
+  if (!!props.table.customer) {
+    drink = <Drink isFull={props.table.customer.refillStatus === RefillStatus.FULL} />
+  }
+
+  let plate = null;
+  if (!!props.table.plate) {
+    plate = <button disabled={!!props.table.customer} onClick={onPlateSelect} className={`plate ${props.table.plate}`}>
+      {props.table.customer?.status === "eating" && <div className={`cube ${props.table.plate}`}></div>}
+    </button>
+  }
+
+  let customer = null;
+  if (!!props.table.customer) {
+    customer = <Meeple number={props.table.customer.pointValue} />
   }
 
   return (
     <button
-      disabled={disabled}
-      className={`customer ${props.customer.status} ${disabled ? "disabled" : ""}`}
-      onClick={() => dispatch({ type: ManualAction.SELECT_CUSTOMER, customerIndex: props.index })}
+      disabled={!enabled}
+      className={`customer ${props.table.customer?.status} ${!enabled ? "disabled" : ""}`}
+      onClick={onSelect}
     >
       <p className="table-number">{props.index + 1}</p>
-      <Meeple number={props.customer.pointValue} />
-      {!!props.customer.order && (
-        <div className={`plate ${props.customer.order}`}>
-          {props.customer.status === CustomerStatus.EATING && <div className={`cube ${props.customer.order}`}></div>}
-        </div>
-      )}
+
+      {customer}
+      {plate}
+      {drink}
     </button>
   );
 }
+function counterContains(state: Game, food: string) {
+  return state.hotCounterItems.includes(food) || state.coldCounterItems.includes(food);
+}
+

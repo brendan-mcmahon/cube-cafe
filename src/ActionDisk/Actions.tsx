@@ -3,6 +3,12 @@ import { ResourceAction } from "../constants";
 import { useGame } from "../gameContext";
 import { Slice } from "./Slice";
 import { GlowFilter } from "../icons/GlowFilter";
+import seat from '../assets/chalkboard/icons/seat.png';
+import clipboard from '../assets/chalkboard/icons/clipboard.png';
+import pan from '../assets/chalkboard/icons/pan.png';
+import cloche from '../assets/chalkboard/icons/cloche.png';
+import refill from '../assets/chalkboard/icons/refill.png';
+import serveCar from '../assets/chalkboard/icons/serve_car.png';
 
 type ActionsProps = {
   hasDriveThru?: boolean;
@@ -11,43 +17,58 @@ type ActionsProps = {
 function Actions(props: ActionsProps) {
   const { state } = useGame();
 
+
+  const width = 25;
+
   return (
-    <svg viewBox="0 0 210 210">
+    <svg viewBox="0 0 210 210" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
       <defs> <GlowFilter /> </defs>
 
-      <circle cx="105" cy="105" r="100" fill="#fff" stroke="#000"></circle>
+      <circle cx="105" cy="105" r="100" fill="#2a2a2a" stroke="#fff"></circle>
 
       {/* meeple */}
       <g>
-        <path
+        {/* <path
           filter={actionAvailable(ResourceAction.SEAT_CUSTOMER) ? "url(#glow)" : ""}
           fillRule="evenodd"
           fill={actionAvailable(ResourceAction.SEAT_CUSTOMER) ? "#0C0" : "#999"}
           d="M12.023-1.678c.139-3.309-7.78-4.92-8.124-5.296-.171-.188.397-5.053-3.898-5.05-4.296-.003-3.728 4.862-3.899 5.05-.343.377-8.262 1.987-8.123 5.296.138 3.308 4.34 1.61 5.237 2.583.784.852-3.674 6.308-4.173 9.772-.163 1.129.155 1.348 1.252 1.348l5.64-.002c.79 0 1.072-.454 1.48-1.08C-1.683 9.557-.592 7.33 0 7.33c.593 0 1.684 2.227 2.586 3.613.408.626.69 1.08 1.48 1.08l5.64.001c1.097 0 1.415-.219 1.252-1.348-.499-3.464-4.957-8.92-4.173-9.771.896-.974 5.1.725 5.237-2.583z"
           transform={props.hasDriveThru ? "translate(125 25)" : "translate(105 25)"}
         ></path>
-        <text fill="#fff" textAnchor="middle" transform={props.hasDriveThru ? "translate(125 30)" :"translate(105 30)"}>
+        <text
+          fill="#fff"
+          textAnchor="middle"
+          transform={props.hasDriveThru ? "translate(125 30)" : "translate(105 30)"}>
           0
-        </text>
+        </text> */}
+
+
+        <image
+          filter={actionAvailable(ResourceAction.SEAT_CUSTOMER) ? "url(#glow)" : ""} href={seat} x="0" y="0" width="40"
+          transform={props.hasDriveThru ? "scale(.8) translate(140 18)" : "translate(85, 12)"} />
+          
       </g>
 
       {/* car */}
-      { props.hasDriveThru && <g>
-        <svg viewBox="0 0 322 222.5" x="0px" y="0px">
+      {props.hasDriveThru && <g>
+        {/* <svg viewBox="0 0 322 222.5" x="0px" y="0px">
           <path
-          filter={actionAvailable(ResourceAction.FEED_CAR) ? "url(#glow)" : ""}
-          fill={actionAvailable(ResourceAction.FEED_CAR) ? "#0C0" : "#999"}
-          transform="translate(105 60) translate(-12 -80)"
+            filter={actionAvailable(ResourceAction.SERVE_CAR) ? "url(#glow)" : ""}
+            fill={actionAvailable(ResourceAction.SERVE_CAR) ? "#0C0" : "#999"}
+            transform="translate(105 60) translate(-12 -80)"
             d="M 2.6 12.8 L 5.6 12.8 L 10.2 2.6 C 10.8 1.4 11.4 -0 13 -0 L 40 -0 C 41.6 -0 42 1.4 42.8 2.6 L 47.4 12.8 L 56.2 12.8 C 60.6 12.8 64.4 16.4 64.4 21 L 64.4 26.6 C 64.4 28 63.2 29.2 61.8 29.2 L 55.2 29.2 C 54.2 20.2 41.2 20.2 40.2 29.2 L 22.2 29.2 C 21.2 20.2 8.2 20.2 7.2 29.2 L 2.6 29.2 C 1.2 29.2 0 28 0 26.6 L 0 15.2 C 0 13.8 1.2 12.8 2.6 12.8 Z M 14.8 24.4 C 17.8 24.4 20.2 26.8 20.2 30 C 20.2 33 17.8 35.6 14.8 35.6 C 11.6 35.6 9.2 33 9.2 30 C 9.2 26.8 11.6 24.4 14.8 24.4 Z M 47.6 24.4 C 50.8 24.4 53.2 26.8 53.2 30 C 53.2 33 50.8 35.6 47.6 35.6 C 44.6 35.6 42 33 42 30 C 42 26.8 44.6 24.4 47.6 24.4 Z" />
           <text fill="#fff" textAnchor="middle" transform="scale(1.7) translate(72 2.5)">
             0
           </text>
-        </svg>
-      </g> }
+        </svg> */}
+        <image
+          filter={actionAvailable(ResourceAction.SERVE_CAR) ? "url(#glow)" : ""} href={serveCar} x="0" y="0" width="40"
+          transform="scale(1.1) translate(55 18)" />
+      </g>}
 
       {/* take order */}
-      <g>
-        <path
+      {/* <g> */}
+      {/* <path
           filter={actionAvailable(ResourceAction.TAKE_ORDER) ? "url(#glow)" : ""}
           fill={actionAvailable(ResourceAction.TAKE_ORDER) ? "#0C0" : "#999"}
           fillRule="evenodd"
@@ -61,12 +82,18 @@ function Actions(props: ActionsProps) {
           transform="translate(105 105) rotate(72 55.055 40) rotate(-72 3.441 -2.5)"
         >
           1
-        </text>
+        </text> */}
+      {/* </g> */}
+
+      <g transform="rotate(72 105 105) translate(82 36)">
+        <image
+          filter={actionAvailable(ResourceAction.TAKE_ORDER) ? "url(#glow)" : ""}
+          transform="rotate(-72)" href={clipboard} x="0" y="0" height="40" width="28" />
       </g>
 
       {/* cook */}
-      <g>
-        <path
+      <g transform="rotate(144 105 105) translate(75 24)">
+        {/* <path
           filter={actionAvailable(ResourceAction.COOK) ? "url(#glow)" : ""}
           fillRule="evenodd"
           fill={actionAvailable(ResourceAction.COOK) ? "#0C0" : "#999"}
@@ -87,12 +114,19 @@ function Actions(props: ActionsProps) {
           transform="translate(105 104) rotate(144 12.997 40) rotate(-144 4.363 5.287)"
         >
           2
-        </text>
+        </text> */}
+
+        <image
+          filter={actionAvailable(ResourceAction.COOK) ? "url(#glow)" : ""}
+          transform="rotate(-144 25 13.25)" href={pan} x="0" y="0" width="55" />
+
       </g>
 
+
+      {/* rotate(-144 105 105)  */}
       {/* serve */}
       <g>
-        <path
+        {/* <path
           filter={actionAvailable(ResourceAction.SERVE) ? "url(#glow)" : ""}
           d="M-9.325-4.917c-.48.35-.808.885-.9 1.47l-.861 5.467a1.634 1.634 0 001.588 1.886 1.64 1.64 0 001.585-1.151l1.02-3.31.007-.004c.517.28 1.17.263 1.675-.105l2.257-1.64 1.212-.048c.267-.01.523-.1.74-.257l2.422-1.76c.26-.19.445-.466.52-.78l.788-3.306.845.134a.45.45 0 00.515-.374l.597-3.772a.45.45 0 00-.374-.514l-8.171-1.295a.449.449 0 00-.515.374l-.597 3.772a.45.45 0 00.374.515l.813.128-.07.444a.447.447 0 01-.181.294l-5.287 3.83-.002.002zm5.769-8.4l7.282 1.154-.457 2.883-7.282-1.154.457-2.882zm.049 5.296a1.34 1.34 0 00.54-.881l.07-.444 4.733.75-.771 3.239a.455.455 0 01-.174.26l-2.422 1.76a.449.449 0 01-.247.085l-1.349.055a.453.453 0 00-.246.085l-2.367 1.72a.676.676 0 01-.942-.149l-.014-.024a.648.648 0 01-.055-.093c-.131-.286-.018-.655.265-.86l3.412-2.48-.53-.727-3.411 2.478-.047.034a1.564 1.564 0 00-.636 1.133v.013c-.007.08-.01.16-.004.242.002.037.01.074.015.112.007.052.012.104.025.156.017.07.043.14.07.208.01.022.014.045.024.067l.003.006c.011.025.023.048.036.072l-.013.01a.448.448 0 00-.166.231L-8.773 2.49a.731.731 0 01-1.424-.33l.861-5.467c.055-.35.252-.672.54-.882h.002l5.287-3.831v-.001zM-9.77 9.205c7.977 9.417 13.647 9.717 18.991 6.55l.843 1.16c.438.602 1.284.736 1.886.298l.728-.529a1.352 1.352 0 00.299-1.885l-.843-1.16c4.663-4.105 6.13-9.59-.36-20.086a.442.442 0 00-.059-.396l-1.058-1.456a.45.45 0 00-.628-.1L-11.087 6.942a.45.45 0 00-.1.629l1.059 1.456c.087.12.222.176.359.178zm21.213 5.013l.806 1.11a.45.45 0 01-.1.628l-.728.53a.45.45 0 01-.629-.1l-.805-1.11.05-.035c.231-.153.461-.31.69-.476s.45-.337.666-.509l.05-.038zm-.234-.973c-1.003.802-1.355 1.058-2.077 1.509-5.005 3.131-10.34 3.014-18.093-6.018l20.038-14.56c6.195 10.167 4.657 15.276.132 19.069zm-21.403-5.839L10.194-7.406l.529.728L-9.665 8.134l-.529-.728z"
           transform="translate(105 105) rotate(-144 -12.997 40)"
@@ -105,12 +139,19 @@ function Actions(props: ActionsProps) {
           transform="translate(105 106) rotate(-144 -12.997 40) rotate(144 .812 2.5)"
         >
           3
-        </text>
+        </text> */}
+
+
+        <image
+          filter={actionAvailable(ResourceAction.SERVE) ? "url(#glow)" : ""}
+          transform="rotate(-144 105 105) translate(85 -5) rotate(144 20 32)"
+          href={cloche} x="0" y="0" width="40" />
+
       </g>
 
       {/* refill */}
       <g>
-        <path
+        {/* <path
           filter={actionAvailable(ResourceAction.REFILL) ? "url(#glow)" : ""}
           d="M17.446 3.838a.7.7 72 00-.203-.268l-5.601-4.746a.7.7 72 00-.47-.17l-1.522.058-3.356-10.33a.7.7 72 00-.955-.425l-21.646 9.69a.7.7 72 00-.377.858l3.833 11.796a.7.7 72 00.81.473L11.165 5.89a.7.7 72 00.522-.906L10.1.095l.85-.035 5.386 4.576a.7.7 72 001.13-.735.7.7 72 00-.02-.063zM5.202-10.446L8.194-1.24l-6.034.224c-.032-1.075-.134-2.257-.574-3.644C1.26-5.686.746-6.823-.06-8.093l5.261-2.353zM8.643.143l1.474 4.535-5.89 1.235C2.413 3.625 2.214 2.111 2.177.381L8.643.143z"
           transform="translate(105 105) rotate(-72 -55.055 40)"
@@ -122,7 +163,12 @@ function Actions(props: ActionsProps) {
           transform="translate(105 107) rotate(-72 -55.055 40) rotate(72 -6.882 -5)"
         >
           4
-        </text>
+        </text> */}
+
+        <image
+          filter={actionAvailable(ResourceAction.REFILL) ? "url(#glow)" : ""}
+          transform={`rotate(-72 105 105) translate(91 9) rotate(72 12.5 20)`}
+          href={refill} x="0" y="0" width="28" />
       </g>
 
 
@@ -130,9 +176,9 @@ function Actions(props: ActionsProps) {
       <Slice action={ResourceAction.COOK} rotation={108} />
       <Slice action={ResourceAction.SERVE} rotation={180} />
       <Slice action={ResourceAction.REFILL} rotation={252} />
-      { !props.hasDriveThru && <Slice action={ResourceAction.SEAT_CUSTOMER} rotation={324} /> }
-      { props.hasDriveThru && <Slice  action={ResourceAction.FEED_CAR} rotation={324} size="half" /> }
-      { props.hasDriveThru && <Slice action={ResourceAction.SEAT_CUSTOMER} rotation={0} size="half" /> }
+      {!props.hasDriveThru && <Slice action={ResourceAction.SEAT_CUSTOMER} rotation={324} />}
+      {props.hasDriveThru && <Slice action={ResourceAction.SERVE_CAR} rotation={324} size="half" />}
+      {props.hasDriveThru && <Slice action={ResourceAction.SEAT_CUSTOMER} rotation={0} size="half" />}
     </svg>
   );
 

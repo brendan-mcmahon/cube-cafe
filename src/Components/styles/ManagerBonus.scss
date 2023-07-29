@@ -1,0 +1,32 @@
+#ManagerBonuses {
+    ul {
+        list-style: none;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        width: 100%;
+        justify-content: center;
+        padding: 0;
+        margin: 16px 0;
+        .bonus {
+            margin: 12px;
+            height: 48px;
+            width: 48px;
+            background-color: transparent;
+            border: none;
+
+            &:focus-visible {
+                outline: none;
+            }
+
+            &.point {
+                .star {
+                    svg {
+                        stroke: black;
+                        stroke-width: 1px;
+                    }
+                }
+            }
+        }
+    }
+}

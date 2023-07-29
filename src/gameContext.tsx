@@ -1,18 +1,26 @@
 import React, { ReactNode, createContext, useContext, useReducer } from "react";
-import { roundSetup, gameSetup, beginRoundTearDown, loadDishwasher, finishRotating } from "./ActionDisk/actions/roundActions";
-import { ManualAction, PlayPhase, GameAction, ResourceAction } from "./constants";
+import { roundSetup, gameSetup, loadDishwasher, finishRotating } from "./ActionDisk/actions/roundActions";
+import { ManualAction, PlayPhase, GameAction, ResourceAction, DishwasherAction } from "./constants";
 import playActions from "./ActionDisk/actions/playPhaseActions";
 import { updateSettings } from "./settings/updateSettings";
-import { Game, defaultGame } from "./game";
+import { Game } from "./models/game";
+import { defaultGame } from "./models/defaultGame";
 import { v4 as uuidv4 } from 'uuid';
-import { IResourceAction, GameSetupAction, FinishedRotatingAction, LoadDishwasherAction, SelectFoodAction, LoadGameAction, QuitGameAction, SetSettingsAction, RoundSetupAction, RoundTearDownAction, SelectResourceAction, SelectCustomerAction, SelectPlateAction, UndoAction, FreezeResourceAction, ThawResourceAction, SelectCarAction } from "./actions";
+import { IResourceAction, GameSetupAction, FinishedRotatingAction, LoadDishwasherAction, SelectFoodAction, LoadGameAction, QuitGameAction, SetSettingsAction, RoundSetupAction, RoundTearDownAction, SelectResourceAction, SelectCustomerAction, SelectPlateAction, UndoAction, FreezeResourceAction, ThawResourceAction, SelectCarAction, SelectManagerBonusAction, ClearTableAction, SelectResourceToCopyAction } from "./actions";
 import { generatePersonName } from "./nameGenerator";
+import { roundTearDown } from "./ActionDisk/actions/roundTearDown";
+import selectFood from "./ActionDisk/actions/selectFood";
+import { addHistory, undo } from "./addHistory";
 
-type Action = IResourceAction | ThawResourceAction | FreezeResourceAction | GameSetupAction | FinishedRotatingAction | LoadDishwasherAction | SelectFoodAction | SelectCarAction | LoadGameAction | QuitGameAction | SetSettingsAction | RoundSetupAction | RoundTearDownAction | SelectResourceAction | SelectCustomerAction | SelectPlateAction | UndoAction;
+// if you're trying to add something to this with a new type of dispatch action,
+// create the action interface in the actions.ts file,
+// then add that to the union below here,
+// then MAKE SURE that the dispatch.type is the same as the action.type in the reducer below
+
+type Action = IResourceAction | SelectResourceToCopyAction | ClearTableAction | SelectManagerBonusAction | ThawResourceAction | FreezeResourceAction | GameSetupAction | FinishedRotatingAction | LoadDishwasherAction | SelectFoodAction | SelectCarAction | LoadGameAction | QuitGameAction | SetSettingsAction | RoundSetupAction | RoundTearDownAction | SelectResourceAction | SelectCustomerAction | SelectPlateAction | UndoAction;
 
 const gameReducer = (state: Game, action: Action) => {
   // TODO: localStorage.setItem("state", JSON.stringify(state));
-
   switch (action.type) {
     case GameAction.LOAD_GAME:
       return loadGame(state, action.game);
@@ -25,49 +33,57 @@ const gameReducer = (state: Game, action: Action) => {
     case GameAction.ROUND_SETUP:
       return roundSetup(state);
     case GameAction.ROUND_TEARDOWN:
-      return beginRoundTearDown(state);
+      return roundTearDown(state);
     case ManualAction.SELECT_RESOURCE:
-      return playActions.selectResource(state, action.resource, action.resourceIndex);
-    case ManualAction.SELECT_CUSTOMER:
-      return playActions.selectCustomer(state, action.customerIndex);
-    case PlayPhase.SELECT_PLATE:
+      return playActions.selectResource(addHistory(state, action.type), action.resource, action.resourceIndex);
+    case ManualAction.SELECT_TABLE:
+      return playActions.selectTable(state, action.tableIndex);
+    case ManualAction.SELECT_MANAGER_BONUS:
+      return playActions.selectManagerBonus(state, action.bonus);
+    case PlayPhase.PLATE_SELECTION_PHASE:
       return playActions.selectPlate(state, action.plate);
     case ResourceAction.ROTATE_CLOCKWISE:
-      return playActions.rotate(addHistory(state, action.type), "clockwise");
+      return playActions.rotate(state, "clockwise");
     case ResourceAction.ROTATE_COUNTERCLOCKWISE:
-      return playActions.rotate(addHistory(state, action.type), "counter-clockwise");
+      return playActions.rotate(state, "counter-clockwise");
     case ManualAction.SELECT_FOOD:
-      return playActions.selectFood(addHistory(state, action.type), action.foodIndex, action.counter);
+      return selectFood(state, action.foodIndex, action.counter);
     case ResourceAction.MOVE_MANAGER:
-      return playActions.moveManager(addHistory(state, action.type));
+      return playActions.moveManager(state, action.spaces);
+    case ManualAction.CLEAR_TABLE:
+      return playActions.clearTable(addHistory(state, action.type), action.tableIndex);
     case ManualAction.LOAD_DISHWASHER:
       return loadDishwasher(state, action.squareIndex);
-    case ManualAction.FINISHED_ROTATING:
-      return finishRotating(addHistory(state, action.type));
+    case ManualAction.SELECT_RESOURCE_TO_COPY:
+      return playActions.selectResourceToCopy(state, action.color);
+    // case ManualAction.FINISHED_ROTATING:
+    //   return finishRotating(addHistory(state, action.type));
     case ResourceAction.SEAT_CUSTOMER:
-      return playActions.seatCustomer(addHistory(state, action.type));
+      return playActions.seatCustomer(state);
     case ResourceAction.TAKE_ORDER:
-      return playActions.takeOrder(addHistory(state, action.type));
+      return playActions.takeOrder(state);
     case ResourceAction.COOK:
-      return playActions.cook(addHistory(state, action.type));
+      return playActions.cook(state);
     case ResourceAction.SERVE:
       return playActions.serve(state);
     case ResourceAction.REFILL:
-      return playActions.refill(addHistory(state, action.type));
+      return playActions.refill(state);
     case ManualAction.SELECT_CAR:
-      return playActions.selectCar(addHistory(state, action.type), action.carIndex);
-    case ResourceAction.FEED_CAR:
-      return playActions.feedCar(addHistory(state, action.type));
+      return playActions.selectCar(state, action.carIndex);
+    case ResourceAction.SERVE_CAR:
+      return playActions.serveCar(state);
     case ManualAction.FREEZE_RESOURCE:
-      return playActions.freezeResource(addHistory(state, action.type));
+      return playActions.freezeResource(state);
     case ManualAction.THAW_RESOURCE:
       return playActions.thawResource(addHistory(state, action.type))
     case ManualAction.UNDO:
-      return state.history || state;
+      return undo(state);
     default:
       return state;
   }
 };
+
+
 
 const loadGame = (state: Game, newGame: Game) => {
   localStorage.setItem("state", JSON.stringify(newGame));
@@ -77,21 +93,6 @@ const loadGame = (state: Game, newGame: Game) => {
     ...newGame
   };
 };
-
-const addHistory = (state: Game, action: string): Game => {
-  const clonedState: Game = {
-    ...state,
-    resources: state.resources.map((resource) => ({ ...resource })),
-    customers: state.customers.map((customer) => (!!customer ? { ...customer } : null)),
-  };
-
-  return {
-    ...clonedState,
-    actionHistory: [...clonedState.actionHistory, action],
-    history: clonedState,
-  };
-};
-
 
 type GameProviderProps = {
   children: ReactNode;
@@ -111,10 +112,6 @@ const GameContext = createContext(defaultGameContext);
 
 export const GameProvider = ({ children }: GameProviderProps) => {
   defaultGame.id = uuidv4();
-
-  if (defaultGame.settings.startingTableCount === 3) {
-    defaultGame.customers[3] = null;
-  }
 
   if (!localStorage.getItem("user")) {
     const user = generatePersonName();

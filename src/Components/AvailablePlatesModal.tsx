@@ -9,7 +9,7 @@ function AvailablePlatesModal(props: IModalProps) {
   const { state, dispatch } = useGame();
 
   const selectPlate = (plate: string) => {
-    dispatch({ type: PlayPhase.SELECT_PLATE, plate });
+    dispatch({ type: PlayPhase.PLATE_SELECTION_PHASE, plate });
   };
   return (
     <Modal title="Select a Plate" show={props.show} setShow={props.setShow}>

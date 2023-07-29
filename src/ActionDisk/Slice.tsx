@@ -29,8 +29,6 @@ export function Slice({action, rotation, size = "full"}: SliceProps) {
         <path
             className={`slice ${enabled ? "enabled" : ""}`}
             fill="none"
-            // stroke="gray"
-            // strokeWidth="1px"
             pointerEvents="all"
             onClick={dispatchAction}
             transform={`rotate(${rotation}, 105, 105)`}

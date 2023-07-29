@@ -126,12 +126,10 @@ let tuples = [
   ["purple", "purple", "purple"],
 ];
 
-// Function to sort and stringify an array
 function sortAndStringify(array) {
   return JSON.stringify(array.sort());
 }
 
-// Remove duplicates
 let uniqueTuples = tuples.filter((tuple, index, self) => {
   return (
     index ===

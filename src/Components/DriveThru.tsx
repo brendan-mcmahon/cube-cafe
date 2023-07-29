@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { useGame } from "../gameContext";
 import Car from "../icons/Car";
-import { ManualAction, PlayPhase, ResourceAction } from "../constants";
+import { ManualAction, PlayPhase } from "../constants";
 import "./styles/DriveThru.scss";
 
 export default function DriveThru() {

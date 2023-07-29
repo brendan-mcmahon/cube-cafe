@@ -14,17 +14,19 @@ export default function SettingsModal({ show, setShow }: IModalProps) {
   const { state, dispatch } = useGame();
   const [user, setUser] = useState(state?.settings?.user || localStorage.getItem("user") || "");
   const [startingMood, setStartingMood] = useState<number>(state?.settings?.startingMood || 3);
-  const [tableCount, setTableCount] = useState(state?.settings?.startingTableCount || 3);
   const [numPlates, setNumPlates] = useState(state?.settings?.numPlates || 1);
   const [hotFoodReward, setHotFoodReward] = useState(state?.settings?.hotFoodReward || 1);
   const [coldFoodPenalty, setColdFoodPenalty] = useState(state?.settings?.coldFoodPenalty || 0);
   const [totalRounds, setTotalRounds] = useState(state?.settings?.totalRounds || 8);
   const [dice, setDice] = useState(state?.settings?.dice || []);
+  const [refillMode, setRefillMode] = useState(state?.settings?.refillMode || "once");
+  const [cookWildsAsWild, setCookWildsAsWild] = useState<boolean>(state?.settings?.cookWildsAsWild || true);
   const [managerTrack, setManagerTrack] = useState(
     state?.settings?.managerTrack || [ManagerAction.EMPTY, ManagerAction.EMPTY, ManagerAction.EMPTY, ManagerAction.EMPTY, ManagerAction.WILD]
   );
   const [driveThruRound, setDriveThruRound] = useState(state?.settings?.driveThruRound || 5);
-  const [driveThruRewards, setDriveThruRewards] = useState(state?.settings?.driveThruRewards || [3, 2])
+  const [driveThruRewards, setDriveThruRewards] = useState(state?.settings?.driveThruRewards || [3, 2]);
+  const [angryCustomersLeave, setAngryCustomersLeave] = useState<boolean>(state?.settings?.angryCustomersLeave || true);
 
   const onSaveClicked: FormEventHandler = (e: ChangeEvent) => {
     e.preventDefault();
@@ -39,7 +41,6 @@ export default function SettingsModal({ show, setShow }: IModalProps) {
       settings: {
         user,
         startingMood,
-        startingTableCount: tableCount,
         hotFoodReward,
         coldFoodPenalty,
         numPlates,
@@ -51,6 +52,9 @@ export default function SettingsModal({ show, setShow }: IModalProps) {
         dice,
         driveThruRound,
         driveThruRewards,
+        refillMode,
+        cookWildsAsWild,
+        angryCustomersLeave,
       },
     });
     setShow(false);
@@ -81,7 +85,6 @@ export default function SettingsModal({ show, setShow }: IModalProps) {
 
         <NumericSettingsInput label="Starting Mood:" name="startingMood" value={startingMood} setValue={setStartingMood} />
 
-        <NumericSettingsInput label="Number of Tables:" name="numTables" min={2} max={3} value={tableCount} setValue={setTableCount} />
 {/* 
         <NumericSettingsInput
           label="Number of Default Plates:"
@@ -114,6 +117,7 @@ export default function SettingsModal({ show, setShow }: IModalProps) {
           value={totalRounds}
           setValue={setTotalRounds}
           min={1}
+          max={8}
         />
 
         <NumericSettingsInput
@@ -142,6 +146,24 @@ export default function SettingsModal({ show, setShow }: IModalProps) {
           min={1}
           max={10}
         />
+
+        <div className="form-input">
+          <label htmlFor="refillMode">Refill Mode:</label>
+          <select id="refillMode" name="refillMode" value={refillMode} onChange={(e) => setRefillMode(e.target.value)}>
+            <option value="once">Once</option>
+            <option value="unlimited">Unlimited</option>
+          </select>
+        </div>
+
+        <div className="form-input">
+          <label htmlFor="cookWildsAsWild">Cook Wilds As Wild:</label>
+          <input type="checkbox" id="cookWildsAsWild" name="cookWildsAsWild" checked={cookWildsAsWild} onChange={(e) => setCookWildsAsWild(e.target.checked)} />
+        </div>
+
+        <div className="form-input">
+          <label htmlFor="angryCustomersLeave">Angry Customers Leave:</label>
+          <input type="checkbox" id="angryCustomersLeave" name="angryCustomersLeave" checked={angryCustomersLeave} onChange={(e) => setAngryCustomersLeave(e.target.checked)} />
+        </div>
 
         {/* <DiceSettings dice={dice} setDice={setDice} /> */}
 

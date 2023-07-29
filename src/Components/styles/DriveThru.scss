@@ -1,29 +1,32 @@
+@import '../../variables';
+
 #DriveThru {
 grid-area: drive-thru;
     height: 100%;
-    width: 90%;
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
     border-top: solid grey 3px;
     border-bottom: solid grey 3px;
+    background-color: grey;
 
     .car {
-        width: 75px;
+        width: 90px;
         height: 40px;
         font-size: 8px;
         background-color: transparent;
+        border: none;
 
         svg {
-            filter: drop-shadow(0 0 10px #0c0);
+            filter: $green-glow;
         }
 
         &:focus,
         &:focus-visible,
         &:hover {
             outline: none;
-            border: none;
         }
 
         &:disabled {
@@ -52,8 +55,8 @@ grid-area: drive-thru;
     }
 
     .yellow-stripe {
-        width: 25px;
+        width: 36px;
         height: 5px;
-        background-color: yellow;
+        background-color: var(--yellow);
     }
 }

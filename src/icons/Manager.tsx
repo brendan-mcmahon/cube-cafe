@@ -4,10 +4,8 @@ import { ResourceAction } from "../constants";
 import { PlayPhase } from "../constants";
 import { GlowFilter } from "./GlowFilter";
 
-function Manager() {
+function Manager({enabled = false}: {enabled?: boolean}) {
   const { state, dispatch } = useGame();
-
-  const enabled = state.playPhase === PlayPhase.SELECT_ACTION && !!state.currentValue && state.currentValue >= 0;
 
   const onClick = () => {
     if (enabled) {

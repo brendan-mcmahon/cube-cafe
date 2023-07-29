@@ -11,9 +11,10 @@ import storage from "../storage";
 const instructionsMap: { [key in PlayPhase]?: string } = {
   [PlayPhase.SELECT_RESOURCE]: "Select a resource",
   [PlayPhase.SELECT_ACTION]: "Select an action",
-  [PlayPhase.SELECT_PLATE]: "Select a plate",
+  [PlayPhase.PLATE_SELECTION_PHASE]: "Select a plate",
   [PlayPhase.SELECT_CUSTOMER]: "Select a customer",
   [PlayPhase.SELECT_FOOD]: "Select a food",
+  [PlayPhase.LOAD_DISHWASHER]: "Select a space in the dishwasher",
 };
 
 type ConsoleProps = {

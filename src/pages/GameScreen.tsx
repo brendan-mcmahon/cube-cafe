@@ -14,6 +14,7 @@ import AlertModel from "../Components/AlertModel";
 import "./GameScreen.scss";
 import { useGame } from "../gameContext";
 import DriveThru from "../Components/DriveThru";
+import ManagerBonusModal from "../Components/ManagerBonusModal";
 
 const emptyAlert = { 
     title: "", 
@@ -34,6 +35,8 @@ type GameScreenProps = {
     setLoadModalOpen: (open: boolean) => void;
     availablePlatesOpen: boolean;
     setAvailablePlatesOpen: (open: boolean) => void;
+    managerBonusOpen: boolean;
+    setManagerBonusOpen: (open: boolean) => void;
     isMobile: boolean;
 };
 
@@ -54,11 +57,12 @@ export function GameScreen(props: GameScreenProps) {
         <Tableau />
         <DriveThru />
         <AvailablePlatesModal show={props.availablePlatesOpen} setShow={props.setAvailablePlatesOpen} />
+        <ManagerBonusModal show={props.managerBonusOpen} setShow={props.setManagerBonusOpen} />
         {/* { state.alert !== null && <Alert /> } */}
         {/* use each property separately because show and setShow are in there */}
         <Alert show={props.alertOpen} setShow={props.setAlertOpen} />
         <Tables />
         <Kitchen />
-        {!props.isMobile && <History />}
+        {/* {!props.isMobile && <History />} */}
     </div>);
 }

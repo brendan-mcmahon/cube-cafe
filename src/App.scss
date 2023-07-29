@@ -2,6 +2,18 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+
+  // --blue: #1982C4;
+  // --green: #8AC926;
+  // --red: #FF595E;
+  // --yellow: #FFCA3A;
+  // --purple: #6A4C93;
+
+  --blue: #33658A;
+  --green: #689E63;
+  --red: #A5000B;
+  --yellow: #FFB447;
+  --purple: #713368;
 }
 
 svg:focus,
@@ -18,7 +30,7 @@ svg:focus-visible {
 }
 
 .red {
-  background-color: red;
+  background-color: var(--red);
   border: solid black 1px;
   color: white;
 }
@@ -30,25 +42,25 @@ svg:focus-visible {
 }
 
 .blue {
-  background-color: blue;
+  background-color: var(--blue);
   border: solid black 1px;
   color: white;
 }
 
 .yellow {
-  background-color: yellow;
+  background-color: var(--yellow);
   border: solid black 1px;
   color: black;
 }
 
 .purple {
-  background-color: purple;
+  background-color: var(--purple);
   border: solid black 1px;
   color: white;
 }
 
 .green {
-  background-color: rgb(0, 199, 0);
+  background-color: var(--green);
   border: solid black 1px;
   color: white;
 }
@@ -63,16 +75,16 @@ svg:focus-visible {
   background: linear-gradient(
     45deg,
     white 28%,
-    red 28%,
-    red 43%,
-    yellow 43%,
-    yellow 58%,
-    blue 58%,
-    blue 73%,
-    // purple 73%,
-    // purple
-    rgb(0, 199, 0) 73%,
-    rgb(0, 199, 0)
+    var(--red) 28%,
+    var(--red) 43%,
+    var(--yellow) 43%,
+    var(--yellow) 58%,
+    var(--blue) 58%,
+    var(--blue) 73%,
+    // var(--purple) 73%,
+    // var(--purple)
+    var(--green) 73%,
+    var(--green)
   );
 }
 

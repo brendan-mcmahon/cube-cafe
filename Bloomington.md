@@ -78,6 +78,7 @@ Just kidding, this decision was not made
 ### Random thoughts:
 - Have a token to put on top of the dice to remind you to tick down at the end of the round
 - Distinction between random and wild: Random is a single color chosen in the moment, wild is a specific resource that can be used in the place of any color.
+- We should have the cars not leave until they get to the end of the drive-thru even if they have food. This just keeps them in the game longer, which is dumb, but might help justify some stuff, ya know?
 
 ### Playtesting 3:45
 1 2 3 4

@@ -8,17 +8,23 @@ type ModalProps = {
   setShow: (show: boolean) => void;
   title: string;
   children: React.ReactNode;
+  onCancel?: () => void;
 }
 
 export function Modal(props: ModalProps) {
   if (!props.show) return null;
+
+  const onCancel = () => {
+    if (!!props.onCancel) props.onCancel();
+    props.setShow(false);
+  }
 
   return (
     <div className="modal">
       <div className="modal-content">
         <div className="modal-header">
           <h1>{props.title}</h1>
-          <span className="close" onClick={() => props.setShow(false)}>
+          <span className="close" onClick={onCancel}>
             <X />
           </span>
         </div>

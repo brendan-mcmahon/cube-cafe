@@ -1,5 +1,5 @@
 import ApiClient from "./apiClient";
-import { Game } from "./game";
+import { Game } from "./models/game";
 import { SaveFile, SaveFileData } from "./Components/SaveFile";
 
 const apiClient = new ApiClient("https://op9jkjzc92.execute-api.us-east-2.amazonaws.com/prod");

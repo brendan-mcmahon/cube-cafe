@@ -1,0 +1,38 @@
+<svg viewBox="0 0 180 110">
+    <defs>
+        <filter id="blur-me">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="5" />
+        </filter>
+    </defs>
+
+    <rect x="0" y="0" width="150" height="110" fill="none" stroke="red" stroke-width=".5" />
+
+    <g>
+
+        <!-- glow -->
+        <path stroke="none" fill="#07d800" transform-origin="60" transform="scale(1.1)" filter="url(#blur-me)"
+            d="m 10 25 l 0 60 l 50 15 l 50 -15 l 0 -60 l -50 -15 z" />
+        <!-- <path stroke="none" fill="#00000050" transform-origin="60 100" filter="url(#blur-me)"
+            transform="skewX(-600) skewY(0)" d="m 10 25 l 0 60 l 50 15 l 50 -15 l 0 -60 l -50 -15 z" /> -->
+
+        <!-- left -->
+        <path stroke="none" fill="blue" d="m 10 25 l 0 60 l 50 15 l 0 -60 z" />
+
+        <!-- right -->
+        <path stroke="none" fill="#00009b" d="m 60 40 l 50 -15 l 0 60 l -50 15 z" />
+
+        <!-- top -->
+        <path stroke="none" fill="#5b5bfd" d="m 10 25 l 50 -15 l 50 15 l -50 15 z" />
+
+        <path stroke-width="1" stroke-linecap="round" stroke-linejoin="round" stroke="black" fill="none"
+            d="m 10 25 l 0 60 l 50 15 l 50 -15 l 0 -60 l -50 15 l -50 -15 l 50 -15 l 50 15 m -50 15 l 0 60" />
+
+
+        <!-- shadow -->
+        <!-- <path stroke="none" fill="#00000050" transform-origin="60 100" filter="url(#blur-me)"
+            transform="skewX(-600) skewY(0)" d="m 10 25 l 0 60 l 50 15 l 50 -15 l 0 -60 l -50 -15 z" /> -->
+
+
+
+    </g>
+</svg>

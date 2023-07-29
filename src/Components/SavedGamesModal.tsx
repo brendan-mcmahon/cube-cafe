@@ -17,9 +17,7 @@ export default function SavedGamesModal(props: IModalProps) {
   useEffect(() => {
     if (props.show) {
       setDoneLoading(false);
-      console.log('getting saved games')
       storage.getSavedGames().then((games) => {
-        console.log(games);
         setSavedGames(games);
         setDoneLoading(true);
       });
@@ -27,13 +25,11 @@ export default function SavedGamesModal(props: IModalProps) {
   }, [props.show]);
 
   const loadGame = (index: number) => {
-    console.log('load clicked');
     dispatch({ type: GameAction.LOAD_GAME, game: savedGames[index].game });
     props.setShow(false);
   };
 
   const deleteGame = async (index: number) => {
-    console.log('delete clicked');
     setDoneLoading(false);
     storage.deleteSave(savedGames[index], () => {
       storage.getSavedGames().then((games) => {

@@ -1,5 +1,6 @@
 import { GameAction, PlayPhase, ManualAction, ResourceAction } from "./constants";
-import { Game, Resource, Settings } from "./game";
+import { Game, Resource } from "./models/game";
+import { Settings } from "./models/Settings";
 
 export interface LoadGameAction {
     type: GameAction.LOAD_GAME;
@@ -30,21 +31,27 @@ export interface RoundTearDownAction {
 
 export interface SelectResourceAction {
     type: ManualAction.SELECT_RESOURCE;
-    resource: Resource;
-    resourceIndex: number;
+    resource: Resource | null;
+    resourceIndex: number | null;
 }
 
 export interface SelectCustomerAction {
-    type: ManualAction.SELECT_CUSTOMER;
-    customerIndex: number;
+    type: ManualAction.SELECT_TABLE;
+    tableIndex: number;
+}
+
+export interface SelectManagerBonusAction {
+    type: ManualAction.SELECT_MANAGER_BONUS;
+    bonus: string;
 }
 
 export interface SelectPlateAction {
-    type: PlayPhase.SELECT_PLATE;
+    type: PlayPhase.PLATE_SELECTION_PHASE;
     plate: string;
 }
 
 export interface IResourceAction {
+    spaces?: number | undefined;
     type: ResourceAction;
 }
 
@@ -62,6 +69,16 @@ export interface SelectCarAction {
 export interface LoadDishwasherAction {
     type: ManualAction.LOAD_DISHWASHER;
     squareIndex: number;
+}
+
+export interface ClearTableAction {
+    type: ManualAction.CLEAR_TABLE;
+    tableIndex: number;
+}
+
+export interface SelectResourceToCopyAction {
+    type: ManualAction.SELECT_RESOURCE_TO_COPY;
+    color: string;
 }
 
 export interface FinishedRotatingAction {

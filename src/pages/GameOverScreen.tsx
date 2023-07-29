@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useGame } from "../gameContext";
 import { GameAction } from "../constants";
-import { Game, RoundTimer, UpgradeKeys } from "../game";
+import { Game, RoundTimer, UpgradeKeys } from "../models/game";
 import Save from "../icons/Save";
 import "./GameOverScreen.scss";
 import { getRandomValues } from "crypto";
@@ -127,7 +127,7 @@ function GameOverScreen({ setSaveOpen }: EndGameProps) {
           </div>
           <div className="stats-row">
             <label>Customers Not Served</label>
-            <div className="value">{state.statistics.leftOverCustomers?.length}</div>
+            <div className="value">{state.statistics.unfinishedTables?.length}</div>
           </div>
           {/* List each finished customer (round seated, round order taken, round served, color of order, star rating) */}
           <div className="stats-row horizontal">

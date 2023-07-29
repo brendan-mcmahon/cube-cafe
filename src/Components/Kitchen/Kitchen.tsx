@@ -16,11 +16,11 @@ function Kitchen() {
     }, [state.playPhase]);
 
     useEffect(() => {
-        if (state.selectedCustomerIndex === 0 || !!state.selectedCustomerIndex) {
-            const customerOrder = state.customers[state.selectedCustomerIndex]?.order || null;
+        if (state.selectedTableIndex === 0 || !!state.selectedTableIndex) {
+            const customerOrder = state.tables[state.selectedTableIndex].customer?.order || null;
             setSelectedCustomerOrder(customerOrder);
         }
-    }, [state.selectedCustomerIndex, state.customers]);
+    }, [state.selectedTableIndex, state.tables]);
 
     return (
         <div id="Kitchen" className={`game-area ${state.upgrades.heatlamp ? "heated" : ""}`}>

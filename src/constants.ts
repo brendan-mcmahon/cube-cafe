@@ -11,11 +11,17 @@ export enum RoundPhase {
   RESOLVE = "Resolve",
 };
 
+export enum DishwasherAction {
+  MOVE_MANAGER = "Move Manager",
+  COLLECT_RESOURCE = "Collect Resource",
+  COPY_RESOURCE = "Copy Resource",
+};
+
 export enum PlayPhase {
   NONE = "None",
   SELECT_RESOURCE = "Select Resource",
   SELECT_ACTION = "Select Action",
-  SELECT_PLATE = "Select Plate",
+  PLATE_SELECTION_PHASE = "Select Plate",
   SELECT_CUSTOMER = "Select Customer",
   SELECT_FOOD = "Select Food",
   SELECT_DIRECTION = "Select Direction",
@@ -24,12 +30,20 @@ export enum PlayPhase {
   END = "End",
   ROTATE_FREELY = "Rotate Freely",
   SELECT_CAR = "Select Car",
+  MANAGER_BONUS_PHASE = "Select Manager Bonus",
+  LOAD_DISHWASHER = "Load Dishwasher",
+  SELECT_RESOURCE_TO_COPY = "Select a Resource to Copy",
 };
 
 export enum CustomerStatus {
   WAITING = "waiting",
   EATING = "eating",
   FINISHED = "finished",
+}
+
+export enum RefillStatus {
+  EMPTY = "empty",
+  FULL = "full",
 }
 
 export enum ResourceStatus {
@@ -46,32 +60,23 @@ export enum ResourceAction {
   SERVE = "Serve",
   TAKE_ORDER = "Take Order",
   REFILL = "Refill",
-  FEED_CAR = "FEED_CAR",
+  SERVE_CAR = "Serve Car",
 }
 
 export enum ManualAction {
-    INCREASE_ONE_CUSTOMER = "Increase One Customer",
-    LOAD_DISHWASHER = "Load Dishwasher",
-    SELECT_RESOURCE = "Select Resource",
-    SELECT_CUSTOMER = "Select Customer",
-    SELECT_CAR = "Select Car",
-    SELECT_FOOD = "Select Food",
-    UNDO = "Undo",
-    FINISHED_ROTATING = "Finished Rotating",
-    FREEZE_RESOURCE = "Freeze Resource",
-    THAW_RESOURCE = "Thaw Resource"
-};
-
-export enum DishwasherAction {
-  INCREASE_ALL_CUSTOMERS = "Increase All Customers",
   INCREASE_ONE_CUSTOMER = "Increase One Customer",
-  ADD_TABLE = "Add Table",
-  PULL_PLATES = "Pull Plates",
-  RESET_WHEEL = "Reset Wheel",
-  FREEZER_UPGRADE = "Freezer Upgrade",
-  CUSTOMER_START_UPGRADE = "Customer Start Upgrade",
-  HEATLAMP_UPGRADE = "Heatlamp Upgrade",
-  POINTS = "3 Points"
+  LOAD_DISHWASHER = "Load Dishwasher",
+  SELECT_RESOURCE = "Select Resource",
+  SELECT_TABLE = "Select Table",
+  SELECT_CAR = "Select Car",
+  SELECT_FOOD = "Select Food",
+  UNDO = "Undo",
+  FINISHED_ROTATING = "Finished Rotating",
+  FREEZE_RESOURCE = "Freeze Resource",
+  THAW_RESOURCE = "Thaw Resource",
+  SELECT_MANAGER_BONUS = "Select Manager Bonus",
+  CLEAR_TABLE = "Clear Table",
+  SELECT_RESOURCE_TO_COPY = "Select Resource to Copy",
 };
 
 export enum ManagerAction {
@@ -81,7 +86,6 @@ export enum ManagerAction {
   BOOST_TWO = "+1 (2)",
   BOOST_THREE = "+1 (3)"
 };
-
 
 export enum GameAction {
   LOAD_GAME = "Load Game",
