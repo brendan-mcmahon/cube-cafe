@@ -19,7 +19,7 @@ export function ManagerTrackStep(props: ManagerTrackStepProps) {
         <option value={ManagerAction.BOOST_ONE}>+1 table 1</option>
         <option value={ManagerAction.BOOST_TWO}>+1 table 2</option>
         <option value={ManagerAction.BOOST_THREE}>+1 table 3</option>
-        <option value={ManagerAction.WILD}>+1 Wild</option>
+        <option value={ManagerAction.CUBE_OR_POINT}>+1 Wild</option>
       </select>
 
       <button onClick={(e) => props.deleteStep(props.index, e)} className="delete-manager-track-step">

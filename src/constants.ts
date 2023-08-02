@@ -81,7 +81,7 @@ export enum ManualAction {
 
 export enum ManagerAction {
   EMPTY = "empty",
-  WILD = "wild",
+  CUBE_OR_POINT = "cube / point",
   BOOST_ONE = "+1 (1)",
   BOOST_TWO = "+1 (2)",
   BOOST_THREE = "+1 (3)"

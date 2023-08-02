@@ -22,7 +22,7 @@ export default function SettingsModal({ show, setShow }: IModalProps) {
   const [refillMode, setRefillMode] = useState(state?.settings?.refillMode || "once");
   const [cookWildsAsWild, setCookWildsAsWild] = useState<boolean>(state?.settings?.cookWildsAsWild || true);
   const [managerTrack, setManagerTrack] = useState(
-    state?.settings?.managerTrack || [ManagerAction.EMPTY, ManagerAction.EMPTY, ManagerAction.EMPTY, ManagerAction.EMPTY, ManagerAction.WILD]
+    state?.settings?.managerTrack || [ManagerAction.EMPTY, ManagerAction.EMPTY, ManagerAction.EMPTY, ManagerAction.EMPTY, ManagerAction.CUBE_OR_POINT]
   );
   const [driveThruRound, setDriveThruRound] = useState(state?.settings?.driveThruRound || 5);
   const [driveThruRewards, setDriveThruRewards] = useState(state?.settings?.driveThruRewards || [3, 2]);

@@ -52,7 +52,7 @@ export const defaultGame: Game = {
       ManagerAction.EMPTY,
       ManagerAction.EMPTY,
       ManagerAction.EMPTY,
-      ManagerAction.WILD,
+      ManagerAction.CUBE_OR_POINT,
     ],
   },
   stars: 0,
