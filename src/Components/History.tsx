@@ -8,21 +8,21 @@ import { Game, TableModel } from "../models/game";
 export default function History() {
   const { state, dispatch } = useGame();
 
-  const histories: { table: TableModel, index: number }[] = [];
-  let i = 0;
+  // const histories: { table: TableModel, index: number }[] = [];
+  // let i = 0;
 
-  useEffect(() => {
-    getHistories(state);
-  }, [state])
+  // useEffect(() => {
+  //   getHistories(state);
+  // }, [state])
 
-  const getHistories = (history: Game) => {
-    if (!history.history) {
-      histories.push({ table: history.tables[0], index: i });
-      i++;
-    } else {
-      getHistories(history.history);
-    }
-  }
+  // const getHistories = (history: Game) => {
+  //   if (!history.history) {
+  //     histories.push({ table: history.tables[0], index: i });
+  //     i++;
+  //   } else {
+  //     getHistories(history.history);
+  //   }
+  // }
 
   return (
     <div id="History" className="game-area">
@@ -31,14 +31,14 @@ export default function History() {
         <Undo onClick={() => dispatch({ type: ManualAction.UNDO })} disabled={state.actionHistory?.length === 0} />
       </div>
       <ul>
-        {/* {state.actionHistory?.map((action, i) => (
+        {state.actionHistory?.map((action, i) => (
           <li key={i}>{action}</li>
-        ))} */}
+        ))}
 
         
-        {histories?.map((moment, i) => (
+        {/* {histories?.map((moment, i) => (
           <li key={i}>{moment.index}: {moment.table.customer?.status}</li>
-        ))}
+        ))} */}
       </ul>
     </div>
   );

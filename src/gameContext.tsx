@@ -20,12 +20,13 @@ import { addHistory, undo } from "./addHistory";
 type Action = IResourceAction | SelectResourceToCopyAction | ClearTableAction | SelectManagerBonusAction | ThawResourceAction | FreezeResourceAction | GameSetupAction | FinishedRotatingAction | LoadDishwasherAction | SelectFoodAction | SelectCarAction | LoadGameAction | QuitGameAction | SetSettingsAction | RoundSetupAction | RoundTearDownAction | SelectResourceAction | SelectCustomerAction | SelectPlateAction | UndoAction;
 
 const gameReducer = (state: Game, action: Action) => {
-  // TODO: localStorage.setItem("state", JSON.stringify(state));
+  localStorage.setItem("autosave", JSON.stringify(state));
+
   switch (action.type) {
     case GameAction.LOAD_GAME:
       return loadGame(state, action.game);
     case GameAction.QUIT_GAME:
-      return { ...defaultGame };
+      return quitGame(state);
     case GameAction.SET_SETTINGS:
       return updateSettings(state, action.settings);
     case GameAction.GAME_SETUP:
@@ -86,13 +87,18 @@ const gameReducer = (state: Game, action: Action) => {
 
 
 const loadGame = (state: Game, newGame: Game) => {
-  localStorage.setItem("state", JSON.stringify(newGame));
+  localStorage.setItem("autosave", JSON.stringify(newGame));
 
   return {
     ...state,
     ...newGame
   };
 };
+
+const quitGame = (state: Game) => {
+  localStorage.removeItem("autosave");
+  return { ...defaultGame };
+}
 
 type GameProviderProps = {
   children: ReactNode;

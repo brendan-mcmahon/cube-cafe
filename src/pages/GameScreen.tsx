@@ -63,6 +63,6 @@ export function GameScreen(props: GameScreenProps) {
         <Alert show={props.alertOpen} setShow={props.setAlertOpen} />
         <Tables />
         <Kitchen />
-        {/* {!props.isMobile && <History />} */}
+        <History />
     </div>);
 }

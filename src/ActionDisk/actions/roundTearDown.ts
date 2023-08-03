@@ -129,6 +129,7 @@ function endGameState(state: Game): Game {
     },
   };
 
+  storage.clearAutoSave();
   storage.saveGame(endState);
   return endState;
 }

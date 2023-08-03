@@ -52,6 +52,7 @@ function GameOverScreen({ setSaveOpen }: EndGameProps) {
   const upgradesMap: { [key in UpgradeKeys]: string } = {
     [UpgradeKeys.Freezer]: "Freezer",
     [UpgradeKeys.HeatLamp]: "Heat Lamp",
+    [UpgradeKeys.DriveThru]: "Drive-thru"
   }
 
   const getUpgrades = (state: Game) => {

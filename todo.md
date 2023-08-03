@@ -68,20 +68,21 @@
   * Don't make this super modular. Just do the way it is vs car w/ cook and car w/ serve
 
 ## Data Collection Features
-* Data View with all of the games data aggregated and assessed
-* Save all of the rolls so you can play the exact same game again
-* We're not using the file we're "auto-saving" on its own. We only allow you to load manually saved files. This would allow a "continue last game?" button.
-  * This can operate in tandem with the auto-saving to AWS. We can just look for a file in local storage when the app loads. If there is a game that's not finished, we can ask the user if they want to continue it.
-  * We should delete the local file when the game is finished.
-* Remove Save Button and replace with auto-saving
-  * ~~When you start a game, give it a few random words for a name + a uuid for an id~~
-  * ~~Change the structure of the dynamodb table to have a partition key of id and a sort key of name~~
-  * ~~When you save a game, update the record instead of creating a new one (including allowing the user to change the name)~~
-  * ~~Make your name editable in settings~~
-  * Add a toast for the saving stuff
-  * Add a popup when the page loads to tell the user what data is being saved. When they dismiss it, set a value in local storage so it doesn't show again
-  * Track the max number of simultaneous food cooking
-  * For the points, we should show what the score would have been 
+- [ ] Data View with all of the games data aggregated and assessed
+  - [ ] Create a lambda function that will aggregate the data
+- [ ] Save all of the rolls so you can play the exact same game again
+  - [ ] Save rolls and car draws to the statistics every time a new round starts
+  - [ ] Predetermine the order of the plates at the start of every game so we can just re-use it instead of drawing them individually in real time
+    * Can we just do this with the rolls and cars too? Why does any of it have to be done in real time? In theory, you could cheat, but I don't care?
+  - [ ] Add a "play this game again" button to the end game screen
+- [ ] Auto-save to localstorage
+  - [x] Delete the local file when the game is finished
+  - [x] Delete the local file when the player quits
+  - [x] Save the game to local storage when the game is started
+  - [x] Save the game to local storage as the game is played
+  - [x] If the user lands on the home page, load the game from local storage if it exists
+  - [x] Add a popup when the page loads to tell the user what data is being saved. When they dismiss it, set a value in local storage so it doesn't show again
+- [ ] Track the max number of simultaneous food cooking
 
 ## Bugs
 - [x] Clicking out of a modal behaves weirdly. It should act like the undo button maybe? Need to check all of these.
@@ -97,6 +98,7 @@
   - [x] seating
   - [x] round tear down
   - [x] round set up
+- [x] Food that is cooking has a higher z-index than the modals
 
 ## Rules questions
 * If a person leaves the table, does the plate go with them?

@@ -56,7 +56,7 @@ function Console({ setSettingsOpen, setSaveOpen }: ConsoleProps) {
         {/* <Save onClick={() => setSaveOpen(true)} /> */}
         <Save onClick={() => storage.saveGame(state)} />
 
-        <Gear onClick={() => setSettingsOpen(true)} />
+        {/* <Gear onClick={() => setSettingsOpen(true)} /> */}
 
         <button onClick={() => quitGame()}>Quit</button>
 

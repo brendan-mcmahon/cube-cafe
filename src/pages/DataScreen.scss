@@ -1,0 +1,57 @@
+@import "../variables";
+
+#AggregateData {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+
+    font-family: $sans;
+
+    h1 {
+        font-family: $script;
+        font-size: 32px;
+    }
+
+    .results-count {
+        display: flex;
+        align-items: baseline;
+        margin: 0 8px;
+    }
+
+    .filters {
+        display: flex;
+        width: 100%;
+
+        .filter {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: space-between;
+            width: 100%;
+            margin: 8px 8px;
+
+            label {
+                font-size: 16px;
+            }
+
+            select {
+                width: 100%;
+                height: 1.5rem;
+                border: 1px solid black;
+                border-radius: 0.5rem;
+                padding: 0 0.5rem;
+                font-size: 16px;
+            }
+        }
+    }
+
+    .game {
+        .info {
+
+            hr {
+                width: 100%;
+            }
+        }
+    }
+}

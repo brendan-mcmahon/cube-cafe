@@ -4,10 +4,38 @@ import { SaveFile, SaveFileData } from "./Components/SaveFile";
 
 const apiClient = new ApiClient("https://op9jkjzc92.execute-api.us-east-2.amazonaws.com/prod");
 
+const autosave = (game: Game) => {
+  const newSave: SaveFileData = {
+    id: game.id,
+    user: localStorage.getItem("user") || "",
+    name: game.settings.gameName,
+    date: new Date(),
+    game: JSON.stringify(game),
+  };
+
+  localStorage.setItem("autosave", JSON.stringify(newSave));
+};
+
+const loadAutosave = (): Game | null => {
+  const autosave = localStorage.getItem("autosave");
+
+  if (autosave) {
+    console.log("Autosave found")
+    return JSON.parse(autosave) as Game;
+
+  }
+
+  return null;
+};
+
+const clearAutoSave = () => {
+  localStorage.removeItem("autosave");
+};
+
 const saveGame = (game: Game, callBack?: (_: any) => void) => {
   const newSave: SaveFileData = {
     id: game.id,
-    user: game.settings.user,
+    user: localStorage.getItem("user") || "",
     name: game.settings.gameName,
     date: new Date(),
     game: JSON.stringify(game),
@@ -24,12 +52,17 @@ const saveGame = (game: Game, callBack?: (_: any) => void) => {
 async function getSavedGames(): Promise<SaveFile[]> {
   const response = await apiClient.get<SaveFileData[]>("/");
 
-  return response.map((saveFileData) => {
+  const stuff = response.map((saveFileData) => {
     return {
       ...saveFileData,
       game: JSON.parse(saveFileData.game),
     } as SaveFile;
   });
+  
+  console.log(stuff);
+
+  return stuff;
+
 }
 
 const deleteSave = (save: SaveFile, callBack: (_: any) => void) => {
@@ -47,8 +80,27 @@ const deleteSave = (save: SaveFile, callBack: (_: any) => void) => {
     .catch((error) => console.error(error));
 };
 
+const acknowledgeDataWarning = () => {
+  localStorage.setItem("acknowledgeDataWarning", "true");
+};
+
+const isDataWarningAcknowledged = (): boolean => {
+  const acknowledged = localStorage.getItem("acknowledgeDataWarning");
+
+  if (acknowledged) {
+    return true;
+  }
+
+  return false;
+};
+
 export default {
   getSavedGames,
   saveGame,
   deleteSave,
+  autosave,
+  loadAutosave,
+  clearAutoSave,
+  acknowledgeDataWarning,
+  isDataWarningAcknowledged,
 };

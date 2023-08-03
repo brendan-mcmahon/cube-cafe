@@ -10,7 +10,7 @@ export function generateRestaurantName() {
   const food = getRandomElementFromArray(words.foods);
   const noun = getRandomElementFromArray(words.restaurantTypes);
 
-  return `${adjective} ${food} ${noun}`;
+  return `The ${adjective} ${food}`;
 }
 
 export function generatePersonName() {

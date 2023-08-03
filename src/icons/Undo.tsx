@@ -8,7 +8,7 @@ type UndoProps = {
 export default function Undo(props: UndoProps) {
   return (
     <svg
-      onClick={props.onClick}
+      onClick={props.disabled ? () => {} : props.onClick}
       className={`undo ${props.disabled ? "disabled" : ""}`}
       viewBox="0 0 35 22"
       x="0px"
