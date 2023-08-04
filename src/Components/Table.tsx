@@ -24,7 +24,7 @@ export default function Table(props: TableProps) {
       <p className="table-number">{props.index + 1}</p></button>;
   }
 
-  const onSelect = () => dispatch({ type: ManualAction.SELECT_TABLE, tableIndex: props.index });
+  const onSelect = () => dispatch({ type: ManualAction.SELECT_TABLE, tableIndex: props.index, color: state.selectedPlate });
   const onPlateSelect = () => dispatch({ type: ManualAction.CLEAR_TABLE, tableIndex: props.index  });
 
   let enabled = false;

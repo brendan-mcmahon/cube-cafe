@@ -68,6 +68,7 @@ export enum ManualAction {
   LOAD_DISHWASHER = "Load Dishwasher",
   SELECT_RESOURCE = "Select Resource",
   SELECT_TABLE = "Select Table",
+  TAKE_ORDER_SELECT_TABLE = "Take Order Select Table",
   SELECT_CAR = "Select Car",
   SELECT_FOOD = "Select Food",
   UNDO = "Undo",

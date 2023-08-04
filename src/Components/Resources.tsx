@@ -7,7 +7,7 @@ import Cube from "../icons/Cube";
 
 function Resources() {
   const { state, dispatch } = useGame();
-  const [copyMode, setCopyMode] = React.useState(state.playPhase === PlayPhase.SELECT_RESOURCE_TO_COPY);
+  const [copyMode, setCopyMode] = useState(state.playPhase === PlayPhase.SELECT_RESOURCE_TO_COPY);
 
   useEffect(() => {
     setCopyMode(state.playPhase === PlayPhase.SELECT_RESOURCE_TO_COPY);

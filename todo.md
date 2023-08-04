@@ -57,15 +57,13 @@
   - [ ] Chalkify the tables
 
 ## UI Improvements
-* Have a Statistics modal that shows the stats for the game (use Endgame or refactor)
-  * Maybe not a modal, but something hidable that shows up on the side
-* Add a "reset game" button to the settings
-* Confirm button for "quitting" maybe? Or does it auto save anyway? Idk.
-* Have a button to turn off auto-saving (mainly for me when I'm testing the app not the game)
+- [ ] Have a Statistics modal that shows the stats for the game (use Endgame or refactor)
+  - [ ] Maybe not a modal, but something hidable that shows up on the side
+- [ ] Add a "reset game" button to the settings
+- [ ] Confirm button for "quitting" maybe? Or does it auto save anyway? Idk.
+- [ ] Have a button to turn off auto-saving (mainly for me when I'm testing the app not the game)
 
 ## Settings to add:
-* Placement of the actions
-  * Don't make this super modular. Just do the way it is vs car w/ cook and car w/ serve
 
 ## Data Collection Features
 - [ ] Data View with all of the games data aggregated and assessed
@@ -82,7 +80,6 @@
   - [x] Save the game to local storage as the game is played
   - [x] If the user lands on the home page, load the game from local storage if it exists
   - [x] Add a popup when the page loads to tell the user what data is being saved. When they dismiss it, set a value in local storage so it doesn't show again
-- [ ] Track the max number of simultaneous food cooking
 
 ## Bugs
 - [x] Clicking out of a modal behaves weirdly. It should act like the undo button maybe? Need to check all of these.

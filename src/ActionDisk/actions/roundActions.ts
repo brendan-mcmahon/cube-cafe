@@ -17,12 +17,15 @@ function gameSetup(state: Game) {
     newState = playPhaseActions.rotate(newState, "clockwise");
   }
 
+  const plateBag = shuffle([...state.plateBag]);
+
   return roundSetup({
     ...newState,
     actionDisk: {
       ...newState.actionDisk,
 
     },
+    plateBag,
     settings: {
       ...newState.settings,
       gameName,
@@ -30,7 +33,12 @@ function gameSetup(state: Game) {
     upgrades: {
       ...newState.upgrades,
       driveThru: newState.upgrades.driveThru || state.round >= (state.settings.driveThruRound - 1),
-    }
+    },
+    playbackHistory: {
+      settings: newState.settings,
+      plateBag,
+      rounds: [],
+    },
   });
 }
 
@@ -110,3 +118,25 @@ function loadDishwasher(state: Game, squareIndex: number): Game {
 }
 
 export { gameSetup, roundSetup, loadDishwasher, finishRotating };
+  function shuffle(items: string[]): string[] {
+    let currentIndex = items.length;
+    let temporaryValue: string;
+    let randomIndex: number;
+  
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+  
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+  
+      // And swap it with the current element.
+      temporaryValue = items[currentIndex];
+      items[currentIndex] = items[randomIndex];
+      items[randomIndex] = temporaryValue;
+    }
+  
+    return items;
+
+  }
+

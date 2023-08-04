@@ -169,32 +169,35 @@ function customerExists(
 
 function drawPlates(state: Game, customerIndex: number): Game {
   const newPlateBag = [...state.plateBag];
-  newPlateBag.sort(() => Math.random() - 0.5);
-  const newAvailablePlates: string[] = [];
+  // newPlateBag.sort(() => Math.random() - 0.5);
+  // const newAvailablePlates: string[] = [];
 
-  for (let i = 0; i < state.settings.numPlates; i++) {
-    const plate = newPlateBag.pop();
-    if (!!plate) {
-      newAvailablePlates.push(plate);
-    }
-  }
+  // for (let i = 0; i < state.settings.numPlates; i++) {
+  //   const plate = newPlateBag.pop();
+  //   if (!!plate) {
+  //     newAvailablePlates.push(plate);
+  //   }
+  // }
 
-  if (newAvailablePlates.length === 1) {
-    return forcePlate(state, newPlateBag, customerIndex);
-  }
+  // if (newAvailablePlates.length === 1) {
+  //   return forcePlate(state, newPlateBag, customerIndex);
+  // }
 
-  return clearHistory({
-    ...state,
-    availablePlates: newAvailablePlates,
-    plateBag: newPlateBag,
-    playPhase: PlayPhase.PLATE_SELECTION_PHASE,
-    selectedTableIndex: customerIndex,
-  });
+  return forcePlate(state, newPlateBag, customerIndex);
+
+  // return clearHistory({
+  //   ...state,
+  //   availablePlates: newAvailablePlates,
+  //   plateBag: newPlateBag,
+  //   playPhase: PlayPhase.PLATE_SELECTION_PHASE,
+  //   selectedTableIndex: customerIndex,
+  // });
 }
 
 function forcePlate(state: Game, newPlateBag: string[], customerIndex: number) {
   const tables = cloneTables(state);
-  const newPlate = newPlateBag.pop();
+  const newPlate = newPlateBag[0];
+  const plateBag = newPlateBag.slice(1);
   const table = tables[customerIndex];
   if (customerExists(table.customer) && !!newPlate) {
     table.customer.order = newPlate;
@@ -203,6 +206,7 @@ function forcePlate(state: Game, newPlateBag: string[], customerIndex: number) {
   return clearHistory(
     resetAction({
       ...state,
+      plateBag,
       tables,
     })
   );
@@ -358,9 +362,11 @@ function giveCustomerPlate(state: Game, plate: string): Game {
   }
   const tables = cloneTables(state);
   const customer = tables[state.selectedTableIndex].customer;
+
   if (!customer) {
     throw new Error(`No customer at index ${state.selectedTableIndex}`);
   }
+
   customer.order = plate;
 
   const availablePlates = [...state.availablePlates];

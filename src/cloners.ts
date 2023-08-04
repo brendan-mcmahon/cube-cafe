@@ -10,3 +10,9 @@ export function cloneTables(state: Game) {
 export function cloneCars(state: Game) {
   return state.cars.map((c) => (!!c ? { ...c } : null));
 }
+
+export function cloneGame(state: Game): Game {
+  return {
+    ...state,
+  };
+}

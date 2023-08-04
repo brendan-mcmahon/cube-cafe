@@ -35,8 +35,14 @@ export interface SelectResourceAction {
     resourceIndex: number | null;
 }
 
-export interface SelectCustomerAction {
+export interface SelectTableAction {
     type: ManualAction.SELECT_TABLE;
+    tableIndex: number;
+    color?: string | null;
+}
+
+export interface TakeOrderSelectTableAction {
+    type: ManualAction.TAKE_ORDER_SELECT_TABLE;
     tableIndex: number;
 }
 

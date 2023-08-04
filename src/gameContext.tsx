@@ -6,21 +6,17 @@ import { updateSettings } from "./settings/updateSettings";
 import { Game } from "./models/game";
 import { defaultGame } from "./models/defaultGame";
 import { v4 as uuidv4 } from 'uuid';
-import { IResourceAction, GameSetupAction, FinishedRotatingAction, LoadDishwasherAction, SelectFoodAction, LoadGameAction, QuitGameAction, SetSettingsAction, RoundSetupAction, RoundTearDownAction, SelectResourceAction, SelectCustomerAction, SelectPlateAction, UndoAction, FreezeResourceAction, ThawResourceAction, SelectCarAction, SelectManagerBonusAction, ClearTableAction, SelectResourceToCopyAction } from "./actions";
 import { generatePersonName } from "./nameGenerator";
 import { roundTearDown } from "./ActionDisk/actions/roundTearDown";
 import selectFood from "./ActionDisk/actions/selectFood";
 import { addHistory, undo } from "./addHistory";
-
-// if you're trying to add something to this with a new type of dispatch action,
-// create the action interface in the actions.ts file,
-// then add that to the union below here,
-// then MAKE SURE that the dispatch.type is the same as the action.type in the reducer below
-
-type Action = IResourceAction | SelectResourceToCopyAction | ClearTableAction | SelectManagerBonusAction | ThawResourceAction | FreezeResourceAction | GameSetupAction | FinishedRotatingAction | LoadDishwasherAction | SelectFoodAction | SelectCarAction | LoadGameAction | QuitGameAction | SetSettingsAction | RoundSetupAction | RoundTearDownAction | SelectResourceAction | SelectCustomerAction | SelectPlateAction | UndoAction;
+import { cloneCars } from "./cloners";
+import { Action } from "./Action";
 
 const gameReducer = (state: Game, action: Action) => {
   localStorage.setItem("autosave", JSON.stringify(state));
+
+  state = addToPlaybackHistory(state, action);
 
   switch (action.type) {
     case GameAction.LOAD_GAME:
@@ -39,6 +35,8 @@ const gameReducer = (state: Game, action: Action) => {
       return playActions.selectResource(addHistory(state, action.type), action.resource, action.resourceIndex);
     case ManualAction.SELECT_TABLE:
       return playActions.selectTable(state, action.tableIndex);
+    case ManualAction.TAKE_ORDER_SELECT_TABLE:
+      return playActions.drawPlates(state, action.tableIndex);
     case ManualAction.SELECT_MANAGER_BONUS:
       return playActions.selectManagerBonus(state, action.bonus);
     case PlayPhase.PLATE_SELECTION_PHASE:
@@ -130,4 +128,37 @@ export const GameProvider = ({ children }: GameProviderProps) => {
   return <GameContext.Provider value={{ state, dispatch }}> {children}</GameContext.Provider>;
 };
 
+function addToPlaybackHistory(state: Game, action: Action) {
+  const rounds = [...state.playbackHistory.rounds];
+  if (!rounds[state.round]) {
+    rounds[state.round] = {
+      actions: [action],
+      cars: cloneCars(state),
+      dice: state.dice,
+    };
+  } else {
+    rounds[state.round] = {
+      ...rounds[state.round],
+      actions: [...rounds[state.round].actions, action]
+    };
+  }
+
+  if (action.type === ManualAction.SELECT_TABLE && state.currentAction === ResourceAction.TAKE_ORDER) {
+    rounds[state.round].actions.push({
+      type: ResourceAction.TAKE_ORDER,
+    });
+  }
+
+  state = {
+    ...state,
+    playbackHistory: {
+      ...state.playbackHistory,
+      rounds
+    }
+  };
+  return state;
+}
+
+
 export const useGame = (): GameContextType => useContext(GameContext);
+

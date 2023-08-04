@@ -20,9 +20,7 @@ const loadAutosave = (): Game | null => {
   const autosave = localStorage.getItem("autosave");
 
   if (autosave) {
-    console.log("Autosave found")
     return JSON.parse(autosave) as Game;
-
   }
 
   return null;
@@ -59,8 +57,6 @@ async function getSavedGames(): Promise<SaveFile[]> {
     } as SaveFile;
   });
   
-  console.log(stuff);
-
   return stuff;
 
 }
@@ -74,7 +70,6 @@ const deleteSave = (save: SaveFile, callBack: (_: any) => void) => {
   apiClient
     .delete("/", deleteParams)
     .then((response) => {
-      console.log(response);
       callBack(response);
     })
     .catch((error) => console.error(error));

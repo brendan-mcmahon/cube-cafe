@@ -1,12 +1,7 @@
 import { Car, Game, TableModel } from "./models/game";
 
 export const addHistory = (state: Game, action: string): Game => {
-  const clonedState: Game = {
-    ...state,
-    resources: state.resources.map((resource) => ({ ...resource })),
-    tables: state.tables.map(cloneTable),
-    cars: state.cars.map(cloneCar),
-  };
+  const clonedState: Game = cloneState(state);
 
   return {
     ...clonedState,
@@ -14,6 +9,16 @@ export const addHistory = (state: Game, action: string): Game => {
     history: {...clonedState},
   };
 };
+
+function cloneState(state: Game): Game {
+  return {
+    ...state,
+    resources: state.resources.map((resource) => ({ ...resource })),
+    tables: state.tables.map(cloneTable),
+    cars: state.cars.map(cloneCar),
+  };
+}
+
 function cloneTable(table: TableModel): TableModel {
   if (!table.customer) return { ...table, customer: null };
   return {

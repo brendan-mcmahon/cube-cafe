@@ -8,6 +8,7 @@ import {
   ManagerAction,
   ResourceAction,
 } from "../constants";
+import { Action } from "../Action";
 import Customer from "./Customer";
 import { Settings } from "./Settings";
 
@@ -61,6 +62,17 @@ export interface Statistics {
   carsFed: number;
 }
 
+interface PlaybackHistory {
+  settings: Settings;
+  plateBag: string[];
+  rounds: PlaybackRound[];
+}
+
+interface PlaybackRound {
+  actions: Action[];
+  dice: string[] | null;
+  cars: (Car | null)[];
+}
 
 export enum UpgradeKeys {
   Freezer = 'freezer',
@@ -104,6 +116,7 @@ export interface Game {
   selectedResource: Resource | null;
   selectedResourceIndex: number | null;
   selectedTableIndex: number | null;
+  playbackHistory: PlaybackHistory;
   actionHistory: string[];
   history: Game | null;
   statistics: Statistics;

@@ -13,6 +13,40 @@ const defaultTable: TableModel = {
   plate: null
 }
 
+const defaultSettings = {
+  user: "",
+  refillMode: "once",
+  cookWildsAsWild: true,
+  angryCustomersLeave: true,
+  dice: [
+    [colors[0], colors[1], colors[2], colors[3], colors[4], colors[0]],
+    [colors[0], colors[1], colors[2], colors[3], colors[4], colors[1]],
+    [colors[0], colors[1], colors[2], colors[3], colors[4], colors[2]],
+    [colors[0], colors[1], colors[2], colors[3], colors[4], colors[3]],
+    [colors[0], colors[1], colors[2], colors[3], colors[4], colors[4]],
+    [colors[0], colors[1], colors[2], colors[3], colors[4], colors[5]],
+  ],
+  driveThruRound: 0,
+  driveThruRewards: [3, 2],
+  gameName: "",
+  platesPerColor: 5,
+  startingMood: 3,
+  numPlates: 1,
+  hotFoodReward: 1,
+  coldFoodPenalty: 0,
+  diceCount: 6,
+  totalRounds: 8,
+  managerTrack: [
+    ManagerAction.EMPTY,
+    ManagerAction.EMPTY,
+    ManagerAction.EMPTY,
+    ManagerAction.EMPTY,
+    ManagerAction.CUBE_OR_POINT,
+  ],
+};
+
+
+
 export const defaultGame: Game = {
   cars: [null, null],
   bonusPoints: 0,
@@ -24,37 +58,7 @@ export const defaultGame: Game = {
     heatlamp: false,
     driveThru: false
   },
-  settings: {
-    user: "",
-    refillMode: "once",
-    cookWildsAsWild: true,
-    angryCustomersLeave: true,
-    dice: [
-      [colors[0], colors[1], colors[2], colors[3], colors[4], colors[0]],
-      [colors[0], colors[1], colors[2], colors[3], colors[4], colors[1]],
-      [colors[0], colors[1], colors[2], colors[3], colors[4], colors[2]],
-      [colors[0], colors[1], colors[2], colors[3], colors[4], colors[3]],
-      [colors[0], colors[1], colors[2], colors[3], colors[4], colors[4]],
-      [colors[0], colors[1], colors[2], colors[3], colors[4], colors[5]],
-    ],
-    driveThruRound: 0,
-    driveThruRewards: [3, 2],
-    gameName: "",
-    platesPerColor: 5,
-    startingMood: 3,
-    numPlates: 1,
-    hotFoodReward: 1,
-    coldFoodPenalty: 0,
-    diceCount: 6,
-    totalRounds: 8,
-    managerTrack: [
-      ManagerAction.EMPTY,
-      ManagerAction.EMPTY,
-      ManagerAction.EMPTY,
-      ManagerAction.EMPTY,
-      ManagerAction.CUBE_OR_POINT,
-    ],
-  },
+  settings: defaultSettings,
   stars: 0,
   round: 1,
   selectedResource: null,
@@ -96,6 +100,11 @@ export const defaultGame: Game = {
   ],
   selectedPlate: null,
   actionHistory: [],
+  playbackHistory: {
+    settings: defaultSettings,
+    plateBag: [],
+    rounds: [],
+  },
   history: null,
   statistics: {
     servedCustomers: [],

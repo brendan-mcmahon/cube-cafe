@@ -43,21 +43,23 @@
         padding-left: 0;
         margin-top: 8px;
         width: 100%;
+        max-height: 80vh;
+        overflow-y: auto;
 
-        // li {
-        //     list-style: none;
-        //     padding: 4px;
-        //     width: 100%;
-        //     text-align: left;
+        li {
+            list-style: none;
+            padding: 4px;
+            width: 100%;
+            text-align: left;
 
-        //     // every other li
-        //     &:nth-child(odd) {
-        //         background-color: #eee;
-        //         color: black;
-        //     }
-        //     &:nth-child(even) {
-        //         background-color: #6d6d6d;
-        //     }
-        // }
+            // every other li
+            &:nth-child(odd) {
+                background-color: #eee;
+                color: black;
+            }
+            &:nth-child(even) {
+                background-color: #6d6d6d;
+            }
+        }
     }
 }
