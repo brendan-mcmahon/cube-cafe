@@ -10,7 +10,7 @@ type ChartProps = {
     yAxisLabel: string | null
 }
 
-export default function Chart(props: ChartProps) {
+export default function _BarChart(props: ChartProps) {
     // useEffect(() => {
     //     console.log(JSON.stringify(props.data))
     // }, [props.data])

@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { Game } from "../models/game";
 import { SaveFile } from "../Components/SaveFile";
 import { RoundTimer } from "../models/game";
-import Chart from "./Chart";
-import { AverageActionRoundData, getActionPerTurnData } from "./dataTools";
+import _BarChart from "./_BarChart";
+import { AverageActionRoundData, getActionPerTurnData, getAveragePointDistribution } from "./dataTools";
 import { ResourceAction } from "../constants";
+import _PieChart from "./_PieChart";
 
 
 function getTimeInSeconds(t: RoundTimer) {
@@ -57,20 +58,24 @@ export function DataList(props: DataListProps) {
 
     <div className="data-item chart">
       <label>Average Customers Served</label>
-      <Chart data={serveData} xAxisKey="roundNumber" xAxisLabel="round #" yAxisLabel="avg. served" />
-      {/* <hr /> */}
+      <_BarChart data={serveData} xAxisKey="roundNumber" xAxisLabel="round #" yAxisLabel="avg. served" />
     </div>
 
     <div className="data-item chart">
       <label>Average Cars Served</label>
-      <Chart data={serveCarData} xAxisKey="roundNumber" xAxisLabel="round #" yAxisLabel="avg. served" />
-      {/* <hr /> */}
+      <_BarChart data={serveCarData} xAxisKey="roundNumber" xAxisLabel="round #" yAxisLabel="avg. served" />
     </div>
 
     <div className="data-item chart">
       <label>Average Rotations / Turn</label>
-      <Chart data={rotationData} xAxisKey="roundNumber" xAxisLabel="round #" yAxisLabel="avg. rotations" />
-      {/* <hr /> */}
+      <_BarChart data={rotationData} xAxisKey="roundNumber" xAxisLabel="round #" yAxisLabel="avg. rotations" />
+    </div>
+
+    <div className="data-item pie">
+      <label>Point Source Distribution</label>
+      <_PieChart data={getAveragePointDistribution(props.games.map(g => g.game))} />
     </div>
   </div>;
 }
+
+
