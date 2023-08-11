@@ -103,20 +103,20 @@ function GameOverScreen({ setSaveOpen }: EndGameProps) {
         <div className="stats-region scoring">
           <h2>Scoring</h2>
           <div className="stats-row">
-            <label>Total Stars (1, 2, 3, 4, 5)</label>
-            <div className="value">{state.stars}</div>
+            <label>Total Points</label>
+            <div className="value">{state.stars + state.bonusPoints}</div>
           </div>
           <div className="stats-row">
-            <label>(1, 2, 3, 5, 8)</label>
-            <div className="value">{mapScoring([1, 2, 3, 5, 8])}</div>
+            <label>Customer Points</label>
+            <div className="value">{state.statistics.customerPoints}</div>
           </div>
           <div className="stats-row">
-            <label>(1, 2, 4, 6, 9)</label>
-            <div className="value">{mapScoring([1, 2, 4, 6, 9])}</div>
+            <label>Car Points</label>
+            <div className="value">{state.statistics.carPoints}</div>
           </div>
           <div className="stats-row">
-            <label>(-2, -1, 0, 1, 2)</label>
-            <div className="value">{mapScoring([-2, -1, 0, 1, 2])}</div>
+            <label>Manager Points</label>
+            <div className="value">{state.statistics.managerPoints}</div>
           </div>
         </div>
 

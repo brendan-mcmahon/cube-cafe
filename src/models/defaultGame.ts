@@ -108,6 +108,9 @@ export const defaultGame: Game = {
   history: null,
   statistics: {
     servedCustomers: [],
+    customerPoints: 0,
+    managerPoints: 0,
+    carPoints: 0,
     rotationCount: 0,
     roundTimers: [],
     unfinishedTables: [],

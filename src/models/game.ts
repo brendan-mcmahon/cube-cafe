@@ -50,6 +50,9 @@ export interface Statistics {
   servedCustomers: Customer[];
   rotationCount: number;
   roundTimers: RoundTimer[];
+  customerPoints: number;
+  managerPoints: number;
+  carPoints: number;
   unfinishedTables: TableModel[];
   hotFoodServed: number;
   coldFoodServed: number;

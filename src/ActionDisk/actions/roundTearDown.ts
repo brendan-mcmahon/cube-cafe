@@ -109,9 +109,10 @@ function stopTimer(state: Game) {
 }
 
 function endGameState(state: Game): Game {
+  const stars = getStars(state);
   const endState: Game = {
     ...state,
-    stars: getStars(state),
+    stars: stars,
     roundPhase: RoundPhase.NONE,
     gamePhase: GamePhase.FINISHED,
     playPhase: PlayPhase.NONE,
@@ -121,6 +122,7 @@ function endGameState(state: Game): Game {
     currentAction: null,
     statistics: {
       ...state.statistics,
+      customerPoints: state.statistics.customerPoints + stars,
       unfinishedTables: [
         ...cloneTables(state)
           .filter((table) => !isEatingCustomer(table))
@@ -160,10 +162,12 @@ function tickDownCustomers(tables: TableModel[], angryCustomersLeave: boolean): 
   });
 }
 
+
 function getStars(state: Game): number {
+  const starMap = [1, 2, 3, 5, 8];
   return state.tables.reduce((acc, table) => {
     if (table.customer?.status === CustomerStatus.EATING) {
-      return acc + table.customer.pointValue;
+      return acc + starMap[table.customer.pointValue - 1];
     }
     return acc;
   }, state.stars);

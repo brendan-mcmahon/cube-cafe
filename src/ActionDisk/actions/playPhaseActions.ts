@@ -301,12 +301,14 @@ function selectCar(state: Game, carIndex: number): Game {
   const cars = cloneCars(state);
   cars[carIndex]!.status = "full";
 
+  const bonusPoints = state.settings.driveThruRewards[carIndex];
   return resetAction({
     ...state,
     cars: cars,
-    bonusPoints: state.bonusPoints + state.settings.driveThruRewards[carIndex],
+    bonusPoints: state.bonusPoints + bonusPoints,
     statistics: {
       ...state.statistics,
+      carPoints: state.statistics.carPoints + bonusPoints,
       carsFed: state.statistics.carsFed + 1,
     },
   });
@@ -390,6 +392,10 @@ function selectManagerBonus(state: Game, bonus: string): Game {
     ...state,
     resources,
     bonusPoints,
+    statistics: {
+      ...state.statistics,
+      managerPoints: state.statistics.managerPoints + bonusPoints
+    }
   });
 }
 

@@ -12,7 +12,6 @@ function gameSetup(state: Game) {
 
   let rotateCount = Math.floor(Math.random() * 6);
   rotateCount = 0;
-  console.log('do we have a drive thru yet?', state.upgrades.driveThru, state.settings.driveThruRound, state.round)
   let newState = {...state};
   for (let i = 0; i < rotateCount; i++) {
     newState = playPhaseActions.rotate(newState, "clockwise");
@@ -49,7 +48,6 @@ function roundSetup(state: Game): Game {
   const color = colors[Math.floor(Math.random() * (colors.length - 1))];
 
   const cars = cloneCars(state);
-  console.log(state.upgrades.driveThru, state.settings.driveThruRound, state.round);
   if (state.upgrades.driveThru || state.settings.driveThruRound <= state.round)
     cars[0] = { color, status: 'waiting'};
 
