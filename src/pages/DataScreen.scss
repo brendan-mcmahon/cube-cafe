@@ -8,6 +8,24 @@
 
     font-family: $sans;
 
+    .title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 0 8px;
+
+        h1 {
+            font-family: $script;
+            font-size: 32px;
+        }
+
+        .results-count {
+            display: flex;
+            align-items: baseline;
+            margin: 0 8px;
+        }
+    }
+
     h1 {
         font-family: $script;
         font-size: 32px;
@@ -48,9 +66,45 @@
 
     .game {
         .info {
+            hr {
+                width: 100%;
+            }
+        }
+    }
+
+    .data {
+        .data-item {
+            display: flex;
+            margin: 16px;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 16px;
+            border-bottom: solid white 1px;
+
+            &.chart {
+
+                flex-direction: column;
+                align-items: flex-start;
+                padding-bottom: 16px;
+            }
 
             hr {
                 width: 100%;
+            }
+
+            label {
+                background-color: grey;
+                color: black;
+                padding: 8px;
+            }
+
+            .bar-chart {
+                margin-top: 16px;
+                .recharts-yAxis {
+                    .recharts-text.recharts-label {
+                        text-anchor: middle;
+                    }
+                }
             }
         }
     }

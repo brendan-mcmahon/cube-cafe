@@ -34,7 +34,7 @@ export function StartScreen(props: StartScreenProps) {
             })}>Start</button>
             
             <button onClick={() => props.setLoadModalOpen(true)}>Saved Games</button>
-            {/* <button onClick={() => props.setShowDataScreen(true)}>Data</button> */}
+            <button onClick={() => props.setShowDataScreen(true)}>Data</button>
         </div>
         <SettingsModal show={props.settingsModalOpen} setShow={props.setSettingsModalOpen} />
         <SavedGamesModal show={props.loadModalOpen} setShow={props.setLoadModalOpen} />

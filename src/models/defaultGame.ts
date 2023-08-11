@@ -26,7 +26,7 @@ const defaultSettings = {
     [colors[0], colors[1], colors[2], colors[3], colors[4], colors[4]],
     [colors[0], colors[1], colors[2], colors[3], colors[4], colors[5]],
   ],
-  driveThruRound: 0,
+  driveThruRound: 5,
   driveThruRewards: [3, 2],
   gameName: "",
   platesPerColor: 5,

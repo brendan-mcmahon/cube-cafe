@@ -62,13 +62,13 @@ export interface Statistics {
   carsFed: number;
 }
 
-interface PlaybackHistory {
+export interface PlaybackHistory {
   settings: Settings;
   plateBag: string[];
   rounds: PlaybackRound[];
 }
 
-interface PlaybackRound {
+export interface PlaybackRound {
   actions: Action[];
   dice: string[] | null;
   cars: (Car | null)[];
