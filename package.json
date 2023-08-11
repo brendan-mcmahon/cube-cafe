@@ -16,6 +16,8 @@
     "color2k": "^2.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-floater": "^0.8.2",
+    "react-joyride": "^2.5.5",
     "recharts": "^2.7.3",
     "sass": "^1.63.2",
     "uuid": "^9.0.0",

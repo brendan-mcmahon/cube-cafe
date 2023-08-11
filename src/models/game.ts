@@ -90,7 +90,9 @@ interface Upgrades {
 }
 
 export interface Game {
+  tutorialMode: boolean;
   cars: (Car | null)[];
+  carPulls: string[];
   bonusPoints: number;
   freezerItems: Resource[];
   upgrades: Upgrades;
@@ -106,6 +108,7 @@ export interface Game {
   playPhase: PlayPhase;
   resources: Resource[];
   dice: string[];
+  rolls: string[][];
   currentValue: number | null;
   availableActions: ResourceAction[];
   availablePlates: string[];

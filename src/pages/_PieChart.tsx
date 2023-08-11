@@ -17,9 +17,6 @@ const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, per
 };
 
 export default function _PieChart(props: { data: any[]; }) {
-  useEffect(() => {
-    console.log(JSON.stringify(props.data))
-  }, [props.data])
   return <div className="pie-chart" style={{ width: '100%', height: 250 }}>
     <ResponsiveContainer>
       <PieChart width={200} height={200}>

@@ -62,6 +62,13 @@
 - [ ] Add a "reset game" button to the settings
 - [ ] Confirm button for "quitting" maybe? Or does it auto save anyway? Idk.
 - [ ] Have a button to turn off auto-saving (mainly for me when I'm testing the app not the game)
+- [ ] Tutorial Level
+  - [ ] Make rolls predefined at the beginning of the game
+    - [x] Add diceRolls to the state
+    - [x] Edit gameContext to set the rolls when the game starts
+    - [x] Edit the "roll dice" function to use the predefined rolls
+  - [x] Set the rolls for the tutorial level to be what we need
+  - [ ] 
 
 ## Settings to add:
 

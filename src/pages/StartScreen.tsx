@@ -7,6 +7,7 @@ import Gear from "../icons/Gear";
 import SettingsModal from "../settings/SettingsModal";
 import DataModal from "../Components/DataModal";
 import storage from "../storage";
+import RulesModal from "../Components/RulesModal";
 
 const version = "8.2.23.0"
 
@@ -16,6 +17,9 @@ type StartScreenProps = {
     settingsModalOpen: boolean;
     setSettingsModalOpen: (open: boolean) => void;
     setShowDataScreen: (open: boolean) => void;
+    rulesModalOpen: boolean;
+    setRulesModalOpen: (open: boolean) => void;
+    startTutorial: () => void;
 };
 
 export function StartScreen(props: StartScreenProps) {
@@ -34,10 +38,12 @@ export function StartScreen(props: StartScreenProps) {
             })}>Start</button>
             
             <button onClick={() => props.setLoadModalOpen(true)}>Saved Games</button>
+            <button onClick={() => props.startTutorial()}> Play Tutorial</button>
             <button onClick={() => props.setShowDataScreen(true)}>Data</button>
         </div>
         <SettingsModal show={props.settingsModalOpen} setShow={props.setSettingsModalOpen} />
         <SavedGamesModal show={props.loadModalOpen} setShow={props.setLoadModalOpen} />
         <DataModal show={showDataModal} setShow={setShowDataModal} />
+        <RulesModal show={props.rulesModalOpen} setShow={props.setRulesModalOpen} />
     </div>);
 }

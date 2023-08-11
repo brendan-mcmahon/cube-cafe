@@ -88,11 +88,12 @@ export enum ManagerAction {
   BOOST_THREE = "+1 (3)"
 };
 
+
 export enum GameAction {
   LOAD_GAME = "Load Game",
   QUIT_GAME = "Quit Game",
   SET_SETTINGS = "Set Settings",
   ROUND_SETUP = "Round Setup",
   ROUND_TEARDOWN = "Round Teardown",
-  GAME_SETUP = "Game Setup"
+  GAME_SETUP = "Game Setup",
 }

@@ -123,10 +123,28 @@ export const GameProvider = ({ children }: GameProviderProps) => {
     defaultGame.settings.user = user;
   }
 
+  // let's predefine all of the rolls for this game so we can inject our own for the tutorial level
+  // loop eight times (once per round)
+  // roll six dice for each loop and save the colors to the array
+  for (let i = 0; i < 8; i++) {
+    defaultGame.rolls.push(rollDice(defaultGame))
+    
+  }
+
+  // defaultGame.plates = defaultGame.plateBag.
+
   const [state, dispatch] = useReducer(gameReducer, defaultGame);
 
   return <GameContext.Provider value={{ state, dispatch }}> {children}</GameContext.Provider>;
 };
+
+function rollDice(state: Game): string[] {
+  const diceCount = state.settings.dice.length;
+
+  return Array
+    .from({ length: diceCount }, () => Math.floor(Math.random() * 6) + 1)
+    .map((die, index) => state.settings.dice[index][die - 1]);
+}
 
 function addToPlaybackHistory(state: Game, action: Action) {
   const rounds = [...state.playbackHistory.rounds];

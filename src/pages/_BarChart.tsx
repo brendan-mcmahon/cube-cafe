@@ -11,9 +11,6 @@ type ChartProps = {
 }
 
 export default function _BarChart(props: ChartProps) {
-    // useEffect(() => {
-    //     console.log(JSON.stringify(props.data))
-    // }, [props.data])
     return (
         <div className="bar-chart" style={{ width: '100%', height: 200 }}>
             <ResponsiveContainer>

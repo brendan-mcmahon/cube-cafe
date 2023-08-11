@@ -66,3 +66,7 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
+
+.react-joyride__tooltip {
+  font-family: 'Montserrat', sans-serif;
+}

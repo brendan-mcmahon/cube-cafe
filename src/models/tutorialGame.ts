@@ -6,15 +6,11 @@ import {
   DishwasherAction,
   ManagerAction, ResourceAction
 } from "../constants";
-import { Game, TableModel } from "./game";
+import { defaultTable } from "./defaultGame";
+import { Game } from "./game";
 
-export const defaultTable: TableModel = {
-  customer: null,
-  plate: null
-}
-
-const defaultSettings = {
-  user: "",
+const tutorialSettings = {
+  user: "tutorial",
   refillMode: "once",
   cookWildsAsWild: true,
   angryCustomersLeave: true,
@@ -28,7 +24,7 @@ const defaultSettings = {
   ],
   driveThruRound: 5,
   driveThruRewards: [3, 2],
-  gameName: "",
+  gameName: "Tutorial",
   platesPerColor: 5,
   startingMood: 3,
   numPlates: 1,
@@ -45,12 +41,10 @@ const defaultSettings = {
   ],
 };
 
-
-
-export const defaultGame: Game = {
-  tutorialMode: false,
+export const tutorial: Game = {
+  tutorialMode: true,
   cars: [null, null],
-  carPulls: [],
+  carPulls: ["red", "blue", "green", "yellow", "red", "yellow", "yellow"],
   bonusPoints: 0,
   alert: null,
   id: "",
@@ -58,9 +52,9 @@ export const defaultGame: Game = {
   upgrades: {
     freezer: false,
     heatlamp: false,
-    driveThru: false
+    driveThru: true
   },
-  settings: defaultSettings,
+  settings: tutorialSettings,
   stars: 0,
   round: 1,
   selectedResource: null,
@@ -68,7 +62,7 @@ export const defaultGame: Game = {
   selectedTableIndex: null,
   availablePlates: [],
   currentAction: null,
-  gamePhase: GamePhase.NOT_STARTED,
+  gamePhase: GamePhase.IN_PROGRESS,
   roundPhase: RoundPhase.SETUP,
   actionDisk: {
     rotation: 0,
@@ -86,7 +80,16 @@ export const defaultGame: Game = {
   playPhase: PlayPhase.NONE,
   resources: [],
   dice: [],
-  rolls: [],
+  rolls: [
+    ["purple", "red", "yellow", "yellow", "red", "red"],
+    ["purple", "red", "yellow", "yellow", "red", "red"],
+    ["purple", "red", "yellow", "yellow", "red", "red"],
+    ["purple", "red", "yellow", "yellow", "red", "red"],
+    ["purple", "red", "yellow", "yellow", "red", "red"],
+    ["purple", "red", "yellow", "yellow", "red", "red"],
+    ["purple", "red", "yellow", "yellow", "red", "red"],
+    ["purple", "red", "yellow", "yellow", "red", "red"],
+  ], // need to populate this
   currentValue: null,
   availableActions: [],
   managerPosition: 0,
@@ -95,16 +98,12 @@ export const defaultGame: Game = {
   hotCounterItems: [],
   coldCounterItems: [],
   plateBag: [
-    ...Array.from({ length: 5 }, () => colors[0]),
-    ...Array.from({ length: 5 }, () => colors[1]),
-    ...Array.from({ length: 5 }, () => colors[2]),
-    ...Array.from({ length: 5 }, () => colors[3]),
-    ...Array.from({ length: 5 }, () => colors[4]),
+    "yellow", "yellow", "yellow", "red"
   ],
   selectedPlate: null,
   actionHistory: [],
   playbackHistory: {
-    settings: defaultSettings,
+    settings: tutorialSettings,
     plateBag: [],
     rounds: [],
   },

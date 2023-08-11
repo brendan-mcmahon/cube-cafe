@@ -18,9 +18,12 @@ function gameSetup(state: Game) {
   }
 
   const plateBag = shuffle([...state.plateBag]);
+  const colorsNoWilds = colors.filter(c => c!== "wild");
+  const carPulls = shuffle([...colorsNoWilds, ...colorsNoWilds, ...colorsNoWilds]);
 
   return roundSetup({
     ...newState,
+    carPulls,
     actionDisk: {
       ...newState.actionDisk,
 
@@ -43,14 +46,14 @@ function gameSetup(state: Game) {
 }
 
 function roundSetup(state: Game): Game {
-  const dice = rollDice(state);
+  const dice = state.rolls[state.round - 1];
 
-  const color = colors[Math.floor(Math.random() * (colors.length - 1))];
-
+  // const color = colors[Math.floor(Math.random() * (colors.length - 1))];
+  const color = state.carPulls[state.round - 1];
   const cars = cloneCars(state);
   if (state.upgrades.driveThru || state.settings.driveThruRound <= state.round)
     cars[0] = { color, status: 'waiting'};
-
+  
   return {
     ...state,
     cars,
