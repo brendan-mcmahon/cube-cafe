@@ -126,9 +126,9 @@ export const GameProvider = ({ children }: GameProviderProps) => {
   // let's predefine all of the rolls for this game so we can inject our own for the tutorial level
   // loop eight times (once per round)
   // roll six dice for each loop and save the colors to the array
+  defaultGame.rolls = [];
   for (let i = 0; i < 8; i++) {
     defaultGame.rolls.push(rollDice(defaultGame))
-    
   }
 
   // defaultGame.plates = defaultGame.plateBag.

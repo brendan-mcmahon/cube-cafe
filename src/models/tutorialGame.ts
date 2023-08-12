@@ -44,7 +44,7 @@ const tutorialSettings = {
 export const tutorial: Game = {
   tutorialMode: true,
   cars: [null, null],
-  carPulls: ["red", "blue", "green", "yellow", "red", "yellow", "yellow"],
+  carPulls: ["red", "blue", "green", "yellow", "red", "yellow", "yellow", "purple", "red", "blue", "green", "green"],
   bonusPoints: 0,
   alert: null,
   id: "",
@@ -81,14 +81,14 @@ export const tutorial: Game = {
   resources: [],
   dice: [],
   rolls: [
-    ["purple", "red", "yellow", "yellow", "red", "red"],
-    ["purple", "red", "yellow", "yellow", "red", "red"],
-    ["purple", "red", "yellow", "yellow", "red", "red"],
-    ["purple", "red", "yellow", "yellow", "red", "red"],
-    ["purple", "red", "yellow", "yellow", "red", "red"],
-    ["purple", "red", "yellow", "yellow", "red", "red"],
-    ["purple", "red", "yellow", "yellow", "red", "red"],
-    ["purple", "red", "yellow", "yellow", "red", "red"],
+    ["purple", "red", "yellow", "red", "purple", "yellow"],
+    ["blue", "red", "yellow", "green", "green", "red"],
+    ["purple", "green", "yellow", "purple", "blue", "blue"],
+    ["purple", "green", "green", "blue", "purple", "wild"],
+    ["green", "red", "red", "green", "blue", "blue"],
+    ["red", "red", "yellow", "green", "red", "green"],
+    ["green", "green", "yellow", "yellow", "blue", "purple"],
+    ["green", "green", "yellow", "green", "green", "blue"],
   ], // need to populate this
   currentValue: null,
   availableActions: [],
@@ -98,7 +98,7 @@ export const tutorial: Game = {
   hotCounterItems: [],
   coldCounterItems: [],
   plateBag: [
-    "yellow", "yellow", "yellow", "red"
+    "yellow", "blue", "yellow", "red", "blue", "green", "purple", "purple", "green"
   ],
   selectedPlate: null,
   actionHistory: [],

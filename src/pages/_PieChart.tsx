@@ -1,10 +1,19 @@
 import React, { useEffect } from "react";
-import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer, PieLabelRenderProps  } from 'recharts';
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28'];
 
 const RADIAN = Math.PI / 180;
-const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
+const renderCustomizedLabel: React.FC<PieLabelRenderProps> = (props) => {
+  if (!props.innerRadius || !props.outerRadius || !props.cx || !props.cy || !props.midAngle) return null;
+
+  const innerRadius = Number(props.innerRadius);
+  const outerRadius = Number(props.outerRadius);
+  const cx = Number(props.cx);
+  const cy = Number(props.cy);
+  const midAngle = Number(props.midAngle);
+  const percent = Number(props.percent);
+
   const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
   const x = cx + radius * Math.cos(-midAngle * RADIAN);
   const y = cy + radius * Math.sin(-midAngle * RADIAN);

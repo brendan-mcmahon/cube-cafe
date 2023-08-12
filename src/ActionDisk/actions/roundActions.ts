@@ -11,7 +11,6 @@ function gameSetup(state: Game) {
   const gameName = generateRestaurantName();
 
   let rotateCount = Math.floor(Math.random() * 6);
-  rotateCount = 0;
   let newState = {...state};
   for (let i = 0; i < rotateCount; i++) {
     newState = playPhaseActions.rotate(newState, "clockwise");
@@ -21,9 +20,15 @@ function gameSetup(state: Game) {
   const colorsNoWilds = colors.filter(c => c!== "wild");
   const carPulls = shuffle([...colorsNoWilds, ...colorsNoWilds, ...colorsNoWilds]);
 
+  const rolls = [];
+  for (let i = 0; i < 8; i++) {
+    rolls.push(rollDice(state))
+  }
+
   return roundSetup({
     ...newState,
     carPulls,
+    rolls,
     actionDisk: {
       ...newState.actionDisk,
 
@@ -48,7 +53,6 @@ function gameSetup(state: Game) {
 function roundSetup(state: Game): Game {
   const dice = state.rolls[state.round - 1];
 
-  // const color = colors[Math.floor(Math.random() * (colors.length - 1))];
   const color = state.carPulls[state.round - 1];
   const cars = cloneCars(state);
   if (state.upgrades.driveThru || state.settings.driveThruRound <= state.round)

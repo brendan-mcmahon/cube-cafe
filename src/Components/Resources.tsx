@@ -14,7 +14,6 @@ function Resources() {
   }, [state.playPhase]);
 
   function dispatchAction(resource: Resource, resourceIndex: number) {
-    console.log('clicked!');
     if (copyMode) {
       return dispatch({ type: ManualAction.SELECT_RESOURCE_TO_COPY, color: resource.color });
     }

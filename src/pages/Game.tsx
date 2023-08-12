@@ -26,14 +26,12 @@ export default function Game() {
   useEffect(() => {
     // check if the user has a saved game in local storage
     const autoSave = storage.loadAutosave();
-    if (autoSave) {
+    if (autoSave && autoSave?.tutorialMode === false) {
       dispatch({ type: GameAction.LOAD_GAME, game: autoSave });
     }
   }, []);
 
   const startTutorial = () => {
-    // set the state to the tutorial level, including setting the game phase
-    console.log('starting tutorial');
     dispatch({ type: GameAction.LOAD_GAME, game: tutorial});
     dispatch({ type: GameAction.ROUND_SETUP});
   };

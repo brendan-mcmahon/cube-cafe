@@ -72,7 +72,6 @@ export const defaultGame: Game = {
   roundPhase: RoundPhase.SETUP,
   actionDisk: {
     rotation: 0,
-    // colors: ["red", "blue", "yellow", "purple", "green"],
     colors: [...colors.slice(0, 5)],
     actions: [
       ResourceAction.SEAT_CUSTOMER,

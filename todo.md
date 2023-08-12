@@ -68,7 +68,7 @@
     - [x] Edit gameContext to set the rolls when the game starts
     - [x] Edit the "roll dice" function to use the predefined rolls
   - [x] Set the rolls for the tutorial level to be what we need
-  - [ ] 
+- [ ] add tool tips for the various actions
 
 ## Settings to add:
 
