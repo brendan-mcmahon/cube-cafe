@@ -58,18 +58,22 @@
 @media only screen and (max-width: 430px) and (orientation: portrait) {
     #ActionDisk {
         display: grid;
-        grid-template-columns: auto calc(190px) auto;
+        // border: solid red 2px;
+        grid-template-columns: auto auto auto;
         grid-template-rows: 1fr;
+        height: 90vh;
 
         .disk {
             svg {
-                height: calc(190px);
+                // height: 190px;
+                width: 70vw;
             }
         }
 
         .arrow {
-            height: calc(60px);
-            width: calc(33px);
+            // height: calc(60px);
+            // width: calc(33px);
+            width: 15vw;
             &:hover {
                 cursor: pointer;
                 transform: scale(1);

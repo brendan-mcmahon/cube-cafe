@@ -7,7 +7,7 @@ import Gear from "../icons/Gear";
 import SettingsModal from "../settings/SettingsModal";
 import DataModal from "../Components/DataModal";
 import storage from "../storage";
-import RulesModal from "../Components/RulesModal";
+import RulesModal from "../Components/TangibleRulesModal";
 
 const version = "8.2.23.0"
 

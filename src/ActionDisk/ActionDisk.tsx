@@ -10,10 +10,10 @@ function ActionDisk() {
   const { state, dispatch } = useGame();
 
   const rotate = (direction: string) => {
-    if (state.playPhase === PlayPhase.SELECT_ACTION || state.playPhase === PlayPhase.ROTATE_FREELY) {
+    // if (state.playPhase === PlayPhase.SELECT_ACTION || state.playPhase === PlayPhase.ROTATE_FREELY) {
       const type = direction === "clockwise" ? ResourceAction.ROTATE_CLOCKWISE : ResourceAction.ROTATE_COUNTERCLOCKWISE;
       dispatch({ type });
-    }
+    // }
   };
 
   return (

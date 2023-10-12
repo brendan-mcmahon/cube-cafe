@@ -167,13 +167,6 @@ function addToPlaybackHistory(state: Game, action: Action) {
     });
   }
 
-  state = {
-    ...state,
-    playbackHistory: {
-      ...state.playbackHistory,
-      rounds
-    }
-  };
   return state;
 }
 
